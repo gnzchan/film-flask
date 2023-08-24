@@ -13,7 +13,7 @@ interface Props {
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-const MyUserContextProvider = (props: Props) => {
+export const MyUserContextProvider = (props: Props) => {
   const {
     session,
     isLoading: isLoadingUser,

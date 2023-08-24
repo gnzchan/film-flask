@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 // change font
 import { Inter } from "next/font/google";
+import UserProvider from "@/components/providers/UserProvider";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <SupabaseProvider>{children}</SupabaseProvider>
+        <SupabaseProvider>
+          <UserProvider>{children}</UserProvider>
+        </SupabaseProvider>
       </body>
     </html>
   );
