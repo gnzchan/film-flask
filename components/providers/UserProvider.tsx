@@ -1,3 +1,5 @@
+"use client";
+
 import { MyUserContextProvider } from "@/hooks/useUser";
 
 interface UserProviderProps {

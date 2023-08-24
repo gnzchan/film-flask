@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 // change font
 import { Inter } from "next/font/google";
 import UserProvider from "@/components/providers/UserProvider";
+import { Sidebar } from "react-pro-sidebar";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <SupabaseProvider>
-          <UserProvider>{children}</UserProvider>
+          <UserProvider>
+            <Sidebar>{children}</Sidebar>
+          </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
