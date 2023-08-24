@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 // change font
 import { Inter } from "next/font/google";
 import UserProvider from "@/components/providers/UserProvider";
-import { Sidebar } from "react-pro-sidebar";
+import Sidebar from "@/components/ui/Sidebar";
 
 const font = Inter({ subsets: ["latin"] });
 
