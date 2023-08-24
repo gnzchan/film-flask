@@ -1,3 +1,4 @@
+import SupabaseProvider from "@/components/providers/SupabaseProvider";
 import "./globals.css";
 import type { Metadata } from "next";
 
@@ -18,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={font.className}>{children}</body>
+      <body className={font.className}>
+        <SupabaseProvider>{children}</SupabaseProvider>
+      </body>
     </html>
   );
 }
