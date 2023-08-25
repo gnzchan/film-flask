@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 // change font
 import { Inter } from "next/font/google";
 import UserProvider from "@/components/providers/UserProvider";
-import Sidebar from "@/components/ui/Sidebar";
+import MainPage from "@/components/ui/MainPage";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={font.className}>
         <SupabaseProvider>
           <UserProvider>
-            <Sidebar>{children}</Sidebar>
+            <MainPage>{children}</MainPage>
           </UserProvider>
         </SupabaseProvider>
       </body>
