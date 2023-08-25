@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Sidebar as RPSidebar, Menu, sidebarClasses } from "react-pro-sidebar";
-import { PiCompassFill, PiSignOut } from "react-icons/pi";
+import { FiSearch, FiCompass } from "react-icons/fi";
+import { PiSignOut } from "react-icons/pi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmark, BsGear } from "react-icons/bs";
 
@@ -34,11 +35,15 @@ const Sidebar = () => {
           <div className="align-center flex justify-center bg-slate-400">
             <h1>Film Flix</h1>
           </div>
+
+          <Menu>
+            <SidebarItem icon={FiSearch} label="Search" href="/search" />
+          </Menu>
           <div>
             <p>Menu</p>
           </div>
           <Menu>
-            <SidebarItem icon={PiCompassFill} label="Browse" href="/" />
+            <SidebarItem icon={FiCompass} label="Browse" href="/" />
             <SidebarItem icon={AiOutlineHeart} label="Likes" href="/likes" />
             <SidebarItem
               icon={BsBookmark}
@@ -52,6 +57,8 @@ const Sidebar = () => {
           </div>
           <Menu>
             <SidebarItem icon={BsGear} label="Settings" href="/settings" />
+
+            {/* TODO: Only show logout if user is authenticated */}
             <SidebarItem
               icon={PiSignOut}
               label="Logout"
