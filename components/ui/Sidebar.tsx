@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Sidebar as RPSidebar, Menu, sidebarClasses } from "react-pro-sidebar";
 import { FiSearch, FiCompass } from "react-icons/fi";
@@ -9,14 +9,22 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmark, BsGear } from "react-icons/bs";
 
 import SidebarItem from "./SidebarItem";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const [toggledSidebar, setToggledSidebar] = useState(false);
+  const [activeSidebarItem, setActiveSidebarItem] = useState("/");
+  const pathName = usePathname();
+
+  useEffect(() => {
+    setActiveSidebarItem(pathName);
+  }, [pathName]);
 
   const handleLogout = () => {
     // TODO: Handle logout
     console.log("logout");
   };
+
   return (
     <div>
       <aside>
@@ -37,18 +45,34 @@ const Sidebar = () => {
           </div>
 
           <Menu>
-            <SidebarItem icon={FiSearch} label="Search" href="/search" />
+            <SidebarItem
+              icon={FiSearch}
+              label="Search"
+              href="/search"
+              isActive={activeSidebarItem === "/search"}
+            />
           </Menu>
           <div>
             <p>Menu</p>
           </div>
           <Menu>
-            <SidebarItem icon={FiCompass} label="Browse" href="/" />
-            <SidebarItem icon={AiOutlineHeart} label="Likes" href="/likes" />
+            <SidebarItem
+              icon={FiCompass}
+              label="Browse"
+              href="/"
+              isActive={activeSidebarItem === "/"}
+            />
+            <SidebarItem
+              icon={AiOutlineHeart}
+              label="Likes"
+              href="/likes"
+              isActive={activeSidebarItem === "/likes"}
+            />
             <SidebarItem
               icon={BsBookmark}
               label="Watchlist"
               href="/watchlist"
+              isActive={activeSidebarItem === "/watchlist"}
             />
           </Menu>
 
@@ -56,7 +80,12 @@ const Sidebar = () => {
             <p>General</p>
           </div>
           <Menu>
-            <SidebarItem icon={BsGear} label="Settings" href="/settings" />
+            <SidebarItem
+              icon={BsGear}
+              label="Settings"
+              href="/settings"
+              isActive={activeSidebarItem === "/settings"}
+            />
 
             {/* TODO: Only show logout if user is authenticated */}
             <SidebarItem

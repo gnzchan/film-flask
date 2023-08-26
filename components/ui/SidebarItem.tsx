@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { twMerge } from "tailwind-merge";
 import { IconType } from "react-icons";
 import { MenuItem } from "react-pro-sidebar";
+import { twMerge } from "tailwind-merge";
 
 interface SidebarItemProps {
   icon: IconType;
   label: string;
+  isActive?: boolean;
   href?: string;
   onClick?: () => void;
 }
@@ -15,28 +14,18 @@ interface SidebarItemProps {
 const SidebarItem: React.FC<SidebarItemProps> = ({
   icon: Icon,
   label,
+  isActive,
   href = "/",
   onClick,
 }) => {
-  const [isActive, setIsActive] = useState(false);
-  const pathName = usePathname();
-
-  useEffect(() => {
-    if (pathName === href && label !== "Logout") {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-    }
-  }, [pathName]);
-
   return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={twMerge(isActive && "text-red-400")}
+    <MenuItem
+      component={<Link href={href} onClick={onClick} />}
+      icon={<Icon size={20} />}
+      className={twMerge(isActive && "text-red-300")}
     >
-      <MenuItem icon={<Icon size={20} />}>{label}</MenuItem>
-    </Link>
+      {label}
+    </MenuItem>
   );
 };
 
