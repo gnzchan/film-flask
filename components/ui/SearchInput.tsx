@@ -11,15 +11,13 @@ import { useRouter } from "next/navigation";
 const SearchInput = () => {
   const router = useRouter();
   const [value, setValue] = useState("");
-  const debouncedValue = useDebounce(value, 800);
+  const debouncedValue = useDebounce(value.trim(), 800);
 
   useEffect(() => {
     if (debouncedValue !== "") {
       const query = {
         title: debouncedValue,
       };
-
-      console.log(debouncedValue);
 
       const url = qs.stringifyUrl({
         url: "/search",

@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { Sidebar as RPSidebar, Menu, sidebarClasses } from "react-pro-sidebar";
+import {
+  Sidebar as RPSidebar,
+  Menu,
+  MenuItem,
+  sidebarClasses,
+} from "react-pro-sidebar";
 import { FiSearch, FiCompass } from "react-icons/fi";
 import { PiSignOut } from "react-icons/pi";
 import { AiOutlineHeart } from "react-icons/ai";

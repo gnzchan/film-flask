@@ -41,7 +41,7 @@ export const MyUserContextProvider = (props: Props) => {
     };
 
     if (user && !isLoadingData && !userDetails) {
-      console.log(user);
+      // console.log(user);
       setIsLoadingData(true);
       getUserDetails();
       setIsLoadingData(false);

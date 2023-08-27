@@ -1,17 +1,24 @@
+import getFilmsByTitle from "@/actions/getFilmsByTitle";
+
+import SearchContent from "@/components/ui/SearchContent";
 import SearchInput from "@/components/ui/SearchInput";
 
-const Search = () => {
+interface SearchProps {
+  searchParams: {
+    title: string;
+  };
+}
+
+const Search: React.FC<SearchProps> = async ({ searchParams }) => {
+  const { Search: films, Error: error } = await getFilmsByTitle(
+    searchParams.title,
+  );
+
   return (
-    <div className="">
+    <div className="h-screen w-full overflow-hidden overflow-y-auto">
       <h1 className="text-3xl font-semibold ">Search</h1>
       <SearchInput />
-      {/* <Header className="from-bg-neutral-900">
-      <div className="mb-2 flex flex-col gap-y-6">
-        <h1 className="text-3xl font-semibold text-white">Search</h1>
-        <SearchInput />
-      </div>
-    </Header>
-    <SearchContent songs={songs} /> */}
+      <SearchContent films={films} error={error} />
     </div>
   );
 };
