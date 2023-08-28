@@ -1,23 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
-import {
-  Sidebar as RPSidebar,
-  Menu,
-  MenuItem,
-  sidebarClasses,
-} from "react-pro-sidebar";
+import { usePathname } from "next/navigation";
+import { Sidebar as RPSidebar, Menu, sidebarClasses } from "react-pro-sidebar";
 import { FiSearch, FiCompass } from "react-icons/fi";
 import { PiSignOut } from "react-icons/pi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmark, BsGear } from "react-icons/bs";
 
 import SidebarItem from "./SidebarItem";
-import { usePathname } from "next/navigation";
+import useSidebar from "@/hooks/useSidebar";
 
-const Sidebar = () => {
-  const [toggledSidebar, setToggledSidebar] = useState(false);
+const Sidebar: React.FC = () => {
+  const sidebar = useSidebar();
   const [activeSidebarItem, setActiveSidebarItem] = useState("/");
   const pathName = usePathname();
 
@@ -39,11 +34,9 @@ const Sidebar = () => {
               height: "100vh",
             },
           }}
-          toggled={toggledSidebar}
-          onBackdropClick={() => {
-            setToggledSidebar(false);
-          }}
-          breakPoint="lg"
+          toggled={sidebar.isOpen}
+          onBackdropClick={sidebar.onClose}
+          customBreakPoint="1024px"
         >
           <div className="align-center flex justify-center bg-slate-400">
             <h1>Film Flix</h1>
@@ -101,12 +94,6 @@ const Sidebar = () => {
           </Menu>
         </RPSidebar>
       </aside>
-
-      <div className="lg:hidden">
-        <button onClick={() => setToggledSidebar(true)}>
-          <RxHamburgerMenu size={24} />
-        </button>
-      </div>
     </div>
   );
 };
