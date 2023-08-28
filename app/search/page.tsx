@@ -1,8 +1,8 @@
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
-import LoadMore from "@/components/ui/LoadMore";
 import SearchContent from "@/components/ui/SearchContent";
 import SearchInput from "@/components/ui/SearchInput";
+import { getTotalPages } from "@/libs/helpers";
 
 interface SearchProps {
   searchParams: {
@@ -12,7 +12,6 @@ interface SearchProps {
 
 const Search: React.FC<SearchProps> = async ({ searchParams }) => {
   const {
-    Response,
     Search: films,
     Error: error,
     totalResults,
@@ -25,15 +24,21 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
           <h1 className="text-3xl font-semibold">Search</h1>
           <SearchInput />
         </div>
-        <SearchContent films={films} error={error} />
 
-        {searchParams.title && (
+        <SearchContent
+          films={films}
+          title={searchParams.title}
+          totalPages={getTotalPages(totalResults)}
+          error={error}
+        />
+
+        {/* {searchParams.title && (
           <LoadMore
             title={searchParams.title}
             totalResults={totalResults}
             response={Response}
           />
-        )}
+        )} */}
       </Header>
     </div>
   );

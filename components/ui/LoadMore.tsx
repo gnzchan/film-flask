@@ -58,7 +58,7 @@ const LoadMore: React.FC<LoadMoreProps> = ({
 
   return (
     <>
-      <SearchContent films={films} />
+      {/* <SearchContent films={films} /> */}
       <div className="flex items-center justify-center" ref={ref}>
         {content}
       </div>
