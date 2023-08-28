@@ -14,7 +14,7 @@ export interface SearchFilm {
 }
 
 export interface Search {
-  Response: boolean;
+  Response: string;
   Search: SearchFilm[];
   totalResults: number;
   Error?: string;

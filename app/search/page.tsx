@@ -1,6 +1,6 @@
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
-
+import LoadMore from "@/components/ui/LoadMore";
 import SearchContent from "@/components/ui/SearchContent";
 import SearchInput from "@/components/ui/SearchInput";
 
@@ -11,19 +11,30 @@ interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = async ({ searchParams }) => {
-  const { Search: films, Error: error } = await getFilmsByTitle(
-    searchParams.title,
-  );
+  const {
+    Response,
+    Search: films,
+    Error: error,
+    totalResults,
+  } = await getFilmsByTitle(searchParams.title);
 
   return (
     <div className="">
       <Header>
-        <div className="mb-2 flex flex-col gap-y-5">
+        <div className="sticky top-0 z-30 flex flex-col gap-y-5 bg-yellow-400/30 px-2 py-3 backdrop-blur-md">
           <h1 className="text-3xl font-semibold">Search</h1>
           <SearchInput />
         </div>
+        <SearchContent films={films} error={error} />
+
+        {searchParams.title && (
+          <LoadMore
+            title={searchParams.title}
+            totalResults={totalResults}
+            response={Response}
+          />
+        )}
       </Header>
-      <SearchContent films={films} error={error} />
     </div>
   );
 };

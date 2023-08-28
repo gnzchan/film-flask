@@ -18,12 +18,8 @@ const SearchContent: React.FC<SearchContentProps> = ({ films, error }) => {
     );
   }
 
-  if (films.length === 0) {
-    return <div>No films found</div>;
-  }
-
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-3 pt-3 sm:grid-cols-2 lg:grid-cols-3">
       {films.map((film) => (
         <FilmItem key={film.imdbID} film={film} />
       ))}

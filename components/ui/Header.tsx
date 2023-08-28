@@ -12,10 +12,13 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <div>
-      <div className="lg:hidden">
-        <button onClick={sidebar.onOpen}>
+      <div className="flex items-center justify-center px-2">
+        <button className="lg:hidden" onClick={sidebar.onOpen}>
           <RxHamburgerMenu size={24} />
         </button>
+        <div className="flex-1">
+          <h1 className="text-center text-3xl font-light">Film Flix</h1>
+        </div>
       </div>
       {children}
     </div>

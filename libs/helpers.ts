@@ -13,3 +13,11 @@ export const getData = async <T>(url: string): Promise<T> => {
 
   return value;
 };
+
+export const delay = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
+export const getTotalPages = (totalResults: number) => {
+  return Math.ceil(totalResults / 10);
+};

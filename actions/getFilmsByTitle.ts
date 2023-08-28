@@ -1,10 +1,15 @@
-import { getData } from "@/libs/helpers";
-import { Search, SearchFilm } from "@/types";
+"use server";
 
-const getFilmsByTitle = async (title: string): Promise<Search> => {
+import { getData } from "@/libs/helpers";
+import { Search } from "@/types";
+
+const getFilmsByTitle = async (
+  title: string,
+  page: number = 1,
+): Promise<Search> => {
   if (title === "" || title === undefined) {
     return {
-      Response: false,
+      Response: "False",
       Search: [],
       totalResults: 0,
     };
@@ -12,10 +17,9 @@ const getFilmsByTitle = async (title: string): Promise<Search> => {
 
   const omdbKey = process.env.OMDB_KEY;
   const formattedTitleForUrl = title.replaceAll(" ", "+");
-  const url = `https://www.omdbapi.com/?apikey=${omdbKey}&s=${formattedTitleForUrl}`;
-  const films = await getData<Search>(url);
+  const url = `https://www.omdbapi.com/?apikey=${omdbKey}&s=${formattedTitleForUrl}&page=${page}`;
 
-  console.log(films);
+  const films = await getData<Search>(url);
 
   return films;
 };
