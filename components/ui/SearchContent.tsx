@@ -66,7 +66,7 @@ const SearchContent: React.FC<SearchContentProps> = ({
   if (error) {
     return (
       <div>
-        Were finding it difficult to find what you're searching. {error}
+        Were finding it difficult to find what you&apos;re searching. {error}
       </div>
     );
   }

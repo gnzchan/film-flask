@@ -31,14 +31,6 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
           totalPages={getTotalPages(totalResults)}
           error={error}
         />
-
-        {/* {searchParams.title && (
-          <LoadMore
-            title={searchParams.title}
-            totalResults={totalResults}
-            response={Response}
-          />
-        )} */}
       </Header>
     </div>
   );
