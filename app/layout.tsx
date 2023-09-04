@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import UserProvider from "@/components/providers/UserProvider";
 import MainPage from "@/components/ui/MainPage";
+import ModalProvider from "@/components/providers/ModalProvider";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={font.className}>
         <SupabaseProvider>
           <UserProvider>
+            <ModalProvider />
             <MainPage>{children}</MainPage>
           </UserProvider>
         </SupabaseProvider>

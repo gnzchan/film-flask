@@ -4,14 +4,14 @@ import useSidebar from "@/hooks/useSidebar";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 interface HeaderProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const Header: React.FC<HeaderProps> = ({ children }) => {
   const sidebar = useSidebar();
 
   return (
-    <div>
+    <>
       <div className="flex items-center justify-center px-2">
         <button className="lg:hidden" onClick={sidebar.onOpen}>
           <RxHamburgerMenu size={24} />
@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         </div>
       </div>
       {children}
-    </div>
+    </>
   );
 };
 

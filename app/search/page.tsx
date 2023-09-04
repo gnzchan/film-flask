@@ -1,7 +1,7 @@
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
-import SearchContent from "@/components/ui/SearchContent";
-import SearchInput from "@/components/ui/SearchInput";
+import SearchContent from "@/components/ui/SearchFilmContent";
+import SearchInput from "@/components/ui/SearchFilmInput";
 import { getTotalPages } from "@/libs/helpers";
 
 interface SearchProps {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import Spinner from "./Spinner";
-import SearchContent from "./SearchContent";
+import SearchContent from "./SearchFilmContent";
 import { SearchFilm } from "@/types";
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 import { delay, getTotalPages } from "@/libs/helpers";

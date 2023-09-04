@@ -20,6 +20,22 @@ export interface Search {
   Error?: string;
 }
 
+export interface FilmDetails {
+  Title: string;
+  Year: string;
+  Rated: string;
+  Genre: string;
+  Director: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Poster: string;
+  imdbRating: string;
+  imdbID: string;
+  Type: string;
+  Response: string;
+}
+
 export interface Film {
   actors: string;
   category: FilmCategory;

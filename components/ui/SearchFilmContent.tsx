@@ -3,7 +3,7 @@
 import { useInView } from "react-intersection-observer";
 
 import { useEffect, useState } from "react";
-import FilmItem from "./FilmItem";
+import FilmItem from "./SearchFilmContentItem";
 import Spinner from "./Spinner";
 
 import { SearchFilm } from "@/types";
