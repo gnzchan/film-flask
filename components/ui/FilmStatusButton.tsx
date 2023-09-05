@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
+
 import { LordIcon } from "./LordIcon";
 
 interface FilmStatusButtonProps {
@@ -27,7 +28,7 @@ const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
 
   return (
     <div
-      className="relative cursor-pointer"
+      className="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

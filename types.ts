@@ -37,8 +37,14 @@ declare global {
 }
 
 export enum FilmCategory {
-  Movie = "movie",
-  Series = "series",
+  MOVIE,
+  SERIES,
+}
+
+export enum Status {
+  TO_WATCH_LATER = "To watch later",
+  CURRENTLY_WATCHING = "Currently watching",
+  FINISHED_WATCHING = "Finished watching",
 }
 
 export interface SearchFilm {

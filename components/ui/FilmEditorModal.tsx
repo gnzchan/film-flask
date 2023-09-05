@@ -1,9 +1,15 @@
-import useFilmEditorModal from "@/hooks/useFilmEditorModal";
+import { useState } from "react";
+
 import Modal from "./Modal";
 import FilmStatusButton from "./FilmStatusButton";
 
+import useFilmEditorModal from "@/hooks/useFilmEditorModal";
+import { Status } from "@/types";
+
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
+  const [review, setReview] = useState<string | undefined>(undefined);
+  const [status, setStatus] = useState<Status>(Status.TO_WATCH_LATER);
 
   const onChangeHandler = (open: boolean) => {
     if (!open) {
@@ -26,12 +32,15 @@ const FilmEditorModal = () => {
           placeholder="Leave a review"
         />
         <div className="flex items-center justify-center gap-4">
-          <FilmStatusButton
-            id="add"
-            color="white"
-            src="https://cdn.lordicon.com/ynwbvguu.json"
-            description="Add to watch later"
-          />
+          <button>
+            <FilmStatusButton
+              id="add"
+              color="white"
+              src="https://cdn.lordicon.com/ynwbvguu.json"
+              description="Add to watch later"
+            />
+          </button>
+
           <FilmStatusButton
             id="current"
             color="white"
