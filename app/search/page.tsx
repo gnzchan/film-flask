@@ -18,9 +18,9 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
   } = await getFilmsByTitle(searchParams.title);
 
   return (
-    <div className="">
+    <div>
       <Header>
-        <div className="sticky top-0 z-30 flex flex-col gap-y-5 bg-yellow-400/30 px-2 py-3 backdrop-blur-md">
+        <div className="sticky top-0 z-10 flex flex-col gap-y-5 bg-yellow-400/30 px-2 py-3 backdrop-blur-md">
           <h1 className="text-3xl font-semibold">Search</h1>
           <SearchInput />
         </div>

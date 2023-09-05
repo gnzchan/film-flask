@@ -19,12 +19,12 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-neutral-900/90 backdrop-blur-sm" />
+        <Dialog.Overlay className="fixed inset-0 z-20 bg-neutral-900/90 backdrop-blur-sm" />
         <Dialog.Content
-          className="
-            fixed 
-            left-[50%]
-            top-[50%] 
+          className="fixed
+            left-[50%] 
+            top-[50%]
+            z-30 
             max-h-[85vh] 
             w-[90vw] 
             translate-x-[-50%] 
