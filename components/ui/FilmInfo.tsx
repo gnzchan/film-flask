@@ -28,7 +28,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         }}
       >
         <div className="flex flex-col items-center gap-5 px-5 py-7 backdrop-blur-sm backdrop-brightness-50">
-          <div className="relative aspect-[3/4] w-[60%] max-w-[400px]  drop-shadow-2xl">
+          <div className="relative aspect-[3/4] w-[60%] max-w-[400px] drop-shadow-2xl">
             <Image
               src={
                 film.Poster !== "N/A" ? film.Poster : "/images/movie-poster.jpg"
@@ -39,8 +39,11 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             />
           </div>
           <div className="flex items-center justify-center">
-            {film.Genre.split(",").map((genre) => (
-              <div className="m-1 flex items-center justify-center rounded-full border border-gray-300  px-2 py-1 font-medium text-gray-400 ">
+            {film.Genre.split(",").map((genre, i) => (
+              <div
+                key={`${genre}-${i}`}
+                className="m-1 flex items-center justify-center rounded-full border border-gray-300  px-2 py-1 font-medium text-gray-400 "
+              >
                 <div className="max-w-full flex-initial text-xs font-normal leading-none">
                   <h1 className="text-white">{genre}</h1>
                 </div>
@@ -50,7 +53,9 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           <div className="flex w-full flex-col gap-4">
             <div className="flex items-center gap-6 text-xs font-medium capitalize text-white">
               <div className="flex items-center justify-center gap-2">
-                <img src="/images/imdb.png" alt="IMDb Logo" className="h-7" />
+                <div className="relative aspect-square h-8">
+                  <Image src="/images/imdb.png" alt="IMDb Logo" fill />
+                </div>
                 <p>{film.imdbRating} / 10</p>
               </div>
               <p>{film.Language}</p>
@@ -70,8 +75,10 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           <p className="text-md">{film.Director}</p>
         </div>
         <div className="flex justify-around">
-          {film.Actors.split(",").map((actor) => (
-            <p className="text-xs">{actor}</p>
+          {film.Actors.split(",").map((actor, i) => (
+            <p key={`${actor}-${i}`} className="text-xs">
+              {actor}
+            </p>
           ))}
         </div>
         <div>
