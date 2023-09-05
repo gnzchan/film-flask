@@ -17,8 +17,11 @@ const Sidebar: React.FC = () => {
   const pathName = usePathname();
 
   useEffect(() => {
-    setActiveSidebarItem(pathName);
-  }, [pathName]);
+    if (pathName !== activeSidebarItem) {
+      setActiveSidebarItem(pathName);
+      sidebar.onClose();
+    }
+  }, [pathName, activeSidebarItem, sidebar]);
 
   const handleLogout = () => {
     // TODO: Handle logout
