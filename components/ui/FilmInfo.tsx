@@ -1,11 +1,14 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 
 import Button from "./Button";
+
+import { useUser } from "@/hooks/useUser";
+import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import { FilmDetails } from "@/types";
-import { useEffect } from "react";
 
 interface FilmInfoProps {
   film: FilmDetails;
@@ -13,10 +16,20 @@ interface FilmInfoProps {
 
 const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   const filmEditorModal = useFilmEditorModal();
+  const { user } = useUser();
+  const authModal = useAuthModal();
 
   useEffect(() => {
     filmEditorModal.setFilm(film);
   }, []);
+
+  const handleClick = () => {
+    if (!user) {
+      return authModal.onOpen("You need to sign in to access this content");
+    }
+
+    return filmEditorModal.onOpen();
+  };
 
   return (
     <>
@@ -82,7 +95,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           ))}
         </div>
         <div>
-          <Button onClick={filmEditorModal.onOpen} className="font-medium">
+          <Button onClick={handleClick} className="font-medium">
             Add to List
           </Button>
         </div>

@@ -50,7 +50,9 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             </div>
           ) : (
             <div>
-              <Button onClick={authModal.onOpen}>Log in</Button>
+              <Button onClick={() => authModal.onOpen("Welcome back")}>
+                Log in
+              </Button>
             </div>
           )}
         </div>

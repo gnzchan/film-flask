@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { Sidebar as RPSidebar, Menu, sidebarClasses } from "react-pro-sidebar";
 import { FiSearch, FiCompass } from "react-icons/fi";
 import { PiSignOut } from "react-icons/pi";
@@ -41,8 +42,8 @@ const Sidebar: React.FC = () => {
           onBackdropClick={sidebar.onClose}
           customBreakPoint="1024px"
         >
-          <div className="align-center flex justify-center bg-slate-400">
-            <h1>Film Flask</h1>
+          <div className="relative aspect-auto min-h-[90px]">
+            <Image src="/images/ff-logo.svg" alt="Film Flask Logo" fill />
           </div>
 
           <Menu>

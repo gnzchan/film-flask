@@ -13,8 +13,10 @@ const FilmEditorModal = () => {
 
   return (
     <Modal
-      title="Edit film list"
-      description={filmEditorModal.film?.Title ?? ""}
+      title="Edit film record"
+      description={`You are currently editing ${
+        filmEditorModal.film?.Title ?? ""
+      }`}
       isOpen={filmEditorModal.isOpen}
       onChange={onChangeHandler}
     >
