@@ -8,6 +8,7 @@ import { Inter } from "next/font/google";
 import UserProvider from "@/components/providers/UserProvider";
 import MainPage from "@/components/ui/MainPage";
 import ModalProvider from "@/components/providers/ModalProvider";
+import ToasterProvider from "@/components/providers/ToasterProvider";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
         <Script src="https://cdn.lordicon.com/bhenfmcm.js"></Script>
       </head>
       <body className={font.className}>
+        <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />

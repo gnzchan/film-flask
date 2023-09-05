@@ -1,7 +1,12 @@
-import useAuthModal from "@/hooks/useAuthModal";
+import { Auth } from "@supabase/auth-ui-react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+
 import Modal from "./Modal";
+import useAuthModal from "@/hooks/useAuthModal";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 const AuthModal = () => {
+  const supabaseClient = useSupabaseClient();
   const authModal = useAuthModal();
 
   // TODO: Refactor with other modals
@@ -20,7 +25,23 @@ const AuthModal = () => {
       isOpen={authModal.isOpen}
       onChange={onChangeHandler}
     >
-      test
+      <Auth
+        theme="dark"
+        providers={["google", "facebook"]}
+        supabaseClient={supabaseClient}
+        view="sign_in"
+        appearance={{
+          theme: ThemeSupa,
+          variables: {
+            default: {
+              colors: {
+                brand: "#404040",
+                brandAccent: "#22c55e",
+              },
+            },
+          },
+        }}
+      />
     </Modal>
   );
 };
