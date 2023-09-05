@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import FilmEditorModal from "../ui/FilmEditorModal";
+import AuthModal from "../ui/AuthModal";
 
 interface ModalProviderProps {}
 
@@ -20,6 +21,7 @@ const ModalProvider: React.FC<ModalProviderProps> = () => {
   return (
     <>
       <FilmEditorModal />
+      <AuthModal />
     </>
   );
 };

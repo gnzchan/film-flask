@@ -10,6 +10,7 @@ const FilmEditorModal = () => {
       filmEditorModal.onClose();
     }
   };
+
   return (
     <Modal
       title="Edit film list"
