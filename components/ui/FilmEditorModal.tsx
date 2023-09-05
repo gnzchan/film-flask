@@ -1,7 +1,6 @@
-
-
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import Modal from "./Modal";
+import FilmStatusButton from "./FilmStatusButton";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
@@ -15,13 +14,35 @@ const FilmEditorModal = () => {
     <Modal
       title="Edit film list"
       description={filmEditorModal.film?.Title ?? ""}
-      isOpen
-      // ={filmEditorModal.isOpen}
+      isOpen={filmEditorModal.isOpen}
       onChange={onChangeHandler}
     >
-      <textarea className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-      placeholder="Leave a review"></textarea>
-
+      <div className="flex flex-col">
+        <textarea
+          className="mb-10 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
+          placeholder="Leave a review"
+        />
+        <div className="flex items-center justify-center gap-4">
+          <FilmStatusButton
+            id="add"
+            color="white"
+            src="https://cdn.lordicon.com/ynwbvguu.json"
+            description="Add to watch later"
+          />
+          <FilmStatusButton
+            id="current"
+            color="white"
+            src="https://cdn.lordicon.com/ycwlopoz.json"
+            description="Currently watching"
+          />
+          <FilmStatusButton
+            id="complete"
+            color="#FFFFFF"
+            src="https://cdn.lordicon.com/tyvtvbcy.json"
+            description="Finished watching"
+          />
+        </div>
+      </div>
     </Modal>
   );
 };

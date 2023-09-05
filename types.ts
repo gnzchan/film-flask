@@ -1,4 +1,40 @@
+import "react";
 import { User } from "@supabase/auth-helpers-nextjs";
+
+export type LordIconTrigger =
+  | "hover"
+  | "click"
+  | "loop"
+  | "loop-on-hover"
+  | "morph"
+  | "morph-two-way";
+
+export type LordIconColors = {
+  primary?: string;
+  secondary?: string;
+};
+
+type LordIconProps = {
+  src?: string;
+  trigger?: LordIconTrigger;
+  delay?: string | number;
+  colors?: string;
+  style?: { width?: number; height?: number };
+};
+
+type LordIconElement = React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLElement>,
+  HTMLElement
+> &
+  LordIconProps;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "lord-icon": LordIconElement;
+    }
+  }
+}
 
 export enum FilmCategory {
   Movie = "movie",

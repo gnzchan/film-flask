@@ -18,6 +18,8 @@
     "autoprefixer": "10.4.15",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "lord-icon-element": "^4.1.1",
+    "lottie-web": "^5.12.2",
     "next": "13.4.19",
     "postcss": "8.4.28",
     "query-string": "^8.1.0",

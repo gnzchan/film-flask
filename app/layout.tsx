@@ -1,6 +1,7 @@
 import SupabaseProvider from "@/components/providers/SupabaseProvider";
 import "./globals.css";
 import type { Metadata } from "next";
+import Script from "next/script";
 
 // change font
 import { Inter } from "next/font/google";
@@ -22,6 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script src="https://cdn.lordicon.com/bhenfmcm.js"></Script>
+      </head>
       <body className={font.className}>
         <SupabaseProvider>
           <UserProvider>
