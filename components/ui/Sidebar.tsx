@@ -42,7 +42,7 @@ const Sidebar: React.FC = () => {
           customBreakPoint="1024px"
         >
           <div className="align-center flex justify-center bg-slate-400">
-            <h1>Film Flix</h1>
+            <h1>Film Flask</h1>
           </div>
 
           <Menu>
