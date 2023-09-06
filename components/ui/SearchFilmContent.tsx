@@ -10,14 +10,14 @@ import { SearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 
-interface SearchContentProps {
+interface SearchFilmContentProps {
   films: SearchFilm[];
   title: string;
   totalPages: number;
   error?: string;
 }
 
-const SearchContent: React.FC<SearchContentProps> = ({
+const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   films: propFilms,
   title,
   totalPages,
@@ -84,4 +84,4 @@ const SearchContent: React.FC<SearchContentProps> = ({
   );
 };
 
-export default SearchContent;
+export default SearchFilmContent;

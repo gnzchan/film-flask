@@ -1,6 +1,6 @@
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
-import SearchContent from "@/components/ui/SearchFilmContent";
+import SearchFilmContent from "@/components/ui/SearchFilmContent";
 import SearchInput from "@/components/ui/SearchFilmInput";
 import { getTotalPages } from "@/libs/helpers";
 
@@ -25,7 +25,7 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
           <SearchInput />
         </div>
 
-        <SearchContent
+        <SearchFilmContent
           films={films}
           title={searchParams.title}
           totalPages={getTotalPages(totalResults)}

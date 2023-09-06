@@ -1,3 +1,5 @@
+"use server";
+
 import { getData } from "@/libs/helpers";
 import { FilmDetails } from "@/types";
 
