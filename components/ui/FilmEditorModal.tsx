@@ -8,7 +8,6 @@ import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
-  const [activeStatus, setActiveStatus] = useState(Status.TO_WATCH_LATER);
 
   const onChangeHandler = (open: boolean) => {
     if (!open) {
@@ -25,17 +24,14 @@ const FilmEditorModal = () => {
     console.log(status);
   };
 
-  const onClickStatusHandler = (status: Status) => {
-    setActiveStatus(status);
-  };
-
   return (
     <Modal
       title="Edit film record"
       description={`You are currently editing ${
         filmEditorModal.film?.Title ?? ""
       }`}
-      isOpen={filmEditorModal.isOpen}
+      isOpen
+      // ={filmEditorModal.isOpen}
       onChange={onChangeHandler}
     >
       <div className="flex flex-col">
@@ -52,24 +48,18 @@ const FilmEditorModal = () => {
               color="white"
               src="https://cdn.lordicon.com/ynwbvguu.json"
               status={Status.TO_WATCH_LATER}
-              active={activeStatus === Status.TO_WATCH_LATER}
-              onClick={onClickStatusHandler}
             />
             <FilmStatusButton
               id="current"
               color="white"
               src="https://cdn.lordicon.com/ycwlopoz.json"
               status={Status.CURRENTLY_WATCHING}
-              active={activeStatus === Status.CURRENTLY_WATCHING}
-              onClick={onClickStatusHandler}
             />
             <FilmStatusButton
               id="complete"
               color="#FFFFFF"
               src="https://cdn.lordicon.com/tyvtvbcy.json"
               status={Status.FINISHED_WATCHING}
-              active={activeStatus === Status.FINISHED_WATCHING}
-              onClick={onClickStatusHandler}
             />
           </div>
 
