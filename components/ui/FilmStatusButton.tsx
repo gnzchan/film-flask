@@ -1,21 +1,22 @@
-import { useEffect, useState } from "react";
-import { twMerge } from "tailwind-merge";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import { LordIcon } from "./LordIcon";
 import { Status } from "@/types";
 
 interface FilmStatusButtonProps {
   id: string;
-  color: string;
   src: string;
   status: Status;
+  checked: boolean;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
 const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
   id,
-  color,
   src,
   status,
+  checked,
+  onChange,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -39,6 +40,8 @@ const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
         type="radio"
         name="status"
         value={status}
+        checked={checked}
+        onChange={onChange}
       />
       <label
         className="absolute z-10 h-full w-full cursor-pointer opacity-0"
@@ -50,7 +53,7 @@ const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
           id={id}
           src={src}
           trigger="hover"
-          colors={{ primary: color }}
+          colors={{ primary: "white" }}
           size={48}
         />
         <h2 className="text-md text-center font-semibold text-white md:text-left md:text-lg">

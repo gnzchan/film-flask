@@ -8,10 +8,10 @@ import Button from "./Button";
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
-import { FilmDetails } from "@/types";
+import { OMDBFilm } from "@/types";
 
 interface FilmInfoProps {
-  film: FilmDetails;
+  film: OMDBFilm;
 }
 
 const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {

@@ -1,12 +1,12 @@
 "use server";
 
 import { getData } from "@/libs/helpers";
-import { Search } from "@/types";
+import { OMDBSearch } from "@/types";
 
 const getFilmsByTitle = async (
   title: string,
   page: number = 1,
-): Promise<Search> => {
+): Promise<OMDBSearch> => {
   if (title === "" || title === undefined) {
     return {
       Response: "False",
@@ -19,7 +19,7 @@ const getFilmsByTitle = async (
   const formattedTitleForUrl = title.replaceAll(" ", "+");
   const url = `https://www.omdbapi.com/?apikey=${omdbKey}&s=${formattedTitleForUrl}&page=${page}`;
 
-  const films = await getData<Search>(url);
+  const films = await getData<OMDBSearch>(url);
 
   return films;
 };

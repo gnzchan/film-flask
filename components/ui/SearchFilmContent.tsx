@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import FilmItem from "./SearchFilmContentItem";
 import Spinner from "./Spinner";
 
-import { SearchFilm } from "@/types";
+import { OMDBSearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 
 interface SearchFilmContentProps {
-  films: SearchFilm[];
+  films: OMDBSearchFilm[];
   title: string;
   totalPages: number;
   error?: string;
@@ -23,7 +23,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   totalPages,
   error,
 }) => {
-  const [films, setFilms] = useState<SearchFilm[]>(propFilms);
+  const [films, setFilms] = useState<OMDBSearchFilm[]>(propFilms);
   const [pagesLoaded, setPagesLoaded] = useState(1);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(false);
   const { ref, inView } = useInView();

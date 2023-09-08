@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 
 import Spinner from "./Spinner";
 import SearchContent from "./SearchFilmContent";
-import { SearchFilm } from "@/types";
+import { OMDBSearchFilm } from "@/types";
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 import { delay, getTotalPages } from "@/libs/helpers";
 
@@ -20,7 +20,7 @@ const LoadMore: React.FC<LoadMoreProps> = ({
   totalResults,
   response,
 }) => {
-  const [films, setFilms] = useState<SearchFilm[]>([]);
+  const [films, setFilms] = useState<OMDBSearchFilm[]>([]);
   const [pagesLoaded, setPagesLoaded] = useState(1);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(false);
   const { ref, inView } = useInView();

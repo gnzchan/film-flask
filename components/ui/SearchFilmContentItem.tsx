@@ -1,9 +1,9 @@
-import { SearchFilm } from "@/types";
+import { OMDBSearchFilm } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
 interface FilmItemProps {
-  film: SearchFilm;
+  film: OMDBSearchFilm;
 }
 
 const FilmItem: React.FC<FilmItemProps> = ({ film }) => {

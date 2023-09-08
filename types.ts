@@ -37,8 +37,8 @@ declare global {
 }
 
 export enum FilmCategory {
-  MOVIE,
-  SERIES,
+  MOVIE = "movie",
+  SERIES = "series",
 }
 
 export enum Status {
@@ -47,7 +47,7 @@ export enum Status {
   FINISHED_WATCHING = "Finished watching",
 }
 
-export interface SearchFilm {
+export interface OMDBSearchFilm {
   Title: string;
   Year: string;
   imdbID: string;
@@ -55,14 +55,14 @@ export interface SearchFilm {
   Poster: string;
 }
 
-export interface Search {
+export interface OMDBSearch {
   Response: string;
-  Search: SearchFilm[];
+  Search: OMDBSearchFilm[];
   totalResults: number;
   Error?: string;
 }
 
-export interface FilmDetails {
+export interface OMDBFilm {
   Title: string;
   Year: string;
   Rated: string;
@@ -79,16 +79,12 @@ export interface FilmDetails {
 }
 
 export interface Film {
-  actors: string;
-  category: FilmCategory;
-  date_released: string;
-  genre: string;
   id: string;
-  imdb_rating: number;
-  imdb_votes: number;
-  plot: string;
-  poster_url: string;
   title: string;
+  genre: string;
+  category: FilmCategory;
+  year: string;
+  language: string;
 }
 
 export type UserContextType = {
