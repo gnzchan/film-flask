@@ -54,7 +54,7 @@ const useFilmDB = () => {
     fetchData();
   }, [filmEditorModal.film?.imdbID, supabaseClient, user?.id, filmEditorModal]);
 
-  const updateFilm = async (e: FormData) => {
+  const updateFilm = async () => {
     if ((review || status) && !film) {
       const { error } = await supabaseClient.from("films").insert({
         id: cachedFilm!.imdbID,
@@ -84,6 +84,7 @@ const useFilmDB = () => {
         return toast.error(error.message);
       }
     }
+
     if (status) {
       const { error } = await supabaseClient.from("status_films").upsert({
         user_id: user!.id,
@@ -96,6 +97,7 @@ const useFilmDB = () => {
       }
     }
 
+    filmEditorModal.onClose();
     toast.success("Film updated");
   };
 
