@@ -42,7 +42,7 @@ export enum FilmCategory {
 }
 
 export enum Status {
-  TO_WATCH_LATER = "To watch later",
+  TO_WATCH_LATER = "Watch later",
   CURRENTLY_WATCHING = "Currently watching",
   FINISHED_WATCHING = "Finished watching",
 }

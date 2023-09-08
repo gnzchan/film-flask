@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({
             md:h-auto 
             md:max-h-[85vh] 
             md:w-[90vw] 
-            md:max-w-[450px]
+            md:max-w-[650px]
             "
         >
           <Dialog.Title className="mb-4 text-center text-xl font-bold">

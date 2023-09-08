@@ -5,6 +5,7 @@ import FilmStatusButton from "./FilmStatusButton";
 
 import { Status } from "@/types";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
+import Button from "./Button";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
@@ -35,14 +36,18 @@ const FilmEditorModal = () => {
       onChange={onChangeHandler}
     >
       <div className="flex flex-col">
-        <form action={create}>
+        <form
+          action={create}
+          className="flex flex-col items-center justify-center gap-10"
+        >
           <textarea
             name="comment"
-            className="mb-10 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
+            rows={5}
+            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
             placeholder="Leave a review"
           />
 
-          <div className="flex items-center justify-center gap-4">
+          <div className="flex w-full flex-col items-center justify-center gap-7 px-7 sm:flex-row">
             <FilmStatusButton
               id="add"
               color="white"
@@ -63,7 +68,7 @@ const FilmEditorModal = () => {
             />
           </div>
 
-          <button type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
         </form>
       </div>
     </Modal>
