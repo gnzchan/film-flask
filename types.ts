@@ -78,6 +78,12 @@ export interface OMDBFilm {
   Response: string;
 }
 
+export interface Review {
+  review: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Film {
   id: string;
   title: string;

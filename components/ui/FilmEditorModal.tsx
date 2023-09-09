@@ -1,5 +1,3 @@
-import { ChangeEvent } from "react";
-
 import Modal from "./Modal";
 import FilmStatusButton from "./FilmStatusButton";
 
@@ -40,7 +38,7 @@ const FilmEditorModal = () => {
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
             placeholder="Leave a review"
             value={review}
-            onChange={statusHandler}
+            onChange={reviewHandler}
           />
 
           <div className="flex w-full flex-col items-center justify-center gap-7 px-7 sm:flex-row">
@@ -49,21 +47,21 @@ const FilmEditorModal = () => {
               src="https://cdn.lordicon.com/ynwbvguu.json"
               status={Status.TO_WATCH_LATER}
               checked={status === Status.TO_WATCH_LATER}
-              onChange={reviewHandler}
+              onChange={statusHandler}
             />
             <FilmStatusButton
               id="current"
               src="https://cdn.lordicon.com/ycwlopoz.json"
               status={Status.CURRENTLY_WATCHING}
               checked={status === Status.CURRENTLY_WATCHING}
-              onChange={reviewHandler}
+              onChange={statusHandler}
             />
             <FilmStatusButton
               id="complete"
               src="https://cdn.lordicon.com/tyvtvbcy.json"
               status={Status.FINISHED_WATCHING}
               checked={status === Status.FINISHED_WATCHING}
-              onChange={reviewHandler}
+              onChange={statusHandler}
             />
           </div>
 

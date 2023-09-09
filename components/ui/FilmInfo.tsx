@@ -9,12 +9,14 @@ import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import { OMDBFilm } from "@/types";
+import useFilmStore from "@/hooks/useFilmStore";
 
 interface FilmInfoProps {
   film: OMDBFilm;
 }
 
 const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
+  const filmStore = useFilmStore();
   const filmEditorModal = useFilmEditorModal();
   const { user } = useUser();
   const authModal = useAuthModal();
@@ -40,7 +42,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         url(${film.Poster})`,
         }}
       >
-        <div className="flex flex-col items-center gap-5 px-5 py-7 backdrop-blur-sm backdrop-brightness-50">
+        <div className="flex flex-col items-center gap-5 px-5 py-3 backdrop-blur-sm backdrop-brightness-50">
           <div className="relative aspect-[3/4] w-[60%] max-w-[400px] drop-shadow-2xl">
             <Image
               src={
@@ -83,7 +85,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col justify-around bg-black px-5 text-white">
+      <div className="flex flex-col gap-5 bg-black px-5 py-3 text-white">
         <div className="flex items-center justify-center">
           <p className="text-md">{film.Director}</p>
         </div>
@@ -99,6 +101,12 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             Add to List
           </Button>
         </div>
+      </div>
+      <div className="bg-red-300 px-5 py-3">
+        <h1 className="text-2xl font-bold text-white">Reviews</h1>
+        {filmStore.reviews.map((review, i) => (
+          <div key={i}>{review.review}</div>
+        ))}
       </div>
     </>
   );
