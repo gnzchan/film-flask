@@ -105,7 +105,11 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
       <div className="bg-red-300 px-5 py-3">
         <h1 className="text-2xl font-bold text-white">Reviews</h1>
         {filmStore.reviews.map((review, i) => (
-          <div key={i}>{review.review}</div>
+          <div key={i}>
+            {review.review}
+            {review.updated_at ? review.updated_at : review.created_at}
+            {review.users.full_name}
+          </div>
         ))}
       </div>
     </>

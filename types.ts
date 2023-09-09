@@ -82,6 +82,7 @@ export interface Review {
   review: string;
   created_at: string;
   updated_at: string;
+  users: UserDetails;
 }
 
 export interface Film {

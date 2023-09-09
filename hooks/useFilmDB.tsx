@@ -77,8 +77,10 @@ const useFilmDB = () => {
   const fetchFilmReviews = async () => {
     const { data: reviewsFromDB } = await supabaseClient
       .from("review_films")
-      .select("*")
+      .select("*, users(*)")
       .eq("film_id", cachedFilm?.imdbID);
+
+    console.log(reviewsFromDB);
 
     filmStore.setReviews(reviewsFromDB as Review[]);
   };
