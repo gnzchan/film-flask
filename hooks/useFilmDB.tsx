@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import toast from "react-hot-toast";
 
@@ -101,9 +101,13 @@ const useFilmDB = () => {
     toast.success("Film updated");
   };
 
-  const statusHandler = (s: Status) => setStatus(s);
+  const statusHandler = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => setStatus(e.target.value as Status);
 
-  const reviewHandler = (r: string) => setReview(r);
+  const reviewHandler = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => setReview(e.target.value);
 
   return { film, status, review, updateFilm, statusHandler, reviewHandler };
 };

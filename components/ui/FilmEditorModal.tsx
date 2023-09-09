@@ -14,18 +14,6 @@ const FilmEditorModal = () => {
   const { status, review, updateFilm, statusHandler, reviewHandler } =
     useFilmDB();
 
-  const onChangeStatus = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    statusHandler(e.target.value as Status);
-  };
-
-  const onChangeReview = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    reviewHandler(e.target.value);
-  };
-
   const onToggleModal = (open: boolean) => {
     if (!open) {
       filmEditorModal.onClose();
@@ -52,7 +40,7 @@ const FilmEditorModal = () => {
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
             placeholder="Leave a review"
             value={review}
-            onChange={onChangeReview}
+            onChange={statusHandler}
           />
 
           <div className="flex w-full flex-col items-center justify-center gap-7 px-7 sm:flex-row">
@@ -61,21 +49,21 @@ const FilmEditorModal = () => {
               src="https://cdn.lordicon.com/ynwbvguu.json"
               status={Status.TO_WATCH_LATER}
               checked={status === Status.TO_WATCH_LATER}
-              onChange={onChangeStatus}
+              onChange={reviewHandler}
             />
             <FilmStatusButton
               id="current"
               src="https://cdn.lordicon.com/ycwlopoz.json"
               status={Status.CURRENTLY_WATCHING}
               checked={status === Status.CURRENTLY_WATCHING}
-              onChange={onChangeStatus}
+              onChange={reviewHandler}
             />
             <FilmStatusButton
               id="complete"
               src="https://cdn.lordicon.com/tyvtvbcy.json"
               status={Status.FINISHED_WATCHING}
               checked={status === Status.FINISHED_WATCHING}
-              onChange={onChangeStatus}
+              onChange={reviewHandler}
             />
           </div>
 
