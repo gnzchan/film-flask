@@ -10,6 +10,7 @@ import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import { OMDBFilm } from "@/types";
 import useFilmStore from "@/hooks/useFilmStore";
+import { getFormattedTime } from "@/libs/helpers";
 
 interface FilmInfoProps {
   film: OMDBFilm;
@@ -102,15 +103,24 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           </Button>
         </div>
       </div>
-      <div className="bg-red-300 px-5 py-3">
-        <h1 className="text-2xl font-bold text-white">Reviews</h1>
-        {filmStore.reviews.map((review, i) => (
-          <div key={i}>
-            {review.review}
-            {review.updated_at ? review.updated_at : review.created_at}
-            {review.users.full_name}
-          </div>
-        ))}
+      <div className="flex h-full flex-col gap-3 bg-black px-5 py-3 text-white">
+        <h1 className="text-2xl font-bold">Reviews</h1>
+        <p className="text-center text-sm italic text-gray-400">
+          Add film to add a review
+        </p>
+        <div className="flex flex-col gap-2 divide-y">
+          {filmStore.reviews.map((review, i) => (
+            <div key={i} className="flex flex-col">
+              <p className="text-md font-medium">{review.users.full_name}</p>
+              <p className="text-sm">{review.review}</p>
+              <p className="text-right text-xs text-gray-600">
+                {getFormattedTime(
+                  review.updated_at ? review.updated_at : review.created_at,
+                )}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

@@ -72,15 +72,13 @@ const useFilmDB = () => {
 
       fetchFilmReviewStatus();
     }
-  }, [filmStore.film, filmEditorModal.isOpen]);
+  }, [filmEditorModal.isOpen]);
 
   const fetchFilmReviews = async () => {
     const { data: reviewsFromDB } = await supabaseClient
       .from("review_films")
       .select("*, users(*)")
       .eq("film_id", cachedFilm?.imdbID);
-
-    console.log(reviewsFromDB);
 
     filmStore.setReviews(reviewsFromDB as Review[]);
   };
@@ -133,11 +131,11 @@ const useFilmDB = () => {
     await fetchFilmReviews();
   };
 
-  const statusHandler = (
+  const statusChangeHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setStatus(e.target.value as Status);
 
-  const reviewHandler = (
+  const reviewChangeHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setReview(e.target.value);
 
@@ -145,8 +143,8 @@ const useFilmDB = () => {
     status,
     review,
     updateFilm,
-    statusHandler,
-    reviewHandler,
+    statusChangeHandler,
+    reviewChangeHandler,
   };
 };
 

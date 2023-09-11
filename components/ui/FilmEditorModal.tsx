@@ -9,8 +9,13 @@ import Button from "./Button";
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
 
-  const { status, review, updateFilm, statusHandler, reviewHandler } =
-    useFilmDB();
+  const {
+    status,
+    review,
+    updateFilm,
+    statusChangeHandler,
+    reviewChangeHandler,
+  } = useFilmDB();
 
   const onToggleModal = (open: boolean) => {
     if (!open) {
@@ -38,7 +43,7 @@ const FilmEditorModal = () => {
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
             placeholder="Leave a review"
             value={review}
-            onChange={reviewHandler}
+            onChange={reviewChangeHandler}
           />
 
           <div className="flex w-full flex-col items-center justify-center gap-7 px-7 sm:flex-row">
@@ -47,21 +52,21 @@ const FilmEditorModal = () => {
               src="https://cdn.lordicon.com/ynwbvguu.json"
               status={Status.TO_WATCH_LATER}
               checked={status === Status.TO_WATCH_LATER}
-              onChange={statusHandler}
+              onChange={statusChangeHandler}
             />
             <FilmStatusButton
               id="current"
               src="https://cdn.lordicon.com/ycwlopoz.json"
               status={Status.CURRENTLY_WATCHING}
               checked={status === Status.CURRENTLY_WATCHING}
-              onChange={statusHandler}
+              onChange={statusChangeHandler}
             />
             <FilmStatusButton
               id="complete"
               src="https://cdn.lordicon.com/tyvtvbcy.json"
               status={Status.FINISHED_WATCHING}
               checked={status === Status.FINISHED_WATCHING}
-              onChange={statusHandler}
+              onChange={statusChangeHandler}
             />
           </div>
 

@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const getData = async <T>(url: string): Promise<T> => {
   const res: Response = await fetch(url, {
     method: "GET",
@@ -20,4 +22,12 @@ export const delay = (ms: number) => {
 
 export const getTotalPages = (totalResults: number) => {
   return Math.ceil(totalResults / 10);
+};
+
+export const getFormattedTime = (timestamptz: string) => {
+  const time = new Date(timestamptz);
+
+  const formattedTime = format(time, "PPp");
+
+  return formattedTime;
 };
