@@ -82,6 +82,8 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
                 id: film.imdbID,
                 poster_url: film.Poster,
                 title: film.Title,
+                category: film.Type,
+                year: film.Year,
               }}
             />
           ))}
