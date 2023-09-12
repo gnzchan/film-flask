@@ -73,7 +73,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
 
   return (
     <>
-      <div className="grid grid-cols-1 place-items-center gap-3 pt-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 place-items-center gap-3 pt-3 sm:grid-cols-3 md:grid-cols-4">
         {films &&
           films.map((film) => (
             <FilmItem

@@ -1,6 +1,6 @@
 import getSBFilms from "@/actions/getSBFilms";
 import Header from "@/components/ui/Header";
-import FilmItem from "@/components/ui/FilmItem";
+import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
 
 export default async function Home() {
   const films = await getSBFilms();
@@ -8,17 +8,8 @@ export default async function Home() {
   return (
     <div>
       <Header />
-      <div className="flex h-full w-full flex-col bg-red-50">
-        <div className="flex flex-col">
-          <h1 className="text-4xl font-bold text-neutral-700">
-            What others have added
-          </h1>
-          <div className="flex gap-3">
-            {films.map((film) => (
-              <FilmItem key={film.id} film={film} />
-            ))}
-          </div>
-        </div>
+      <div className="flex flex-col px-3">
+        <ScrollableFilmContent title={"What others have added"} films={films} />
       </div>
     </div>
   );
