@@ -88,10 +88,11 @@ export interface Review {
 export interface Film {
   id: string;
   title: string;
-  genre: string;
-  category: FilmCategory;
-  year: string;
-  language: string;
+  poster_url: string;
+  genre?: string;
+  category?: FilmCategory;
+  year?: string;
+  language?: string;
 }
 
 export type UserContextType = {

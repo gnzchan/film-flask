@@ -95,6 +95,7 @@ const useFilmDB = () => {
             : FilmCategory.SERIES,
         year: cachedFilm?.Year ?? "",
         language: cachedFilm?.Language ?? "",
+        poster_url: cachedFilm?.Poster ?? "",
       });
 
       if (error) {

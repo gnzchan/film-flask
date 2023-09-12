@@ -3,7 +3,7 @@
 import { useInView } from "react-intersection-observer";
 
 import { useEffect, useState } from "react";
-import FilmItem from "./SearchFilmContentItem";
+import FilmItem from "./FilmItem";
 import Spinner from "./Spinner";
 
 import { OMDBSearchFilm } from "@/types";
@@ -73,9 +73,18 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-3 pt-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 place-items-center gap-3 pt-3 sm:grid-cols-2 lg:grid-cols-3">
         {films &&
-          films.map((film) => <FilmItem key={film.imdbID} film={film} />)}
+          films.map((film) => (
+            <FilmItem
+              key={film.imdbID}
+              film={{
+                id: film.imdbID,
+                poster_url: film.Poster,
+                title: film.Title,
+              }}
+            />
+          ))}
       </div>
       <div className="flex items-center justify-center" ref={ref}>
         {content}
