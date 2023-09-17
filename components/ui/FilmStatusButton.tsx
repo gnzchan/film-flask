@@ -48,7 +48,7 @@ const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
         htmlFor={status}
       />
       <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-b from-pink-600 to-purple-600 opacity-75 blur peer-checked:scale-110 peer-checked:from-blue-600 peer-checked:to-green-600"></div>
-      <div className="relative flex h-full min-h-[150px] w-full flex-col items-center gap-5 rounded-md border-gray-400 bg-neutral-700 p-3 transition-all group-hover:scale-105 peer-checked:scale-105 md:items-start">
+      <div className="relative flex h-full w-full flex-row items-center gap-5 rounded-md border-gray-400 bg-neutral-700 p-3 transition-all group-hover:scale-105 peer-checked:scale-105 sm:min-h-[150px] sm:flex-col md:items-start">
         <LordIcon
           id={id}
           src={src}

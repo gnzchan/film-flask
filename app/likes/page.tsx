@@ -1,7 +1,9 @@
+import Header from "@/components/ui/Header";
+
 const Likes = () => {
   return (
-    <div>
-      <h1>Likes</h1>
+    <div className="flex h-full flex-col">
+      <Header />
     </div>
   );
 };

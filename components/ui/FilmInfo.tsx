@@ -8,8 +8,8 @@ import Button from "./Button";
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
-import { OMDBFilm } from "@/types";
 import useFilmStore from "@/hooks/useFilmStore";
+import { OMDBFilm } from "@/types";
 import { getFormattedTime } from "@/libs/helpers";
 
 interface FilmInfoProps {
@@ -34,6 +34,10 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
     return filmEditorModal.onOpen();
   };
 
+  const isFilmOnList = () => {
+    return filmStore.film !== undefined;
+  };
+
   return (
     <>
       <div
@@ -44,7 +48,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         }}
       >
         <div className="flex flex-col items-center gap-5 px-5 py-3 backdrop-blur-sm backdrop-brightness-50">
-          <div className="relative aspect-[3/4] w-[60%] max-w-[400px] drop-shadow-2xl">
+          <div className="relative aspect-[3/4] min-h-[350px] w-[60%] min-w-[263px] max-w-[400px] drop-shadow-2xl">
             <Image
               src={
                 film.Poster !== "N/A" ? film.Poster : "/images/movie-poster.jpg"
@@ -99,7 +103,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         </div>
         <div>
           <Button onClick={handleClick} className="font-medium">
-            Add to List
+            {isFilmOnList() ? "Change status" : "Add to list"}
           </Button>
         </div>
       </div>

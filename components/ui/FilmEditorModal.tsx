@@ -39,7 +39,7 @@ const FilmEditorModal = () => {
         >
           <textarea
             name="review"
-            rows={5}
+            rows={2}
             className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
             placeholder="Leave a review"
             value={review}
