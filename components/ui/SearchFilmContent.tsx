@@ -58,7 +58,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   };
 
   const content = isAllPagesLoaded ? (
-    <div>{films.length === 0 ? "Start searching" : "All results shown"}</div>
+    <div>{films.length === 0 ? "Start searching" : "You're all caught up"}</div>
   ) : (
     <Spinner />
   );

@@ -8,8 +8,11 @@ export default async function Home() {
   return (
     <div>
       <Header />
-      <div className="flex flex-col px-3">
-        <ScrollableFilmContent title={"What others have added"} films={films} />
+      <div className="flex flex-col gap-5 px-3">
+        <ScrollableFilmContent title="Trending now" films={films} />
+
+        {/* TODO: Change content */}
+        <ScrollableFilmContent title="What you have added" films={films} />
       </div>
     </div>
   );

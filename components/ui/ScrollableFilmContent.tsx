@@ -7,6 +7,11 @@ import FilmItem from "./FilmItem";
 import { Film } from "@/types";
 import { useRef } from "react";
 
+enum Direction {
+  LEFT = "left",
+  RIGHT = "right",
+}
+
 interface ScrollableFilmContentProps {
   title: string;
   films: Film[];
@@ -18,15 +23,13 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  const slideLeft = () => {
+  const slide = (direction: Direction) => {
     if (sliderRef.current) {
-      sliderRef.current.scrollLeft -= 200;
-    }
-  };
-
-  const slideRight = () => {
-    if (sliderRef.current) {
-      sliderRef.current.scrollLeft += 200;
+      if (direction === Direction.LEFT) {
+        sliderRef.current.scrollLeft -= 250;
+      } else {
+        sliderRef.current.scrollLeft += 250;
+      }
     }
   };
 
@@ -34,26 +37,26 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-bold text-neutral-700">{title}</h1>
       <div className="flex items-center gap-2">
-        <div
-          onClick={slideLeft}
+        <button
+          onClick={() => slide(Direction.LEFT)}
           className="hover-opacity-100 flex h-44 cursor-pointer items-center justify-center rounded-md bg-neutral-200 opacity-50 transition hover:scale-110"
         >
           <MdChevronLeft size={40} />
-        </div>
+        </button>
         <div
           ref={sliderRef}
-          className="scrollbar-hide flex w-full gap-4 overflow-x-scroll scroll-smooth"
+          className="flex w-full gap-4 overflow-x-scroll scroll-smooth scrollbar-hide"
         >
           {films.map((film) => (
             <FilmItem key={film.id} film={film} />
           ))}
         </div>
-        <div
-          onClick={slideRight}
+        <button
+          onClick={() => slide(Direction.RIGHT)}
           className="hover-opacity-100 flex h-44 cursor-pointer items-center justify-center rounded-md bg-neutral-200 opacity-50 transition hover:scale-110"
         >
           <MdChevronRight size={40} />
-        </div>
+        </button>
       </div>
     </div>
   );
