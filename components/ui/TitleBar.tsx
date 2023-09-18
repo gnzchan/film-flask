@@ -17,7 +17,6 @@ const TitleBar: React.FC<TitleBarProps> = ({ film }) => {
       {film.Title}
       <button onClick={likeFilmHandler}>
         <LordIcon
-          id="like"
           src={
             isLiked
               ? "https://cdn.lordicon.com/xryjrepg.json"

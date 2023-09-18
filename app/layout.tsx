@@ -12,6 +12,8 @@ import ToasterProvider from "@/components/providers/ToasterProvider";
 
 const font = Inter({ subsets: ["latin"] });
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Film Flask",
   description: "A storage for films, made for Jessa",

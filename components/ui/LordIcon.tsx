@@ -1,14 +1,11 @@
 import React from "react";
-import lottie from "lottie-web";
-import { defineElement } from "lord-icon-element";
+// import lottie from "lottie-web";
+// import { defineElement } from "lord-icon-element";
 
 import { LordIconColors, LordIconTrigger } from "@/types";
 
-// register lottie and define custom element
-defineElement(lottie.loadAnimation);
-
 interface LordIconProps {
-  id: string;
+  id?: string;
   src?: string;
   trigger?: LordIconTrigger;
   colors?: LordIconColors;

@@ -20,13 +20,13 @@ const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  const linkToFocus = document.getElementById(id);
-
   useEffect(() => {
+    const linkToFocus = document.getElementById(id);
+
     if (isHovered) {
       linkToFocus?.dispatchEvent(new Event("mouseenter"));
     }
-  }, [isHovered, linkToFocus]);
+  }, [isHovered]);
 
   return (
     <div

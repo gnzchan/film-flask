@@ -20,10 +20,8 @@
     "autoprefixer": "10.4.15",
     "date-fns": "^2.30.0",
     "eslint": "8.47.0",
-    "eslint-config-next": "13.4.19",
-    "lord-icon-element": "^4.1.1",
-    "lottie-web": "^5.12.2",
-    "next": "13.4.19",
+    "eslint-config-next": "13.4.12",
+    "next": "13.4.12",
     "postcss": "8.4.28",
     "query-string": "^8.1.0",
     "react": "18.2.0",
@@ -39,6 +37,7 @@
     "zustand": "^4.4.1"
   },
   "devDependencies": {
+    "encoding": "^0.1.13",
     "prettier": "^3.0.2",
     "prettier-plugin-tailwindcss": "^0.5.3",
     "supabase": "^1.88.0"
