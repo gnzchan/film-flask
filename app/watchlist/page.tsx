@@ -1,9 +1,9 @@
-import { getLikedFilms } from "@/actions/getSBFilms";
+import { getListedFilms } from "@/actions/getSBFilms";
 import FilmGrid from "@/components/ui/FilmGrid";
 import Header from "@/components/ui/Header";
 
-const Likes = async () => {
-  const films = await getLikedFilms();
+const Watchlist = async () => {
+  const films = await getListedFilms();
 
   return (
     <div className="flex h-full flex-col">
@@ -13,4 +13,4 @@ const Likes = async () => {
   );
 };
 
-export default Likes;
+export default Watchlist;

@@ -2,7 +2,7 @@ import { Film } from "@/types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
-const getSBFilms = async (): Promise<Film[]> => {
+const getFilms = async (): Promise<Film[]> => {
   const supabase = createServerComponentClient({
     cookies,
   });
@@ -16,4 +16,50 @@ const getSBFilms = async (): Promise<Film[]> => {
   return (data as Film[]) || [];
 };
 
-export default getSBFilms;
+const getLikedFilms = async (): Promise<Film[]> => {
+  const supabase = createServerComponentClient({
+    cookies,
+  });
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { data, error } = await supabase
+    .from("liked_films")
+    .select("films(*)")
+    .eq("user_id", user?.id);
+
+  if (error) {
+    console.log(error);
+  }
+
+  const filmData = data?.map((item) => item.films as unknown as Film);
+
+  return filmData || [];
+};
+
+const getListedFilms = async (): Promise<Film[]> => {
+  const supabase = createServerComponentClient({
+    cookies,
+  });
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const { data, error } = await supabase
+    .from("status_films")
+    .select("films(*)")
+    .eq("user_id", user?.id);
+
+  if (error) {
+    console.log(error);
+  }
+
+  const filmData = data?.map((item) => item.films as unknown as Film);
+
+  return filmData || [];
+};
+
+export { getFilms, getLikedFilms, getListedFilms };

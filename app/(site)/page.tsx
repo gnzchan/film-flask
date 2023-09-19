@@ -1,9 +1,9 @@
-import getSBFilms from "@/actions/getSBFilms";
+import { getFilms } from "@/actions/getSBFilms";
 import Header from "@/components/ui/Header";
 import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
 
 export default async function Home() {
-  const films = await getSBFilms();
+  const films = await getFilms();
 
   return (
     <div>
