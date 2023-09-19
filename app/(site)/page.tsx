@@ -9,6 +9,8 @@ export default async function Home() {
     <div>
       <Header />
       <div className="flex flex-col gap-5 px-3">
+      {/* TODO: Check SwiperJS Thumbs Gallery, Parallax */}
+
         <ScrollableFilmContent title="Trending now" films={films} />
 
         {/* TODO: Change content */}
