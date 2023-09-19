@@ -1,12 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { useEffect, useState } from "react";
-import FilmItem from "./FilmItem";
+import FilmGrid from "./FilmGrid";
 import Spinner from "./Spinner";
 
-import { OMDBSearchFilm } from "@/types";
+import { Film, OMDBSearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 
@@ -23,7 +23,16 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   totalPages,
   error,
 }) => {
-  const [films, setFilms] = useState<OMDBSearchFilm[]>(propFilms);
+  const mapToFilm = (omdbFilms: OMDBSearchFilm[]) =>
+    omdbFilms.map((omdbFilm) => ({
+      id: omdbFilm.imdbID,
+      title: omdbFilm.Title,
+      poster_url: omdbFilm.Poster,
+      year: omdbFilm.Year,
+      category: omdbFilm.Type,
+    }));
+
+  const [films, setFilms] = useState<Film[]>(mapToFilm(propFilms));
   const [pagesLoaded, setPagesLoaded] = useState(1);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(false);
   const { ref, inView } = useInView();
@@ -35,7 +44,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   }, [title]);
 
   useEffect(() => {
-    setFilms(propFilms);
+    setFilms(mapToFilm(propFilms));
   }, [propFilms]);
 
   useEffect(() => {
@@ -53,7 +62,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     }
 
     const { Search: newFilms } = await getFilmsByTitle(title, nextPage);
-    setFilms((prevItems) => [...prevItems, ...newFilms]);
+    setFilms((prevItems) => [...prevItems, ...mapToFilm(newFilms)]);
     setPagesLoaded(nextPage);
   };
 
@@ -73,21 +82,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
 
   return (
     <>
-      <div className="grid grid-cols-2 place-items-center gap-3 pt-3 sm:grid-cols-3 md:grid-cols-4">
-        {films &&
-          films.map((film) => (
-            <FilmItem
-              key={film.imdbID}
-              film={{
-                id: film.imdbID,
-                poster_url: film.Poster,
-                title: film.Title,
-                category: film.Type,
-                year: film.Year,
-              }}
-            />
-          ))}
-      </div>
+      <FilmGrid films={films} />
       <div className="flex items-center justify-center" ref={ref}>
         {content}
       </div>

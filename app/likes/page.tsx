@@ -1,11 +1,11 @@
 import Header from "@/components/ui/Header";
-import Test from "@/components/ui/Test";
+import LikedFilmContent from "@/components/ui/LikedFilmContent";
 
 const Likes = () => {
   return (
     <div className="flex h-full flex-col">
       <Header />
-      <Test />
+      <LikedFilmContent />
     </div>
   );
 };
