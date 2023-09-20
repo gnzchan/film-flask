@@ -1,11 +1,15 @@
 "use client";
 
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { HiArrowRight } from "react-icons/hi";
 
 import FilmItem from "./FilmItem";
 
 import { Film } from "@/types";
 import { useRef } from "react";
+import Link from "next/link";
+import qs from "query-string";
+import { useRouter } from "next/navigation";
 
 enum Direction {
   LEFT = "left",
@@ -21,7 +25,21 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
   title,
   films,
 }) => {
+  const router = useRouter();
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  const seeMoreHandler = () => {
+    const query = {
+      status: title,
+    };
+
+    const url = qs.stringifyUrl({
+      url: "/watchlist",
+      query,
+    });
+
+    router.push(url);
+  };
 
   const slide = (direction: Direction) => {
     if (sliderRef.current) {
@@ -35,7 +53,16 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold text-neutral-700">{title}</h1>
+      <div className="div flex justify-between">
+        <h1 className="text-2xl font-bold text-neutral-700">{title}</h1>
+        <button
+          onClick={seeMoreHandler}
+          className="flex items-center gap-3 text-neutral-300 transition hover:text-neutral-600"
+        >
+          <span className="text-sm">See all</span>
+          <HiArrowRight />
+        </button>
+      </div>
       <div className="flex items-center gap-2">
         <button
           onClick={() => slide(Direction.LEFT)}

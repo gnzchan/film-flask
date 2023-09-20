@@ -1,4 +1,4 @@
-import { Film } from "@/types";
+import { Film, Status } from "@/types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
@@ -39,7 +39,7 @@ const getLikedFilms = async (): Promise<Film[]> => {
   return filmData || [];
 };
 
-const getListedFilms = async (): Promise<Film[]> => {
+const getListedFilms = async (status: Status): Promise<Film[]> => {
   const supabase = createServerComponentClient({
     cookies,
   });
@@ -51,7 +51,8 @@ const getListedFilms = async (): Promise<Film[]> => {
   const { data, error } = await supabase
     .from("status_films")
     .select("films(*)")
-    .eq("user_id", user?.id);
+    .eq("user_id", user?.id)
+    .eq("status", status);
 
   if (error) {
     console.log(error);
