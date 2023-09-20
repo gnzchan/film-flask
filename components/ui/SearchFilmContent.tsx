@@ -78,7 +78,8 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     return (
       <div className="my-5 flex items-center justify-center">
         <p className="text-md font-normal">
-          We're finding it difficult to find what you&apos;re searching. {error}
+          We&apos;re finding it difficult to find what you&apos;re searching.{" "}
+          {error}
         </p>
       </div>
     );
