@@ -1,21 +1,14 @@
 import { getFilms } from "@/actions/getSBFilms";
 import Header from "@/components/ui/Header";
-import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
+import ThumbGallery from "@/components/ui/ThumbGallery";
 
 export default async function Home() {
   const films = await getFilms();
 
   return (
-    <div>
+    <div className="flex h-[100vh] flex-col">
       <Header />
-      <div className="flex flex-col gap-5 px-3">
-      {/* TODO: Check SwiperJS Thumbs Gallery, Parallax */}
-
-        <ScrollableFilmContent title="Trending now" films={films} />
-
-        {/* TODO: Change content */}
-        <ScrollableFilmContent title="What you have added" films={films} />
-      </div>
+      <ThumbGallery films={films} />
     </div>
   );
 }

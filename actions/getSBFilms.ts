@@ -7,7 +7,10 @@ const getFilms = async (): Promise<Film[]> => {
     cookies,
   });
 
-  const { data, error } = await supabase.from("films").select("*");
+  const { data, error } = await supabase
+    .from("films")
+    .select("*")
+    .order("created_at", { ascending: false });
 
   if (error) {
     console.log(error);
