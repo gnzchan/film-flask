@@ -29,7 +29,9 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ filmId }) => {
   return (
     <div className="flex h-[65vh] min-h-[450px]">
       <div className="flex w-full flex-col justify-center gap-5 bg-black px-7">
-        <h1 className="text-4xl font-extrabold text-white">{film.Title}</h1>
+        <h1 className="text-xl font-extrabold text-white md:text-4xl">
+          {film.Title}
+        </h1>
         <div className="flex items-center">
           {film.Genre.split(",").map((genre, i) => (
             <div

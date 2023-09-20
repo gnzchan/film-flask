@@ -1,3 +1,7 @@
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
 import { getListedFilms } from "@/actions/getSBFilms";
 import Header from "@/components/ui/Header";
 import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
@@ -11,6 +15,15 @@ interface WatchlistProps {
 }
 
 const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
+  const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    redirect("/unauthenticated");
+  }
+
   const watchLaterFilms = await getListedFilms(Status.TO_WATCH_LATER);
   const currentWatchFilms = await getListedFilms(Status.CURRENTLY_WATCHING);
   const finishedWatchFilms = await getListedFilms(Status.FINISHED_WATCHING);

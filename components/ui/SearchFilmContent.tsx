@@ -24,7 +24,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   error,
 }) => {
   const mapToFilm = (omdbFilms: OMDBSearchFilm[]) =>
-    omdbFilms.map((omdbFilm) => ({
+    omdbFilms?.map((omdbFilm) => ({
       id: omdbFilm.imdbID,
       title: omdbFilm.Title,
       poster_url: omdbFilm.Poster,
@@ -67,15 +67,19 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   };
 
   const content = isAllPagesLoaded ? (
-    <div>{films.length === 0 ? "Start searching" : "You're all caught up"}</div>
+    <p className="text-md font-normal">
+      {films.length === 0 ? "Start searching" : "You're all caught up"}
+    </p>
   ) : (
     <Spinner />
   );
 
   if (error) {
     return (
-      <div>
-        Were finding it difficult to find what you&apos;re searching. {error}
+      <div className="my-5 flex items-center justify-center">
+        <p className="text-md font-normal">
+          We're finding it difficult to find what you&apos;re searching. {error}
+        </p>
       </div>
     );
   }
@@ -83,7 +87,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   return (
     <>
       <FilmGrid films={films} />
-      <div className="flex items-center justify-center" ref={ref}>
+      <div className="my-5 flex items-center justify-center" ref={ref}>
         {content}
       </div>
     </>

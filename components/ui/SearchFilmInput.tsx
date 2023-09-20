@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import qs from "query-string";
 
-import Input from "./Input";
-
 import useDebounce from "@/hooks/useDebounce";
 import { useRouter } from "next/navigation";
 
@@ -31,9 +29,10 @@ const SearchInput = () => {
   }, [debouncedValue]);
 
   return (
-    <Input
+    <input
       placeholder="Search for movies or series"
       value={value}
+      className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow-sm focus:outline-none"
       onChange={(e) => setValue(e.target.value)}
     />
   );

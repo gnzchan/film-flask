@@ -3,11 +3,13 @@
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 import Button from "./Button";
 import { useUser } from "@/hooks/useUser";
 import useSidebar from "@/hooks/useSidebar";
 import useAuthModal from "@/hooks/useAuthModal";
+import Link from "next/link";
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -38,8 +40,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             <RxHamburgerMenu size={24} />
           </button>
         </div>
-        <div className="">
-          <h1 className="text-center text-3xl font-light">Film Flask</h1>
+        <div className="relative aspect-auto min-h-[60px]">
+          <Link href="/">
+            <Image src="/images/ff-logo.svg" alt="Film Flask Logo" fill />
+          </Link>
         </div>
         <div className="flex items-center justify-end">
           {user ? (

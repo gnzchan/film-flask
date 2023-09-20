@@ -22,7 +22,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
     <MenuItem
       component={<Link href={href} onClick={onClick} />}
       icon={<Icon size={20} />}
-      className={twMerge(isActive && "text-red-300")}
+      className={twMerge("text-lg font-semibold", isActive && "bg-white")}
     >
       {label}
     </MenuItem>
