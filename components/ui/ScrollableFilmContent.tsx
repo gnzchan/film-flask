@@ -52,39 +52,49 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="mb-6 flex flex-col gap-4">
       <div className="div flex justify-between">
-        <h1 className="text-2xl font-bold text-neutral-700">{title}</h1>
-        <button
-          onClick={seeMoreHandler}
-          className="flex items-center gap-3 text-neutral-300 transition hover:text-neutral-600"
-        >
-          <span className="text-sm">See all</span>
-          <HiArrowRight />
-        </button>
+        <h1 className="mb-3 pl-3 text-2xl font-light text-neutral-800">
+          {title}
+        </h1>
+        {films.length !== 0 && (
+          <button
+            onClick={seeMoreHandler}
+            className="flex items-center gap-3 text-sm font-light text-neutral-400 transition hover:text-neutral-600"
+          >
+            <span>See all</span>
+            <HiArrowRight />
+          </button>
+        )}
       </div>
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => slide(Direction.LEFT)}
-          className="hover-opacity-100 flex h-44 cursor-pointer items-center justify-center rounded-md bg-neutral-200 opacity-50 transition hover:scale-110"
-        >
-          <MdChevronLeft size={40} />
-        </button>
-        <div
-          ref={sliderRef}
-          className="flex w-full gap-4 overflow-x-scroll scroll-smooth scrollbar-hide"
-        >
-          {films.map((film) => (
-            <FilmItem key={film.id} film={film} />
-          ))}
+      {films.length !== 0 ? (
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => slide(Direction.LEFT)}
+            className="hover-opacity-100 flex h-44 cursor-pointer items-center justify-center rounded-md bg-neutral-200 opacity-50 transition hover:scale-110"
+          >
+            <MdChevronLeft size={40} />
+          </button>
+          <div
+            ref={sliderRef}
+            className="flex w-full gap-4 overflow-x-scroll scroll-smooth scrollbar-hide"
+          >
+            {films.map((film) => (
+              <FilmItem key={film.id} film={film} />
+            ))}
+          </div>
+          <button
+            onClick={() => slide(Direction.RIGHT)}
+            className="hover-opacity-100 flex h-44 cursor-pointer items-center justify-center rounded-md bg-neutral-200 opacity-50 transition hover:scale-110"
+          >
+            <MdChevronRight size={40} />
+          </button>
         </div>
-        <button
-          onClick={() => slide(Direction.RIGHT)}
-          className="hover-opacity-100 flex h-44 cursor-pointer items-center justify-center rounded-md bg-neutral-200 opacity-50 transition hover:scale-110"
-        >
-          <MdChevronRight size={40} />
-        </button>
-      </div>
+      ) : (
+        <div className="flex h-full w-full items-center justify-center">
+          <h1 className="text-l font-light text-neutral-800">no films found</h1>
+        </div>
+      )}
     </div>
   );
 };

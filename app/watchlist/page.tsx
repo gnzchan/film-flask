@@ -1,5 +1,4 @@
 import { getListedFilms } from "@/actions/getSBFilms";
-import FilmGrid from "@/components/ui/FilmGrid";
 import Header from "@/components/ui/Header";
 import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
 import SeeMoreContent from "@/components/ui/SeeMoreContent";
@@ -50,7 +49,7 @@ const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
   return (
     <div className="flex h-full flex-col">
       <Header />
-      {content()}
+      <div>{content()}</div>
     </div>
   );
 };

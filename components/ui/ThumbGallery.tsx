@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
@@ -12,7 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 // import required modules
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 import { Film } from "@/types";
 import FilmBanner from "./FilmBanner";
 import { twMerge } from "tailwind-merge";
@@ -34,9 +34,12 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
         <div>
           <Swiper
             spaceBetween={10}
+            autoplay={{
+              delay: 5000,
+            }}
             navigation={true}
             thumbs={{ swiper: thumbsSwiper }}
-            modules={[FreeMode, Navigation, Thumbs]}
+            modules={[FreeMode, Navigation, Thumbs, Autoplay]}
             onActiveIndexChange={(swiper) => setActiveIndex(swiper.activeIndex)}
             className="mySwiper2"
           >
