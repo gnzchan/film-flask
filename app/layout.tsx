@@ -9,6 +9,7 @@ import UserProvider from "@/components/providers/UserProvider";
 import MainPage from "@/components/ui/MainPage";
 import ModalProvider from "@/components/providers/ModalProvider";
 import ToasterProvider from "@/components/providers/ToasterProvider";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -33,8 +34,10 @@ export default function RootLayout({
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
-            <ModalProvider />
-            <MainPage>{children}</MainPage>
+            <ThemeProvider attribute="class">
+              <ModalProvider />
+              <MainPage>{children}</MainPage>
+            </ThemeProvider>
           </UserProvider>
         </SupabaseProvider>
       </body>

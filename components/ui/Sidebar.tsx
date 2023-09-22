@@ -10,10 +10,12 @@ import { PiSignOut } from "react-icons/pi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmark, BsGear } from "react-icons/bs";
 import toast from "react-hot-toast";
+import { useTheme } from "next-themes";
 
 import SidebarItem from "./SidebarItem";
 import useSidebar from "@/hooks/useSidebar";
 import { useUser } from "@/hooks/useUser";
+import { getColorTheme } from "./Themes";
 
 const Sidebar: React.FC = () => {
   const sidebar = useSidebar();
@@ -21,6 +23,7 @@ const Sidebar: React.FC = () => {
   const pathName = usePathname();
   const { user } = useUser();
   const supabaseClient = useSupabaseClient();
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (pathName !== activeSidebarItem) {
@@ -46,18 +49,31 @@ const Sidebar: React.FC = () => {
           rootStyles={{
             [`.${sidebarClasses.container}`]: {
               height: "100vh",
+              // borderRight: "0",
             },
+            borderRight: 0,
           }}
           toggled={sidebar.isOpen}
           onBackdropClick={sidebar.onClose}
           customBreakPoint="1024px"
-          backgroundColor="#FAFAFA"
+          backgroundColor={getColorTheme(theme).sidebar.backgroundColor}
         >
           <div className="relative aspect-auto min-h-[90px]">
-            <Image src="/images/ff-logo.svg" alt="Film Flask Logo" fill />
+            <Image src={getColorTheme(theme).logo} alt="Film Flask Logo" fill />
           </div>
 
-          <Menu>
+          <Menu
+            className="px-2"
+            menuItemStyles={{
+              button: {
+                "&:hover": {
+                  backgroundColor:
+                    getColorTheme(theme).menu.hover.backgroundColor,
+                  borderRadius: "5px",
+                },
+              },
+            }}
+          >
             <SidebarItem
               icon={FiSearch}
               label="Search"
@@ -68,7 +84,18 @@ const Sidebar: React.FC = () => {
           <div className="pl-2">
             <p>Menu</p>
           </div>
-          <Menu>
+          <Menu
+            className="px-2"
+            menuItemStyles={{
+              button: {
+                "&:hover": {
+                  backgroundColor:
+                    getColorTheme(theme).menu.hover.backgroundColor,
+                  borderRadius: "5px",
+                },
+              },
+            }}
+          >
             <SidebarItem
               icon={FiCompass}
               label="Browse"
@@ -96,7 +123,18 @@ const Sidebar: React.FC = () => {
           <div className="pl-2">
             <p>General</p>
           </div>
-          <Menu>
+          <Menu
+            className="px-2"
+            menuItemStyles={{
+              button: {
+                "&:hover": {
+                  backgroundColor:
+                    getColorTheme(theme).menu.hover.backgroundColor,
+                  borderRadius: "5px",
+                },
+              },
+            }}
+          >
             <SidebarItem
               icon={BsGear}
               label="Settings"
