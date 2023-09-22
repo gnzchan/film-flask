@@ -13,9 +13,9 @@ import toast from "react-hot-toast";
 import { useTheme } from "next-themes";
 
 import SidebarItem from "./SidebarItem";
+import { getColorTheme } from "./Themes";
 import useSidebar from "@/hooks/useSidebar";
 import { useUser } from "@/hooks/useUser";
-import { getColorTheme } from "./Themes";
 
 const Sidebar: React.FC = () => {
   const sidebar = useSidebar();
@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
           rootStyles={{
             [`.${sidebarClasses.container}`]: {
               height: "100vh",
-              // borderRight: "0",
+              transition: "all .5s ease-in-out",
             },
             borderRight: 0,
           }}
@@ -57,6 +57,7 @@ const Sidebar: React.FC = () => {
           onBackdropClick={sidebar.onClose}
           customBreakPoint="1024px"
           backgroundColor={getColorTheme(theme).sidebar.backgroundColor}
+          className="shadow-xl dark:shadow-zinc-950"
         >
           <div className="relative aspect-auto min-h-[90px]">
             <Image src={getColorTheme(theme).logo} alt="Film Flask Logo" fill />

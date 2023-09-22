@@ -1,9 +1,10 @@
-import getFilmById from "@/actions/getFilmById";
-import Image from "next/image";
-import { Film, OMDBFilm } from "@/types";
 import { useEffect, useState } from "react";
-import Button from "./Button";
 import Link from "next/link";
+
+import Button from "./Button";
+
+import getFilmById from "@/actions/getFilmById";
+import { OMDBFilm } from "@/types";
 
 interface FilmBannerProps {
   filmId: string;
@@ -27,8 +28,8 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ filmId }) => {
   }
 
   return (
-    <div className="flex h-[65vh] min-h-[450px]">
-      <div className="flex w-full flex-col justify-center gap-5 bg-black px-7">
+    <div className="mx-8 mb-10 flex h-[65vh] min-h-[450px] overflow-hidden rounded-md bg-black shadow-xl shadow-zinc-950">
+      <div className="flex w-full flex-col justify-center gap-5 px-7">
         <h1 className="text-xl font-extrabold text-white md:text-4xl">
           {film.Title}
         </h1>
@@ -57,9 +58,9 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ filmId }) => {
         </Link>
       </div>
       <div
-        className="w-full max-w-[400px] bg-cover bg-center md:w-[35vw]"
+        className="hidden aspect-[3/4] overflow-visible bg-cover bg-center md:block"
         style={{
-          backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%), 
+          backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)), 
         url(${film.Poster})`,
         }}
       ></div>

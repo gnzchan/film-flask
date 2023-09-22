@@ -6,8 +6,12 @@ export default async function Home() {
   const films = await getFilms();
 
   return (
-    <div className="flex h-[100vh] flex-col">
-      <Header />
+    <div className="flex h-full flex-col">
+      <Header>
+        <h1 className="m-3 pl-3 text-2xl font-light text-neutral-800 dark:text-white">
+          Popular on Film Flask
+        </h1>
+      </Header>
       <ThumbGallery films={films} />
     </div>
   );

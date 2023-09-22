@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
+import { LordIcon } from "./LordIcon";
+
 const ThemeSwitcher = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
@@ -17,10 +19,19 @@ const ThemeSwitcher = () => {
 
   return (
     <button
-      className={`absolute right-5 top-2 w-fit rounded-md bg-slate-200 p-2 duration-200 hover:scale-110 active:scale-100 dark:bg-[#212933]`}
+      className="flex items-center justify-center rounded-full bg-neutral-900 p-1 shadow-zinc-950 drop-shadow-xl transition active:scale-110 dark:bg-neutral-100"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
-      {theme === "light" ? "Dark" : "Light"}
+      <LordIcon
+        src={
+          theme === "dark"
+            ? "https://cdn.lordicon.com/hnvrjtda.json"
+            : "https://cdn.lordicon.com/mxzuvjjs.json"
+        }
+        trigger="hover"
+        colors={{ primary: theme === "dark" ? "#fcd34d" : "#f5f5f5" }}
+        size={28}
+      />
     </button>
   );
 };
