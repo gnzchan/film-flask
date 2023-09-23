@@ -1,10 +1,13 @@
-import { getFilms } from "@/actions/getSBFilms";
-import Header from "@/components/ui/Header";
-import ThumbGallery from "@/components/ui/ThumbGallery";
 import { Suspense } from "react";
 
+import { getOmdbFilms } from "@/actions/getSBFilms";
+import Header from "@/components/ui/Header";
+import ThumbGallery from "@/app/(site)/ThumbGallery";
+import ThumbGallerySkeleton from "./ThumbGallerySkeleton";
+import Await from "@/components/ui/Await";
+
 export default async function Home() {
-  const films = await getFilms();
+  const promise = getOmdbFilms();
 
   return (
     <div className="flex h-full flex-col">
@@ -13,8 +16,10 @@ export default async function Home() {
           Popular on Film Flask
         </h1>
       </Header>
-      <Suspense fallback="loading from suspense...">
-        <ThumbGallery films={films} />
+      <Suspense fallback={<ThumbGallerySkeleton />}>
+        <Await promise={promise}>
+          {(data) => <ThumbGallery films={data} />}
+        </Await>
       </Suspense>
     </div>
   );

@@ -1,6 +1,27 @@
-import { Film, Status } from "@/types";
+import { Film, OMDBFilm, Status } from "@/types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import getFilmById from "./getFilmById";
+
+const getOmdbFilms = async (): Promise<OMDBFilm[]> => {
+  const supabase = createServerComponentClient({
+    cookies,
+  });
+
+  const { data, error } = await supabase
+    .from("films")
+    .select("id")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.log(error);
+  }
+
+  const omdbDataPromise = data?.map(({ id }) => getFilmById(id));
+  const omdbData = await Promise.all(omdbDataPromise || []);
+
+  return (omdbData as unknown as OMDBFilm[]) || [];
+};
 
 const getFilms = async (): Promise<Film[]> => {
   const supabase = createServerComponentClient({
@@ -66,4 +87,4 @@ const getListedFilms = async (status: Status): Promise<Film[]> => {
   return filmData || [];
 };
 
-export { getFilms, getLikedFilms, getListedFilms };
+export { getOmdbFilms, getFilms, getLikedFilms, getListedFilms };

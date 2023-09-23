@@ -1,28 +1,14 @@
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import Button from "./Button";
 
-import getFilmById from "@/actions/getFilmById";
 import { OMDBFilm } from "@/types";
 
 interface FilmBannerProps {
-  filmId: string;
+  film: OMDBFilm;
 }
 
-const FilmBanner: React.FC<FilmBannerProps> = ({ filmId }) => {
-  const [film, setFilm] = useState<OMDBFilm>();
-
-  useEffect(() => {
-    const fetchFilmInfo = async () => {
-      const data = await getFilmById(filmId, "short");
-
-      setFilm(data);
-    };
-
-    fetchFilmInfo();
-  }, []);
-
+const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
   return (
     <div className="mx-8 mb-12 flex h-[65vh] min-h-[450px] overflow-hidden rounded-md bg-black shadow-xl shadow-zinc-950">
       <div className="flex w-full flex-col justify-center gap-5 px-7">
@@ -30,7 +16,7 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ filmId }) => {
           {film?.Title}
         </h1>
         <div className="flex items-center">
-          {film?.Genre.split(",").map((genre, i) => (
+          {film.Genre?.split(",").map((genre, i) => (
             <div
               key={`${genre}-${i}`}
               className="m-1 flex items-center justify-center rounded-full border border-gray-300  px-2 py-1 font-medium text-gray-400 "
