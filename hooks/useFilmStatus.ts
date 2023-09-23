@@ -22,10 +22,12 @@ const useFilmStatus = (filmId: string) => {
       .select("status")
       .eq("film_id", filmId)
       .eq("user_id", user.id)
-      .single();
+      .maybeSingle();
 
     if (data) {
       setStatus(data.status);
+    } else {
+      setStatus(Status.TO_WATCH_LATER);
     }
   };
 

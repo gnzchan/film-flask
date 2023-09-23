@@ -21,10 +21,12 @@ const useFilmReview = (filmId: string) => {
       .select("review")
       .eq("film_id", filmId)
       .eq("user_id", user.id)
-      .single();
+      .maybeSingle();
 
     if (data) {
       setReview(data.review);
+    } else {
+      setReview("");
     }
   };
 
