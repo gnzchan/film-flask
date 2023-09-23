@@ -10,7 +10,7 @@ interface FilmTitleBarProps {
 }
 
 const FilmTitleBar: React.FC<FilmTitleBarProps> = ({ film }) => {
-  const { liked, likeFilmHandler } = useFilmLike(film.imdbID);
+  const { liked, likeFilmHandler } = useFilmLike(film);
 
   return (
     <div className="flex items-center justify-between px-2 pt-2">

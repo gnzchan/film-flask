@@ -15,7 +15,9 @@ const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
   const cachedFilm = filmEditorModal.omdbFilm;
 
-  const { listed, addFilmToListHandler } = useFilm(cachedFilm?.imdbID ?? "");
+  const { listed, fetchListed, addFilmToListHandler } = useFilm(
+    cachedFilm?.imdbID ?? "",
+  );
   const { review, addReviewHandler, reviewChangeHandler } = useFilmReview(
     cachedFilm?.imdbID ?? "",
   );
@@ -32,22 +34,23 @@ const FilmEditorModal = () => {
     }
   };
 
-  const updateFilm = () => {
+  const updateFilm = async () => {
     if ((review || status) && !listed) {
-      if (cachedFilm) addFilmToListHandler(cachedFilm);
+      await addFilmToListHandler(cachedFilm);
+      await fetchListed();
     }
 
     if (review) {
-      addReviewHandler(cachedFilm.imdbID);
+      await addReviewHandler(cachedFilm.imdbID);
     }
 
     if (status) {
-      addStatusHandler(cachedFilm.imdbID);
+      await addStatusHandler(cachedFilm.imdbID);
     }
 
     filmEditorModal.onClose();
     toast.success("Film updated");
-    fetchFilmReviews();
+    await fetchFilmReviews();
   };
 
   return (

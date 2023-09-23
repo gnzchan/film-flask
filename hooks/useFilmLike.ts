@@ -4,42 +4,52 @@ import toast from "react-hot-toast";
 
 import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
+import useFilm from "./useFilm";
+import { OMDBFilm } from "@/types";
 
-const useFilmLike = (filmId: string) => {
+const useFilmLike = (film: OMDBFilm) => {
   const [liked, setLiked] = useState<boolean | null>(null);
   const { user } = useUser();
   const { supabaseClient } = useSessionContext();
   const authModal = useAuthModal();
+  const { listed, fetchListed, addFilmToListHandler } = useFilm(film.imdbID);
+
+  const fetchLikeStatus = async () => {
+    if (!user) return;
+
+    const { data } = await supabaseClient
+      .from("liked_films")
+      .select("*")
+      .eq("user_id", user.id)
+      .eq("film_id", film.imdbID)
+      .maybeSingle();
+
+    setLiked(data ? true : false);
+  };
 
   useEffect(() => {
-    const fetchLikeStatus = async () => {
-      if (!user) {
-        return;
-      }
-
-      const { data } = await supabaseClient
-        .from("liked_films")
-        .select("*")
-        .eq("user_id", user.id)
-        .eq("film_id", filmId)
-        .maybeSingle();
-
-      setLiked(data ? true : false);
-    };
-
     fetchLikeStatus();
   }, []);
+
+  useEffect(() => {
+    fetchLikeStatus();
+  }, [user]);
 
   const likeFilmHandler = async () => {
     if (!user)
       return authModal.onOpen("You need to sign in to use this feature");
+
+    if (!listed) {
+      await addFilmToListHandler(film);
+      await fetchListed();
+    }
 
     if (liked) {
       const { error } = await supabaseClient
         .from("liked_films")
         .delete()
         .eq("user_id", user.id)
-        .eq("film_id", filmId);
+        .eq("film_id", film.imdbID);
 
       if (error) {
         return toast.error(error.message);
@@ -49,8 +59,8 @@ const useFilmLike = (filmId: string) => {
       }
     } else {
       const { error } = await supabaseClient.from("liked_films").insert({
-        user_id: user!.id,
-        film_id: filmId,
+        user_id: user.id,
+        film_id: film.imdbID,
       });
 
       if (error) {

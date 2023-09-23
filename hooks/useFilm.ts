@@ -8,17 +8,17 @@ const useFilm = (filmId: string) => {
   const [listed, setListed] = useState<boolean>(false);
   const { supabaseClient } = useSessionContext();
 
+  const fetchListed = async () => {
+    const { data } = await supabaseClient
+      .from("films")
+      .select("*")
+      .eq("id", filmId)
+      .maybeSingle();
+
+    setListed(data ? true : false);
+  };
+
   useEffect(() => {
-    const fetchListed = async () => {
-      const { data } = await supabaseClient
-        .from("films")
-        .select("*")
-        .eq("id", filmId)
-        .maybeSingle();
-
-      setListed(data ? true : false);
-    };
-
     fetchListed();
   }, []);
 
@@ -37,7 +37,7 @@ const useFilm = (filmId: string) => {
     if (error) return toast.error(error.message);
   };
 
-  return { listed, addFilmToListHandler };
+  return { listed, fetchListed, addFilmToListHandler };
 };
 
 export default useFilm;
