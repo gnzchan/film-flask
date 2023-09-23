@@ -1,8 +1,8 @@
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
-import SearchFilmContent from "@/components/ui/SearchFilmContent";
 import SearchInput from "@/components/ui/SearchFilmInput";
 import { getTotalPages } from "@/libs/helpers";
+import SearchFilmContent from "./SearchFilmContent";
 
 interface SearchProps {
   searchParams: {
@@ -26,8 +26,8 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
         </div>
 
         <SearchFilmContent
-          films={films}
-          title={searchParams.title}
+          propFilms={films}
+          searchString={searchParams.title}
           totalPages={getTotalPages(totalResults)}
           error={error}
         />
