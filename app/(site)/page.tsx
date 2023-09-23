@@ -1,6 +1,7 @@
 import { getFilms } from "@/actions/getSBFilms";
 import Header from "@/components/ui/Header";
 import ThumbGallery from "@/components/ui/ThumbGallery";
+import { Suspense } from "react";
 
 export default async function Home() {
   const films = await getFilms();
@@ -12,7 +13,9 @@ export default async function Home() {
           Popular on Film Flask
         </h1>
       </Header>
-      <ThumbGallery films={films} />
+      <Suspense fallback="loading from suspense...">
+        <ThumbGallery films={films} />
+      </Suspense>
     </div>
   );
 }
