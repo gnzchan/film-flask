@@ -38,11 +38,8 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
   }, [firstItemInView, lastItemInView]);
 
   const setItemRef = (index: number) => {
-    if (index === 0) {
-      return firstItemRef;
-    } else if (index + 1 === films.length) {
-      return lastItemRef;
-    }
+    if (index === 0) return firstItemRef;
+    else if (index + 1 === films.length) return lastItemRef;
   };
 
   const seeMoreHandler = () => {

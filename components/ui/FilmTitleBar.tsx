@@ -2,15 +2,15 @@
 
 import { LordIcon } from "./LordIcon";
 
-import useFilmDB from "@/hooks/useFilmDB";
+import useFilmLike from "@/hooks/useFilmLike";
 import { OMDBFilm } from "@/types";
 
-interface TitleBarProps {
+interface FilmTitleBarProps {
   film: OMDBFilm;
 }
 
-const TitleBar: React.FC<TitleBarProps> = ({ film }) => {
-  const { isLiked, likeFilmHandler } = useFilmDB();
+const FilmTitleBar: React.FC<FilmTitleBarProps> = ({ film }) => {
+  const { liked, likeFilmHandler } = useFilmLike(film.imdbID);
 
   return (
     <div className="flex items-center justify-between px-2 pt-2">
@@ -18,12 +18,12 @@ const TitleBar: React.FC<TitleBarProps> = ({ film }) => {
       <button onClick={likeFilmHandler}>
         <LordIcon
           src={
-            isLiked
+            liked
               ? "https://cdn.lordicon.com/xryjrepg.json"
               : "https://cdn.lordicon.com/pnhskdva.json"
           }
           trigger="hover"
-          colors={{ primary: isLiked ? "red" : "black" }}
+          colors={{ primary: liked ? "red" : "black" }}
           size={32}
         />
       </button>
@@ -31,4 +31,4 @@ const TitleBar: React.FC<TitleBarProps> = ({ film }) => {
   );
 };
 
-export default TitleBar;
+export default FilmTitleBar;

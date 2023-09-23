@@ -1,7 +1,7 @@
 import getFilmById from "@/actions/getFilmById";
 import FilmInfo from "@/components/ui/FilmInfo";
+import FilmTitleBar from "@/components/ui/FilmTitleBar";
 import Header from "@/components/ui/Header";
-import TitleBar from "@/components/ui/TitleBar";
 
 interface FilmProps {
   params: {
@@ -10,12 +10,12 @@ interface FilmProps {
 }
 
 const Film: React.FC<FilmProps> = async ({ params }) => {
-  const film = await getFilmById(params.filmId);
+  const film = await getFilmById(params.filmId, true);
 
   return (
     <div className="flex h-full flex-col">
       <Header>
-        <TitleBar film={film} />
+        <FilmTitleBar film={film} />
       </Header>
       <FilmInfo film={film} />
     </div>

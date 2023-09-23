@@ -57,9 +57,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     await delay(1000);
     const nextPage = pagesLoaded + 1;
 
-    if (nextPage >= totalPages) {
-      return setIsAllPagesLoaded(true);
-    }
+    if (nextPage >= totalPages) return setIsAllPagesLoaded(true);
 
     const { Search: newFilms } = await getFilmsByTitle(searchString, nextPage);
     setFilms((prevItems) => [...prevItems, ...mapToFilm(newFilms)]);

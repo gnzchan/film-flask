@@ -8,7 +8,7 @@ import Button from "./Button";
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
-import useFilmStore from "@/hooks/useFilmStore";
+import useFilmReviews from "@/hooks/useFilmReviews";
 import { OMDBFilm } from "@/types";
 import { getFormattedTime } from "@/libs/helpers";
 
@@ -17,25 +17,23 @@ interface FilmInfoProps {
 }
 
 const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
-  const filmStore = useFilmStore();
-  const filmEditorModal = useFilmEditorModal();
   const { user } = useUser();
   const authModal = useAuthModal();
 
+  const filmEditorModal = useFilmEditorModal();
+
+  const { fetchFilmReviews } = useFilmReviews(film.imdbID);
+
   useEffect(() => {
     filmEditorModal.setFilm(film);
+    fetchFilmReviews();
   }, []);
 
   const handleClick = () => {
-    if (!user) {
+    if (!user)
       return authModal.onOpen("You need to sign in to access this content");
-    }
 
     return filmEditorModal.onOpen();
-  };
-
-  const isFilmOnList = () => {
-    return filmStore.film !== undefined;
   };
 
   return (
@@ -103,7 +101,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         </div>
         <div className="flex items-center justify-center">
           <Button onClick={handleClick} className="font-medium">
-            {isFilmOnList() ? "Change status" : "Add to list"}
+            Change status
           </Button>
         </div>
       </div>
@@ -113,7 +111,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           Add film to add a review
         </p>
         <div className="flex flex-col gap-2 divide-y">
-          {filmStore.reviews.map((review, i) => (
+          {filmEditorModal.reviews.map((review, i) => (
             <div key={i} className="flex flex-col">
               <p className="text-md font-medium">{review.users.full_name}</p>
               <p className="text-sm">{review.review}</p>

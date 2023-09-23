@@ -5,10 +5,12 @@ import { OMDBFilm } from "@/types";
 
 const getFilmById = async (
   id: string,
-  plotLength: string = "full",
+  fullPlot: boolean = false,
 ): Promise<OMDBFilm> => {
   const omdbKey = process.env.OMDB_KEY;
-  const url = `https://www.omdbapi.com/?apikey=${omdbKey}&i=${id}&plot=${plotLength}`;
+  const url = `https://www.omdbapi.com/?apikey=${omdbKey}&i=${id}${
+    fullPlot ? "&plot=full" : ""
+  }`;
 
   const film = await getData<OMDBFilm>(url);
 

@@ -1,21 +1,30 @@
+import toast from "react-hot-toast";
+
 import Modal from "./Modal";
 import FilmStatusButton from "./FilmStatusButton";
 import Button from "./Button";
 
-import useFilmEditorModal from "@/hooks/useFilmEditorModal";
-import useFilmDB from "@/hooks/useFilmDB";
 import { Status } from "@/types";
+import useFilmEditorModal from "@/hooks/useFilmEditorModal";
+import useFilm from "@/hooks/useFilm";
+import useFilmReview from "@/hooks/useFilmReview";
+import useFilmStatus from "@/hooks/useFilmStatus";
+import useFilmReviews from "@/hooks/useFilmReviews";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
+  const cachedFilm = filmEditorModal.omdbFilm;
 
-  const {
-    status,
-    review,
-    updateFilm,
-    statusChangeHandler,
-    reviewChangeHandler,
-  } = useFilmDB();
+  const { listed, addFilmToListHandler } = useFilm(cachedFilm?.imdbID ?? "");
+  const { review, addReviewHandler, reviewChangeHandler } = useFilmReview(
+    cachedFilm?.imdbID ?? "",
+  );
+  const { status, addStatusHandler, statusChangeHandler } = useFilmStatus(
+    cachedFilm?.imdbID ?? "",
+  );
+  const { fetchFilmReviews } = useFilmReviews(cachedFilm?.imdbID ?? "");
+
+  if (!cachedFilm) return;
 
   const onToggleModal = (open: boolean) => {
     if (!open) {
@@ -23,12 +32,28 @@ const FilmEditorModal = () => {
     }
   };
 
+  const updateFilm = () => {
+    if ((review || status) && !listed) {
+      if (cachedFilm) addFilmToListHandler(cachedFilm);
+    }
+
+    if (review) {
+      addReviewHandler(cachedFilm.imdbID);
+    }
+
+    if (status) {
+      addStatusHandler(cachedFilm.imdbID);
+    }
+
+    filmEditorModal.onClose();
+    toast.success("Film updated");
+    fetchFilmReviews();
+  };
+
   return (
     <Modal
       title="Change record"
-      description={`You are currently editing ${
-        filmEditorModal.film?.Title ?? ""
-      }`}
+      description={`You are currently editing ${cachedFilm.Title}`}
       isOpen={filmEditorModal.isOpen}
       onChange={onToggleModal}
     >
