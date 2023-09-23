@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import Image from "next/image";
 import { Sidebar as RPSidebar, Menu, sidebarClasses } from "react-pro-sidebar";
 import { FiSearch, FiCompass } from "react-icons/fi";
-import { PiSignOut } from "react-icons/pi";
+import { PiSignOut, PiSignIn } from "react-icons/pi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmark, BsGear } from "react-icons/bs";
 import toast from "react-hot-toast";
@@ -16,12 +16,14 @@ import SidebarItem from "./SidebarItem";
 import { getColorTheme } from "./Themes";
 import useSidebar from "@/hooks/useSidebar";
 import { useUser } from "@/hooks/useUser";
+import useAuthModal from "@/hooks/useAuthModal";
 
 const Sidebar: React.FC = () => {
   const sidebar = useSidebar();
   const [activeSidebarItem, setActiveSidebarItem] = useState("/");
   const pathName = usePathname();
   const { user } = useUser();
+  const authModal = useAuthModal();
   const supabaseClient = useSupabaseClient();
   const { theme } = useTheme();
 
@@ -50,6 +52,12 @@ const Sidebar: React.FC = () => {
             [`.${sidebarClasses.container}`]: {
               height: "100vh",
               transition: "all .5s ease-in-out",
+            },
+
+            [`.${sidebarClasses.backdrop}`]: {
+              background: authModal.isOpen
+                ? "rgb(0, 0, 0, 0)"
+                : "rgb(0, 0, 0, 0.3)",
             },
             borderRight: 0,
           }}
@@ -142,11 +150,17 @@ const Sidebar: React.FC = () => {
               href="/settings"
               isActive={activeSidebarItem === "/settings"}
             />
-            {user && (
+            {user ? (
               <SidebarItem
                 icon={PiSignOut}
                 label="Logout"
                 onClick={handleLogout}
+              />
+            ) : (
+              <SidebarItem
+                icon={PiSignIn}
+                label="Login"
+                onClick={() => authModal.onOpen("Welcome back")}
               />
             )}
           </Menu>

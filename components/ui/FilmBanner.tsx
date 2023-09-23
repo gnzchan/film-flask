@@ -28,7 +28,7 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ filmId }) => {
   }
 
   return (
-    <div className="mx-8 mb-10 flex h-[65vh] min-h-[450px] overflow-hidden rounded-md bg-black shadow-xl shadow-zinc-950">
+    <div className="mx-8 mb-12 flex h-[65vh] min-h-[450px] overflow-hidden rounded-md bg-black shadow-xl shadow-zinc-950">
       <div className="flex w-full flex-col justify-center gap-5 px-7">
         <h1 className="text-xl font-extrabold text-white md:text-4xl">
           {film.Title}
@@ -54,7 +54,7 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ filmId }) => {
           {film.Plot}
         </p>
         <Link href={`/film/${film.imdbID}`}>
-          <Button className="max-w-sm font-medium">View more info</Button>
+          <Button className="max-w-[240px] font-medium">View more info</Button>
         </Link>
       </div>
       <div

@@ -8,17 +8,20 @@ interface FilmItemProps {
 
 const FilmItem: React.FC<FilmItemProps> = ({ film }) => {
   return (
-    <Link href={`/film/${film.id}`}>
-      <div className="h-64 w-min overflow-hidden rounded-md bg-black shadow-lg">
+    <Link
+      href={`/film/${film.id}`}
+      className="flex aspect-[3/4] h-64 items-center justify-center"
+    >
+      <div className="overflow-hidden rounded-md bg-black shadow-lg shadow-zinc-950">
         <div
-          className="hover:bg flex aspect-[3/4] h-56 flex-col justify-end bg-cover"
+          className="hover:bg flex aspect-[3/4] h-64 flex-col justify-end bg-cover"
           style={{
             backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), 
         url(${film.poster_url})`,
           }}
         >
           <div className="group flex h-full w-full flex-col items-start justify-end transition hover:justify-center hover:backdrop-blur-sm hover:backdrop-brightness-50">
-            <div className="flex w-full flex-col gap-2 px-3">
+            <div className="flex w-full flex-col gap-2 p-3">
               <h1 className="text-lg font-bold text-white">{film.title}</h1>
               <div className="hidden flex-col gap-2 text-xs font-medium capitalize text-white group-hover:flex">
                 {film.genre?.split(",").map((genre, i) => (

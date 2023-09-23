@@ -37,7 +37,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
           className="mySwiper2"
         >
           {films.map((film) => (
-            <SwiperSlide key={film.id} className="overflow-visible">
+            <SwiperSlide key={film.id}>
               <FilmBanner filmId={film.id} />
             </SwiperSlide>
           ))}
@@ -45,7 +45,11 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
         <Swiper
           onSwiper={setThumbsSwiper}
           spaceBetween={20}
-          slidesPerView={4.5}
+          breakpoints={{
+            0: { slidesPerView: 1.5 },
+            550: { slidesPerView: 4.5 },
+            800: { slidesPerView: 6.5 },
+          }}
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
@@ -55,7 +59,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
             <SwiperSlide key={film.id}>
               <div
                 className={twMerge(
-                  "m-8 mt-0 h-[15vh] min-h-[100px] w-full overflow-hidden rounded-md bg-cover bg-center shadow-xl shadow-zinc-950 transition",
+                  "m-8 mt-2 h-[15vh] min-h-[100px] w-full overflow-hidden rounded-md bg-cover bg-center shadow-xl shadow-zinc-950 transition",
                   activeIndex === i && "scale-105",
                 )}
                 style={{
@@ -64,7 +68,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
                 }}
               >
                 <div className="flex h-full cursor-pointer items-center justify-center p-3 backdrop-blur-sm backdrop-brightness-50">
-                  <p className="truncate text-center text-sm font-extrabold text-white md:text-xl">
+                  <p className="truncate text-center text-xs font-extrabold text-white md:text-sm ">
                     {film.title}
                   </p>
                 </div>

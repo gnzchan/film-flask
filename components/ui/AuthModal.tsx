@@ -27,7 +27,7 @@ const AuthModal = () => {
     >
       <Auth
         theme="dark"
-        providers={["google", "facebook"]}
+        providers={["google"]}
         supabaseClient={supabaseClient}
         view="sign_in"
         appearance={{
@@ -36,7 +36,7 @@ const AuthModal = () => {
             default: {
               colors: {
                 brand: "#404040",
-                brandAccent: "#22c55e",
+                brandAccent: "#525252",
               },
             },
           },

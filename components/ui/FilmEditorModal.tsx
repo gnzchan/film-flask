@@ -1,10 +1,10 @@
 import Modal from "./Modal";
 import FilmStatusButton from "./FilmStatusButton";
+import Button from "./Button";
 
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmDB from "@/hooks/useFilmDB";
 import { Status } from "@/types";
-import Button from "./Button";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
@@ -25,7 +25,7 @@ const FilmEditorModal = () => {
 
   return (
     <Modal
-      title="Edit film record"
+      title="Change record"
       description={`You are currently editing ${
         filmEditorModal.film?.Title ?? ""
       }`}
@@ -40,7 +40,7 @@ const FilmEditorModal = () => {
           <textarea
             name="review"
             rows={2}
-            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900"
+            className="focus:shadow-outline block w-full resize-none appearance-none rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm leading-tight text-gray-900 shadow-sm focus:outline-none"
             placeholder="Leave a review"
             value={review}
             onChange={reviewChangeHandler}
@@ -70,7 +70,9 @@ const FilmEditorModal = () => {
             />
           </div>
 
-          <Button type="submit">Submit</Button>
+          <Button className="max-w-sm" type="submit">
+            Submit
+          </Button>
         </form>
       </div>
     </Modal>

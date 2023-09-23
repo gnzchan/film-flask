@@ -19,7 +19,7 @@ const ThemeSwitcher = () => {
 
   return (
     <button
-      className="flex items-center justify-center rounded-full bg-neutral-900 p-1 shadow-zinc-950 drop-shadow-xl transition active:scale-110 dark:bg-neutral-100"
+      className="flex items-center justify-center rounded-full bg-neutral-900 p-1 shadow-md transition hover:shadow-zinc-400 active:scale-110 dark:bg-neutral-100 dark:shadow-lg dark:hover:shadow-amber-300"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
     >
       <LordIcon

@@ -20,7 +20,7 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
   return (
     <div>
       <Header>
-        <div className="sticky top-0 z-10 flex flex-col gap-y-5 bg-neutral-300/30 px-2 py-3 backdrop-blur-md">
+        <div className="sticky -top-1 z-10 flex flex-col gap-y-5 rounded-b-lg bg-neutral-100/30 px-2 py-3 backdrop-blur-lg dark:bg-zinc-900/30">
           <h1 className="text-3xl font-semibold">Search</h1>
           <SearchInput />
         </div>

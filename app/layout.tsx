@@ -10,6 +10,7 @@ import MainPage from "@/components/ui/MainPage";
 import ModalProvider from "@/components/providers/ModalProvider";
 import ToasterProvider from "@/components/providers/ToasterProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import { twMerge } from "tailwind-merge";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,7 @@ export default function RootLayout({
       <head>
         <Script src="https://cdn.lordicon.com/bhenfmcm.js"></Script>
       </head>
-      <body className={font.className}>
+      <body className={twMerge("min-w-[340px]", font.className)}>
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
