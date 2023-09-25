@@ -33,7 +33,7 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
         <meta name="apple-mobile-web-app-title" content="Film Flask"></meta>
         <meta name="mobile-web-app-capable" content="yes"></meta>
-        <link rel="shortcut icon" href="apple-icon.png" />
+        <link rel="shortcut icon" type="image/png" href="apple-icon.png" />
         <link rel="apple-touch-icon" href="apple-icon.png" />
       </head>
       <body className={twMerge("min-w-[340px]", font.className)}>
