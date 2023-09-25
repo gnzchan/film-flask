@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 import Button from "./Button";
 
@@ -17,6 +18,7 @@ interface FilmInfoProps {
 }
 
 const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
+  const { theme } = useTheme();
   const { user } = useUser();
   const authModal = useAuthModal();
 
@@ -41,11 +43,13 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
       <div
         className="bg-cover"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), 
+          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(${
+            theme === "light" ? "255, 255, 255" : "0, 0, 0"
+          }, 1)), 
         url(${film.Poster})`,
         }}
       >
-        <div className="flex flex-col items-center gap-5 px-5 py-3 backdrop-blur-sm backdrop-brightness-50">
+        <div className="flex flex-col items-center gap-5 px-5 py-3 backdrop-blur-sm ">
           <div className="relative aspect-[3/4] min-h-[350px] w-[60%] min-w-[263px] max-w-[400px] drop-shadow-2xl">
             <Image
               src={
@@ -60,16 +64,16 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             {film.Genre.split(",").map((genre, i) => (
               <div
                 key={`${genre}-${i}`}
-                className="m-1 flex items-center justify-center rounded-full border border-gray-300  px-2 py-1 font-medium text-gray-400 "
+                className="m-1 flex items-center justify-center rounded-full border border-gray-500 px-2  py-1 font-medium text-gray-600 dark:border-gray-300 dark:text-gray-400 "
               >
                 <div className="max-w-full flex-initial text-xs font-normal leading-none">
-                  <h1 className="text-white">{genre}</h1>
+                  <p>{genre}</p>
                 </div>
               </div>
             ))}
           </div>
           <div className="flex w-full flex-col gap-4">
-            <div className="flex items-center gap-6 text-xs font-medium capitalize text-white">
+            <div className="flex items-center gap-6 text-xs font-medium capitalize">
               <div className="flex items-center justify-center gap-2">
                 <div className="relative aspect-square h-8">
                   <Image src="/images/imdb.png" alt="IMDb Logo" fill />
@@ -80,15 +84,15 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
               <p>{film.Type}</p>
               <p>{film.Year}</p>
             </div>
-            <h1 className="text-4xl font-extrabold text-white">{film.Title}</h1>
-            <p className="text-justify text-sm font-normal text-gray-400">
+            <h1 className="text-4xl font-extrabold ">{film.Title}</h1>
+            <p className="text-justify text-sm font-normal text-gray-600 dark:text-gray-400">
               {film.Plot}
             </p>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 bg-black px-5 py-3 text-white">
+      <div className="flex flex-col gap-5 bg-white px-5 py-3  dark:bg-black">
         <div className="flex items-center justify-center">
           <p className="text-md">{film.Director}</p>
         </div>
@@ -105,7 +109,8 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           </Button>
         </div>
       </div>
-      <div className="flex h-full flex-col gap-3 bg-black px-5 py-3 text-white">
+
+      <div className="flex h-full flex-col gap-3 bg-white px-5 py-3  dark:bg-black">
         <h1 className="text-2xl font-bold">Reviews</h1>
         <p className="text-center text-sm italic text-gray-400">
           Add film to add a review

@@ -1,5 +1,7 @@
 "use client";
 
+import { useTheme } from "next-themes";
+
 import { LordIcon } from "./LordIcon";
 
 import useFilmLike from "@/hooks/useFilmLike";
@@ -11,6 +13,7 @@ interface FilmTitleBarProps {
 
 const FilmTitleBar: React.FC<FilmTitleBarProps> = ({ film }) => {
   const { liked, likeFilmHandler } = useFilmLike(film);
+  const { theme } = useTheme();
 
   return (
     <div className="flex items-center justify-between px-2 pt-2">
@@ -23,7 +26,9 @@ const FilmTitleBar: React.FC<FilmTitleBarProps> = ({ film }) => {
               : "https://cdn.lordicon.com/pnhskdva.json"
           }
           trigger="hover"
-          colors={{ primary: liked ? "red" : "black" }}
+          colors={{
+            primary: liked ? "red" : theme === "light" ? "black" : "white",
+          }}
           size={32}
         />
       </button>
