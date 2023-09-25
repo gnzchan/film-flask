@@ -45,8 +45,9 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(${
             theme === "light" ? "255, 255, 255" : "0, 0, 0"
-          }, 1)), 
-        url(${film.Poster})`,
+          }, 1)), ${film.Poster !== "N/A" ? `url(${film.Poster})` : ""} `,
+          backgroundPosition: "center",
+          backgroundColor: `${theme === "light" ? "white" : "black"}`,
         }}
       >
         <div className="flex flex-col items-center gap-5 px-5 py-3 backdrop-blur-sm ">
@@ -56,7 +57,9 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
                 film.Poster !== "N/A" ? film.Poster : "/images/movie-poster.jpg"
               }
               alt={`${film.Title} Poster`}
+              priority={true}
               fill
+              sizes="(max-width: 750px) 100vw"
               className="rounded-lg border"
             />
           </div>
@@ -76,7 +79,12 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             <div className="flex items-center gap-6 text-xs font-medium capitalize">
               <div className="flex items-center justify-center gap-2">
                 <div className="relative aspect-square h-8">
-                  <Image src="/images/imdb.png" alt="IMDb Logo" fill />
+                  <Image
+                    src="/images/imdb.png"
+                    alt="IMDb Logo"
+                    sizes="(max-width: 70px) 100vw"
+                    fill
+                  />
                 </div>
                 <p>{film.imdbRating} / 10</p>
               </div>

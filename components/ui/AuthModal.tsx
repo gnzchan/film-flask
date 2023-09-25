@@ -9,9 +9,6 @@ const AuthModal = () => {
   const supabaseClient = useSupabaseClient();
   const authModal = useAuthModal();
 
-  // TODO: Refactor with other modals
-  // TODO: also refactor useModal hooks
-
   const onChangeHandler = (open: boolean) => {
     if (!open) {
       authModal.onClose();

@@ -68,7 +68,12 @@ const Sidebar: React.FC = () => {
           className="shadow-xl dark:shadow-zinc-950"
         >
           <div className="relative aspect-auto min-h-[90px]">
-            <Image src={getColorTheme(theme).logo} alt="Film Flask Logo" fill />
+            <Image
+              src={getColorTheme(theme).logo}
+              alt="Film Flask Logo"
+              fill
+              priority={true}
+            />
           </div>
 
           <Menu
@@ -144,12 +149,12 @@ const Sidebar: React.FC = () => {
               },
             }}
           >
-            <SidebarItem
+            {/* <SidebarItem
               icon={BsGear}
               label="Settings"
               href="/settings"
               isActive={activeSidebarItem === "/settings"}
-            />
+            /> */}
             {user ? (
               <SidebarItem
                 icon={PiSignOut}

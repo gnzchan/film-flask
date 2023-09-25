@@ -6,7 +6,7 @@ interface MainPageProps {
 
 const MainPage: React.FC<MainPageProps> = ({ children }) => {
   return (
-    <div className="flex overscroll-none">
+    <div className="flex overflow-visible">
       <Sidebar />
       <main className="h-screen w-full flex-1 overflow-hidden overflow-y-auto transition duration-500 ease-in-out dark:bg-zinc-900">
         {children}

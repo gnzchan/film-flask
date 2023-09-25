@@ -6,8 +6,8 @@ import { useInView } from "react-intersection-observer";
 import FilmGrid from "../../components/ui/FilmGrid";
 import Spinner from "../../components/ui/Spinner";
 
-import { Film, OMDBSearch, OMDBSearchFilm } from "@/types";
-import { delay, getTotalPages } from "@/libs/helpers";
+import { Film, OMDBSearchFilm } from "@/types";
+import { delay } from "@/libs/helpers";
 import getFilmsByTitle from "@/actions/getFilmsByTitle";
 
 interface SearchFilmContentProps {
@@ -34,17 +34,18 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
 
   const [films, setFilms] = useState<Film[]>(mapToFilm(propFilms));
   const [pagesLoaded, setPagesLoaded] = useState(1);
-  const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(false);
+  const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(true);
   const { ref, inView } = useInView();
 
   useEffect(() => {
     setFilms([]);
     setPagesLoaded(1);
-    setIsAllPagesLoaded(false);
+    setIsAllPagesLoaded(searchString === "");
   }, [searchString]);
 
   useEffect(() => {
     setFilms(mapToFilm(propFilms));
+    setIsAllPagesLoaded(pagesLoaded === totalPages);
   }, [propFilms]);
 
   useEffect(() => {
@@ -66,7 +67,9 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
 
   const content = isAllPagesLoaded ? (
     <p className="text-md font-normal">
-      {films.length === 0 ? "Start searching" : "You're all caught up"}
+      {films.length !== 0
+        ? "You're all caught up"
+        : "Enter movie title or keywords"}
     </p>
   ) : (
     <Spinner />

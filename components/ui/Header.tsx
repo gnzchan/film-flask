@@ -27,11 +27,16 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             <RxHamburgerMenu size={24} />
           </button>
         </div>
-        <div className="relative aspect-auto min-h-[50px]">
-          <Link href="/">
-            <Image src={getColorTheme(theme).logo} alt="Film Flask Logo" fill />
-          </Link>
-        </div>
+        <Link href="/">
+          <div className="relative aspect-auto min-h-[50px]">
+            <Image
+              src={getColorTheme(theme).logo}
+              alt="Film Flask Logo"
+              fill
+              priority={true}
+            />
+          </div>
+        </Link>
         <div className="flex items-center justify-end gap-3">
           <ThemeSwitcher />
         </div>

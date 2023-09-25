@@ -27,7 +27,7 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
 
         <SearchFilmContent
           propFilms={films}
-          searchString={searchParams.title}
+          searchString={searchParams.title ?? ""}
           totalPages={getTotalPages(totalResults)}
           error={error}
         />
