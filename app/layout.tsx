@@ -33,11 +33,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
         <meta name="apple-mobile-web-app-title" content="Film Flask"></meta>
         <meta name="mobile-web-app-capable" content="yes"></meta>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="apple-icon.png"
-        ></link>
       </head>
       <body className={twMerge("min-w-[340px]", font.className)}>
         <ToasterProvider />
