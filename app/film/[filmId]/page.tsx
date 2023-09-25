@@ -14,9 +14,9 @@ const Film: React.FC<FilmProps> = async ({ params }) => {
 
   return (
     <div className="flex h-full flex-col">
-      <Header>
+      {/* <Header>
         <FilmTitleBar film={film} />
-      </Header>
+      </Header> */}
       <FilmInfo film={film} />
     </div>
   );
