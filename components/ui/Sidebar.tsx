@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
         <RPSidebar
           rootStyles={{
             [`.${sidebarClasses.container}`]: {
-              height: "100vh",
+              // height: "100vh",
               transition: "all .5s ease-in-out",
             },
 
