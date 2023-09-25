@@ -10,11 +10,11 @@ const FilmItem: React.FC<FilmItemProps> = ({ film }) => {
   return (
     <Link
       href={`/film/${film.id}`}
-      className="flex aspect-[3/4] h-64 items-center justify-center"
+      className="flex aspect-[3/4] items-center justify-center"
     >
       <div className="overflow-hidden rounded-md bg-black shadow-lg shadow-zinc-950">
         <div
-          className="hover:bg flex aspect-[3/4] h-64 flex-col justify-end bg-cover"
+          className="hover:bg flex aspect-[3/4] flex-col justify-end bg-cover"
           style={{
             backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), 
         url(${film.poster_url})`,
