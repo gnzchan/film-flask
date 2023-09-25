@@ -31,6 +31,7 @@ export default function RootLayout({
       <head>
         <Script src="https://cdn.lordicon.com/bhenfmcm.js"></Script>
         <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+        <link rel="icon" href="/icon.svg" sizes="any" />
       </head>
       <body className={twMerge("min-w-[340px]", font.className)}>
         <ToasterProvider />
