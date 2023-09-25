@@ -6,13 +6,15 @@ import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
 import useFilm from "./useFilm";
 import { OMDBFilm } from "@/types";
+import useFilmEditorModal from "./useFilmEditorModal";
 
 const useFilmLike = (film: OMDBFilm) => {
   const [liked, setLiked] = useState<boolean | null>(null);
   const { user } = useUser();
   const { supabaseClient } = useSessionContext();
   const authModal = useAuthModal();
-  const { listed, fetchListed, addFilmToListHandler } = useFilm(film.imdbID);
+  const { listed } = useFilmEditorModal();
+  const { fetchListed, addFilmToListHandler } = useFilm(film.imdbID);
 
   const fetchLikeStatus = async () => {
     if (!user) return;

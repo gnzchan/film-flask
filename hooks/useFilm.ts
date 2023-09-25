@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import toast from "react-hot-toast";
 
+import useFilmEditorModal from "./useFilmEditorModal";
 import { FilmCategory, OMDBFilm } from "@/types";
 
 const useFilm = (filmId: string) => {
-  const [listed, setListed] = useState<boolean>(false);
+  const { setListed } = useFilmEditorModal();
   const { supabaseClient } = useSessionContext();
 
   const fetchListed = async () => {
@@ -37,7 +38,7 @@ const useFilm = (filmId: string) => {
     if (error) return toast.error(error.message);
   };
 
-  return { listed, fetchListed, addFilmToListHandler };
+  return { fetchListed, addFilmToListHandler };
 };
 
 export default useFilm;

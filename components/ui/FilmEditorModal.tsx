@@ -15,7 +15,7 @@ const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
   const cachedFilm = filmEditorModal.omdbFilm;
 
-  const { listed, fetchListed, addFilmToListHandler } = useFilm(
+  const { fetchListed, addFilmToListHandler } = useFilm(
     cachedFilm?.imdbID ?? "",
   );
   const { review, addReviewHandler, reviewChangeHandler } = useFilmReview(
@@ -35,7 +35,7 @@ const FilmEditorModal = () => {
   };
 
   const updateFilm = async () => {
-    if ((review || status) && !listed) {
+    if ((review || status) && !filmEditorModal.listed) {
       await addFilmToListHandler(cachedFilm);
       await fetchListed();
     }
