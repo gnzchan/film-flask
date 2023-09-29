@@ -33,13 +33,13 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     }));
 
   const [films, setFilms] = useState<Film[]>(mapToFilm(propFilms));
-  const [pagesLoaded, setPagesLoaded] = useState(1);
+  const [pagesLoaded, setPagesLoaded] = useState(0);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(true);
   const { ref, inView } = useInView();
 
   useEffect(() => {
     setFilms([]);
-    setPagesLoaded(1);
+    setPagesLoaded(0);
     setIsAllPagesLoaded(searchString === "");
   }, [searchString]);
 
@@ -58,9 +58,12 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     await delay(1000);
     const nextPage = pagesLoaded + 1;
 
-    if (nextPage >= totalPages) return setIsAllPagesLoaded(true);
+    if (nextPage > totalPages - 1) return setIsAllPagesLoaded(true);
 
-    const { Search: newFilms } = await getFilmsByTitle(searchString, nextPage);
+    const { Search: newFilms } = await getFilmsByTitle(
+      searchString,
+      nextPage + 1,
+    );
     setFilms((prevItems) => [...prevItems, ...mapToFilm(newFilms)]);
     setPagesLoaded(nextPage);
   };
