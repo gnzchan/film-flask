@@ -29,12 +29,14 @@ const SearchInput = () => {
   }, [debouncedValue]);
 
   return (
-    <input
-      placeholder="Search for movies or series"
-      value={value}
-      className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow-sm focus:outline-none"
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <div className="flex items-center justify-center">
+      <input
+        placeholder="Search for movies or series"
+        value={value}
+        className="focus:shadow-outline w-full max-w-[1700px] appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow-sm focus:outline-none"
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </div>
   );
 };
 
