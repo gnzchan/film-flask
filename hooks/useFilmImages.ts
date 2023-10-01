@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
 import useFilmEditorModal from "./useFilmEditorModal";
+import useCommonFunctions from "./useCommonFunctions";
 
 const useFilmImages = (filmId: string) => {
   const [images, setImages] = useState<File[]>([]);
@@ -15,19 +16,7 @@ const useFilmImages = (filmId: string) => {
   const { supabaseClient } = useSessionContext();
   const authModal = useAuthModal();
   const filmEditorModal = useFilmEditorModal();
-
-  const fetchImage = async (image_path: string) => {
-    const { data: imageData } = supabaseClient.storage
-      .from("images")
-      .getPublicUrl(image_path);
-
-    const response = await fetch(imageData.publicUrl);
-    const blob = await response.blob();
-
-    const file = new File([blob], image_path);
-
-    return file;
-  };
+  const { fetchImage } = useCommonFunctions();
 
   const fetchImages = async () => {
     if (!user) return;
@@ -50,6 +39,7 @@ const useFilmImages = (filmId: string) => {
   };
 
   useEffect(() => {
+    console.log("ran here");
     if (!filmEditorModal.isOpen) {
       setImagesForUpload([]);
       fetchImages();
@@ -57,6 +47,7 @@ const useFilmImages = (filmId: string) => {
   }, [filmEditorModal.isOpen]);
 
   useEffect(() => {
+    console.log("ran here 2");
     fetchImages();
   }, [user, filmId]);
 
@@ -149,7 +140,6 @@ const useFilmImages = (filmId: string) => {
   };
 
   return {
-    fetchImage,
     images,
     imagesForUpload,
     imagesForRemove,

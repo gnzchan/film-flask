@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { ImageReview, OMDBFilm, CommentReview, Review } from "@/types";
+import { OMDBFilm, Review } from "@/types";
 
 interface FilmEditorModalStore {
   omdbFilm: OMDBFilm | null;

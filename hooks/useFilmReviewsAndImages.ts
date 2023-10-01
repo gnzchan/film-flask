@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 
-import useFilmImages from "./useFilmImages";
 import { ImageReview, CommentReview } from "@/types";
 import useFilmEditorModal from "./useFilmEditorModal";
+import useCommonFunctions from "./useCommonFunctions";
 
 const useFilmReviewsAndImages = (filmId: string) => {
   const { supabaseClient } = useSessionContext();
-  const { fetchImage } = useFilmImages(filmId);
+  const { fetchImage } = useCommonFunctions();
   const { setReviewsAndImages } = useFilmEditorModal();
 
   useEffect(() => {
