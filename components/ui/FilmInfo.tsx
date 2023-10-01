@@ -45,7 +45,10 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         style={{
           backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(${
             theme === "light" ? "255, 255, 255" : "0, 0, 0"
-          }, 1)), ${film.Poster !== "N/A" ? `url(${film.Poster})` : ""} `,
+          }, 1)), 
+          url(${
+            film?.Poster !== "N/A" ? film.Poster : "/images/movie-poster.jpg"
+          })`,
           backgroundPosition: "center",
           backgroundColor: `${theme === "light" ? "white" : "black"}`,
         }}

@@ -63,7 +63,11 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
               )}
               style={{
                 backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%), 
-        url(${film.Poster})`,
+                url(${
+                  film?.Poster !== "N/A"
+                    ? film.Poster
+                    : "/images/movie-poster.jpg"
+                })`,
               }}
             >
               <div className="flex h-full cursor-pointer items-center justify-center p-3 backdrop-blur-sm backdrop-brightness-50">

@@ -17,11 +17,11 @@ const FilmItem: React.FC<FilmItemProps> = ({ film }) => {
           className="hover:bg flex aspect-[3/4] w-full flex-col justify-end bg-cover bg-center"
           style={{
             backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), 
-        url(${
-          film.poster_url !== "N/A"
-            ? film.poster_url
-            : "/images/movie-poster.jpg"
-        })`,
+           url(${
+             film.poster_url !== "N/A"
+               ? film.poster_url
+               : "/images/movie-poster.jpg"
+           })`,
           }}
         >
           <div className="group flex h-full w-full flex-col items-start justify-end transition hover:justify-center hover:backdrop-blur-sm hover:backdrop-brightness-50">
