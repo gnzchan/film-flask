@@ -40,19 +40,17 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   return (
     <>
       <div
-        className="bg-cover"
+        className="bg-white bg-cover bg-center dark:bg-black"
         style={{
-          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(${
+          backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(${
             theme === "light" ? "255, 255, 255" : "0, 0, 0"
-          }, 1)), 
+          }) 70%), 
           url(${
             film?.Poster !== "N/A" ? film.Poster : "/images/movie-poster.jpg"
           })`,
-          backgroundPosition: "center",
-          backgroundColor: `${theme === "light" ? "white" : "black"}`,
         }}
       >
-        <div className="flex flex-col items-center gap-5 px-5 py-3 backdrop-blur-sm ">
+        <div className="flex flex-col items-center gap-5 px-5 py-4 backdrop-blur-sm">
           <div className="relative aspect-[3/4] min-h-[350px] w-[60%] min-w-[263px] max-w-[400px] drop-shadow-2xl">
             <Image
               src={
@@ -102,7 +100,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-5 bg-white px-5 py-3  dark:bg-black">
+      <div className="flex flex-col gap-5 bg-white px-5 py-3 dark:bg-black">
         <div className="flex items-center justify-center">
           <p className="text-md">{film.Director}</p>
         </div>
