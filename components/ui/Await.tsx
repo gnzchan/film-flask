@@ -7,7 +7,5 @@ export default async function Await<T>({
 }) {
   let data = await promise;
 
-  console.log(data);
-
   return children(data);
 }

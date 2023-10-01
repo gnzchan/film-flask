@@ -1,34 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 
-import useFilmEditorModal from "./useFilmEditorModal";
 import useFilmImages from "./useFilmImages";
-import { ImageReview, CommentReview, Review } from "@/types";
+import { ImageReview, CommentReview } from "@/types";
+import useFilmEditorModal from "./useFilmEditorModal";
 
 const useFilmReviewsAndImages = (filmId: string) => {
-  const [reviewsAndImages, setReviewsAndImages] = useState<Review[]>([]);
   const { supabaseClient } = useSessionContext();
   const { fetchImage } = useFilmImages(filmId);
-  const filmEditorModal = useFilmEditorModal();
+  const { setReviewsAndImages } = useFilmEditorModal();
 
   useEffect(() => {
-    fetchFilmReviews();
-    fetchFilmImages();
+    fetchReviews();
   }, []);
 
-  useEffect(() => {
-    if (!filmEditorModal.isOpen) {
-      fetchFilmReviews();
-      fetchFilmImages();
-    }
-  }, [filmEditorModal.isOpen]);
+  const fetchReviews = async () => {
+    const reviews = await fetchFilmReviews();
+    const images = await fetchFilmImages();
 
-  useEffect(() => {
-    mergeCommentAndImageReview(
-      filmEditorModal.reviews,
-      filmEditorModal.imageReviews,
-    );
-  }, [filmEditorModal.reviews, filmEditorModal.imageReviews]);
+    mergeCommentAndImageReview(reviews, images);
+  };
 
   const fetchFilmReviews = async () => {
     const { data } = await supabaseClient
@@ -36,7 +27,7 @@ const useFilmReviewsAndImages = (filmId: string) => {
       .select("*, users(*)")
       .eq("film_id", filmId);
 
-    filmEditorModal.setReviews(data as CommentReview[]);
+    return data as CommentReview[];
   };
 
   const fetchFilmImages = async () => {
@@ -45,7 +36,7 @@ const useFilmReviewsAndImages = (filmId: string) => {
       .select("*, users(*)")
       .eq("film_id", filmId);
 
-    filmEditorModal.setImageReviews(data as ImageReview[]);
+    return data as ImageReview[];
   };
 
   const mergeCommentAndImageReview = async (
@@ -73,7 +64,7 @@ const useFilmReviewsAndImages = (filmId: string) => {
     setReviewsAndImages(mergedReviews);
   };
 
-  return { reviewsAndImages, fetchFilmReviews, fetchFilmImages };
+  return { fetchReviews };
 };
 
 export default useFilmReviewsAndImages;

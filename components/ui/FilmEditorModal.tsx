@@ -11,8 +11,8 @@ import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilm from "@/hooks/useFilm";
 import useFilmReview from "@/hooks/useFilmReview";
 import useFilmStatus from "@/hooks/useFilmStatus";
-import useFilmReviews from "@/hooks/useFilmReviewsAndImages";
 import useFilmImages from "@/hooks/useFilmImages";
+import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
@@ -37,7 +37,7 @@ const FilmEditorModal = () => {
   const { status, addStatusHandler, statusChangeHandler } = useFilmStatus(
     cachedFilm?.imdbID ?? "",
   );
-  const { fetchFilmReviews } = useFilmReviews(cachedFilm?.imdbID ?? "");
+  const { fetchReviews } = useFilmReviewsAndImages(cachedFilm?.imdbID ?? "");
 
   if (!cachedFilm) return;
 
@@ -71,7 +71,7 @@ const FilmEditorModal = () => {
 
     filmEditorModal.onClose();
     toast.success("Film updated");
-    await fetchFilmReviews();
+    await fetchReviews();
   };
 
   return (

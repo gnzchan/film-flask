@@ -67,7 +67,7 @@ const useFilmImages = (filmId: string) => {
 
     for (const image of [...images, ...imagesForUpload]) {
       if (image.name === newImage.name) {
-        console.log("dupe");
+        // TODO: Add prompt for duplicate file name
         return;
       }
     }

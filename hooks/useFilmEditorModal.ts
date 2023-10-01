@@ -1,17 +1,15 @@
 import { create } from "zustand";
 
-import { ImageReview, OMDBFilm, CommentReview } from "@/types";
+import { ImageReview, OMDBFilm, CommentReview, Review } from "@/types";
 
 interface FilmEditorModalStore {
   omdbFilm: OMDBFilm | null;
   listed: boolean;
-  reviews: CommentReview[];
-  imageReviews: ImageReview[];
   isOpen: boolean;
+  reviewsAndImages: Review[];
   setFilm: (omdbFilm: OMDBFilm) => void;
   setListed: (isListed: boolean) => void;
-  setReviews: (reviews: CommentReview[]) => void;
-  setImageReviews: (imageReviews: ImageReview[]) => void;
+  setReviewsAndImages: (reviewsAndImages: Review[]) => void;
   onOpen: () => void;
   onClose: () => void;
 }
@@ -19,13 +17,11 @@ interface FilmEditorModalStore {
 const useFilmEditorModal = create<FilmEditorModalStore>((set) => ({
   omdbFilm: null,
   listed: false,
-  reviews: [],
-  imageReviews: [],
   isOpen: false,
+  reviewsAndImages: [],
   setFilm: (omdbFilm) => set({ omdbFilm }),
   setListed: (isListed) => set({ listed: isListed }),
-  setReviews: (reviews) => set({ reviews }),
-  setImageReviews: (imageReviews) => set({ imageReviews }),
+  setReviewsAndImages: (reviewsAndImages) => set({ reviewsAndImages }),
   onOpen: () => set({ isOpen: true }),
   onClose: () => set({ isOpen: false }),
 }));

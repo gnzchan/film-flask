@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 
 import Button from "./Button";
+import UploadImage from "./UploadImage";
 
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
@@ -12,7 +13,6 @@ import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
 import { OMDBFilm } from "@/types";
 import { getFormattedTime } from "@/libs/helpers";
-import UploadImage from "./UploadImage";
 
 interface FilmInfoProps {
   film: OMDBFilm;
@@ -22,16 +22,12 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   const { theme } = useTheme();
   const { user } = useUser();
   const authModal = useAuthModal();
-
   const filmEditorModal = useFilmEditorModal();
-
-  const { reviewsAndImages, fetchFilmReviews, fetchFilmImages } =
-    useFilmReviewsAndImages(film.imdbID);
+  const { fetchReviews } = useFilmReviewsAndImages(film.imdbID);
 
   useEffect(() => {
     filmEditorModal.setFilm(film);
-    fetchFilmReviews();
-    fetchFilmImages();
+    fetchReviews();
   }, []);
 
   const handleClick = () => {
@@ -130,7 +126,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           Add film to add a review
         </p>
         <div className="flex flex-col gap-2 divide-y">
-          {reviewsAndImages.map((review, i) => (
+          {filmEditorModal.reviewsAndImages.map((review, i) => (
             <div key={i} className="flex flex-col">
               <p className="text-md font-medium">{review.users.full_name}</p>
               <p className="text-sm">{review.review}</p>
