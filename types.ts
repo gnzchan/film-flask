@@ -79,6 +79,22 @@ export interface OMDBFilm {
 }
 
 export interface Review {
+  user_id: string;
+  review: string;
+  image_path: File[];
+  created_at: string;
+  updated_at: string;
+  users: UserDetails;
+}
+
+export interface ImageReview {
+  user_id: string;
+  users: UserDetails;
+  image_path: string;
+}
+
+export interface CommentReview {
+  user_id: string;
   review: string;
   created_at: string;
   updated_at: string;

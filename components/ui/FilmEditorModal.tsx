@@ -1,15 +1,18 @@
+import { ChangeEvent, MouseEvent, useState } from "react";
 import toast from "react-hot-toast";
 
 import Modal from "./Modal";
 import FilmStatusButton from "./FilmStatusButton";
 import Button from "./Button";
+import UploadImage from "./UploadImage";
 
 import { Status } from "@/types";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilm from "@/hooks/useFilm";
 import useFilmReview from "@/hooks/useFilmReview";
 import useFilmStatus from "@/hooks/useFilmStatus";
-import useFilmReviews from "@/hooks/useFilmReviews";
+import useFilmReviews from "@/hooks/useFilmReviewsAndImages";
+import useFilmImages from "@/hooks/useFilmImages";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
@@ -18,6 +21,16 @@ const FilmEditorModal = () => {
   const { fetchListed, addFilmToListHandler } = useFilm(
     cachedFilm?.imdbID ?? "",
   );
+
+  const {
+    images,
+    imagesForUpload,
+    imagesForRemove,
+    addImageForUploadHandler,
+    removeImageForUploadHandler,
+    uploadImagesHandler,
+    removeImagesHandler,
+  } = useFilmImages(cachedFilm?.imdbID ?? "");
   const { review, addReviewHandler, reviewChangeHandler } = useFilmReview(
     cachedFilm?.imdbID ?? "",
   );
@@ -35,9 +48,17 @@ const FilmEditorModal = () => {
   };
 
   const updateFilm = async () => {
-    if ((review || status) && !filmEditorModal.listed) {
+    if ((review || status || imagesForUpload) && !filmEditorModal.listed) {
       await addFilmToListHandler(cachedFilm);
       await fetchListed();
+    }
+
+    if (imagesForUpload.length !== 0) {
+      await uploadImagesHandler();
+    }
+
+    if (imagesForRemove.length !== 0) {
+      await removeImagesHandler();
     }
 
     if (review) {
@@ -73,6 +94,36 @@ const FilmEditorModal = () => {
             value={review}
             onChange={reviewChangeHandler}
           />
+          <div className="flex flex-col items-center justify-center">
+            <label htmlFor="imageFiles" className="cursor-pointer">
+              Add image
+            </label>
+            <input
+              id="imageFiles"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={addImageForUploadHandler}
+            />
+            <div className="flex gap-1">
+              {images.map((image) => (
+                <UploadImage
+                  key={image.name}
+                  image={image}
+                  uploaded={true}
+                  removeImageHandler={removeImageForUploadHandler}
+                />
+              ))}
+              {imagesForUpload.map((image) => (
+                <UploadImage
+                  key={image.name}
+                  image={image}
+                  uploaded={false}
+                  removeImageHandler={removeImageForUploadHandler}
+                />
+              ))}
+            </div>
+          </div>
 
           <div className="flex w-full flex-col items-center justify-center gap-7 px-7 sm:flex-row">
             <FilmStatusButton
