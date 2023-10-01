@@ -50,7 +50,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           })`,
         }}
       >
-        <div className="flex flex-col items-center gap-5 px-5 py-4 backdrop-blur-sm">
+        <div className="flex flex-col items-center gap-5 p-5 backdrop-blur-sm">
           <div className="relative aspect-[3/4] min-h-[350px] w-[60%] min-w-[263px] max-w-[400px] drop-shadow-2xl">
             <Image
               src={
@@ -67,7 +67,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             {film.Genre.split(",").map((genre, i) => (
               <div
                 key={`${genre}-${i}`}
-                className="m-1 flex items-center justify-center rounded-full border border-gray-500 px-2  py-1 font-medium text-gray-600 dark:border-gray-300 dark:text-gray-400 "
+                className="mx-1 flex items-center justify-center rounded-full border border-gray-500 px-2  py-1 font-medium text-gray-600 dark:border-gray-300 dark:text-gray-400 "
               >
                 <div className="max-w-full flex-initial text-xs font-normal leading-none">
                   <p>{genre}</p>
@@ -118,7 +118,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         </div>
       </div>
 
-      <div className="flex h-full flex-col gap-3 bg-white px-5 py-3  dark:bg-black">
+      <div className="flex h-full flex-col gap-3 bg-white px-5 py-3 dark:bg-black">
         <h1 className="text-2xl font-bold">Reviews</h1>
         <p className="text-center text-sm italic text-gray-400">
           Add film to add a review
