@@ -1,4 +1,5 @@
 import toast from "react-hot-toast";
+import { BiImageAdd } from "react-icons/bi";
 
 import Modal from "./Modal";
 import FilmStatusButton from "./FilmStatusButton";
@@ -93,9 +94,13 @@ const FilmEditorModal = () => {
             value={review}
             onChange={reviewChangeHandler}
           />
-          <div className="flex flex-col items-center justify-center">
-            <label htmlFor="imageFiles" className="cursor-pointer">
-              Add image
+          <div className="flex flex-col items-center justify-center gap-2">
+            <label
+              htmlFor="imageFiles"
+              className="flex cursor-pointer items-center justify-center gap-2 rounded-md border p-2 text-neutral-600 transition hover:text-neutral-400"
+            >
+              <BiImageAdd />
+              Attach image
             </label>
             <input
               id="imageFiles"
