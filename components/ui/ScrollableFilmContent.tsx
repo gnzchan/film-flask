@@ -61,7 +61,7 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
         <h1 className="text-2xl font-light text-neutral-800 dark:text-white">
           {title}
         </h1>
-        {films.length !== 0 && seeMore && (
+        {films.length >= 2 && seeMore && (
           <button
             onClick={seeMoreHandler}
             className="flex items-center gap-2 text-sm font-light text-neutral-400 transition hover:text-neutral-600 dark:text-neutral-300"
@@ -79,7 +79,7 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
           breakpoints={{
             0: { slidesPerView: 1.5 },
             500: { slidesPerView: 2.5 },
-            750: { slidesPerView: 3.5 },
+            850: { slidesPerView: 3.5 },
             1120: { slidesPerView: 4.5 },
           }}
           modules={[FreeMode, Navigation]}

@@ -39,7 +39,6 @@ const useFilmImages = (filmId: string) => {
   };
 
   useEffect(() => {
-    console.log("ran here");
     if (!filmEditorModal.isOpen) {
       setImagesForUpload([]);
       fetchImages();
@@ -47,7 +46,6 @@ const useFilmImages = (filmId: string) => {
   }, [filmEditorModal.isOpen]);
 
   useEffect(() => {
-    console.log("ran here 2");
     fetchImages();
   }, [user, filmId]);
 

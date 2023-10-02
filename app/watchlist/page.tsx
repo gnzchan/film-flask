@@ -62,7 +62,10 @@ const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
   return (
     <div className="flex h-full flex-col">
       <Header />
-      <div>{content()}</div>
+
+      <div className="flex items-center justify-center">
+        <div className="w-full max-w-[1700px]">{content()}</div>
+      </div>
     </div>
   );
 };

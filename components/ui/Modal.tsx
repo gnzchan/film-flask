@@ -25,10 +25,11 @@ const Modal: React.FC<ModalProps> = ({
             left-[50%] 
             top-[50%]
             z-[110] 
-            max-h-[85vh] 
+            max-h-[85vh]
             w-[90vw] 
             translate-x-[-50%] 
             translate-y-[-50%] 
+            overflow-y-scroll 
             rounded-md 
             border 
             border-neutral-700 

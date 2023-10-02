@@ -16,11 +16,15 @@ export default async function Home() {
           Popular on Film Flask
         </h1>
       </Header>
-      <Suspense fallback={<ThumbGallerySkeleton />}>
-        <Await promise={promise}>
-          {(data) => <ThumbGallery films={data} />}
-        </Await>
-      </Suspense>
+      <div className="flex items-center justify-center">
+        <div className="w-full max-w-[1700px]">
+          <Suspense fallback={<ThumbGallerySkeleton />}>
+            <Await promise={promise}>
+              {(data) => <ThumbGallery films={data} />}
+            </Await>
+          </Suspense>
+        </div>
+      </div>
     </div>
   );
 }

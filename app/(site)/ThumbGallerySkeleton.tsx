@@ -1,6 +1,6 @@
 const ThumbGallerySkeleton = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex max-w-[1700px] flex-col">
       <div className="mx-8 mb-12 flex h-[65vh] min-h-[450px] animate-pulse overflow-hidden rounded-md bg-gray-300"></div>
 
       <div className="mx-8 flex justify-between gap-8">

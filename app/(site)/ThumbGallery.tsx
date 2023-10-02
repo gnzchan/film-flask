@@ -62,8 +62,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
                 activeIndex === i && "scale-105",
               )}
               style={{
-                backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 1) 100%), 
-                url(${
+                backgroundImage: `url(${
                   film?.Poster !== "N/A"
                     ? film.Poster
                     : "/images/movie-poster.jpg"
@@ -71,7 +70,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
               }}
             >
               <div className="flex h-full cursor-pointer items-center justify-center p-3 backdrop-blur-sm backdrop-brightness-50">
-                <p className="truncate text-center text-xs font-extrabold text-white md:text-sm ">
+                <p className="truncate text-center text-xs font-semibold text-white md:text-sm ">
                   {film.Title}
                 </p>
               </div>
