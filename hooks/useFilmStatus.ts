@@ -74,10 +74,7 @@ const useFilmStatus = (filmId: string) => {
 
   const statusChangeHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    console.log(e.target.value);
-    setStatus(e.target.value as Status);
-  };
+  ) => setStatus(e.target.value as Status);
 
   return { status, addStatusHandler, statusChangeHandler };
 };
