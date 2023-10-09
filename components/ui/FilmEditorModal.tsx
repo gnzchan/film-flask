@@ -94,6 +94,7 @@ const FilmEditorModal = () => {
             value={review}
             onChange={reviewChangeHandler}
           />
+          
           <div className="flex flex-col items-center justify-center gap-2">
             <label
               htmlFor="imageFiles"

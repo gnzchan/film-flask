@@ -29,7 +29,7 @@ const Modal: React.FC<ModalProps> = ({
             w-[90vw] 
             translate-x-[-50%] 
             translate-y-[-50%] 
-            overflow-y-scroll 
+            overflow-y-auto 
             rounded-md 
             border 
             border-neutral-700 
