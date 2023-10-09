@@ -64,7 +64,7 @@ const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
             </h2>
           </>
         ) : (
-          <BsCameraVideoOff className="h-full max-h-[90px] w-full text-neutral-400" />
+          <BsCameraVideoOff className="h-full max-h-[60px] w-full text-neutral-400" />
         )}
       </div>
     </div>
