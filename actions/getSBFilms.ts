@@ -11,7 +11,8 @@ const getOmdbFilms = async (): Promise<OMDBFilm[]> => {
   const { data, error } = await supabase
     .from("films")
     .select("id")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .limit(20);
 
   if (error) {
     console.log(error);
