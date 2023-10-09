@@ -42,6 +42,7 @@ export enum FilmCategory {
 }
 
 export enum Status {
+  UNLISTED = "Unlisted",
   TO_WATCH_LATER = "Watch later",
   CURRENTLY_WATCHING = "Currently watching",
   FINISHED_WATCHING = "Finished watching",

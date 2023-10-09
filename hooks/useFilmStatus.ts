@@ -8,7 +8,8 @@ import { Status } from "@/types";
 import useFilmEditorModal from "./useFilmEditorModal";
 
 const useFilmStatus = (filmId: string) => {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(Status.UNLISTED);
+  const [listed, setListed] = useState(false);
   const { user } = useUser();
   const { supabaseClient } = useSessionContext();
   const authModal = useAuthModal();
@@ -26,8 +27,9 @@ const useFilmStatus = (filmId: string) => {
 
     if (data) {
       setStatus(data.status);
+      setListed(true);
     } else {
-      setStatus(Status.TO_WATCH_LATER);
+      setStatus(Status.UNLISTED);
     }
   };
 
@@ -43,18 +45,39 @@ const useFilmStatus = (filmId: string) => {
     if (!user)
       return authModal.onOpen("You need to sign in to access this content");
 
-    const { error } = await supabaseClient.from("status_films").upsert({
-      user_id: user.id,
-      film_id: filmId,
-      status,
-    });
+    if (status === Status.UNLISTED) {
+      if (listed) {
+        if (!user) return;
 
-    if (error) return toast.error(error.message);
+        const { error } = await supabaseClient
+          .from("status_films")
+          .delete()
+          .eq("film_id", filmId)
+          .eq("user_id", user.id);
+
+        if (error) {
+          return toast.error(error.message);
+        } else {
+          setListed(false);
+        }
+      }
+    } else {
+      const { error } = await supabaseClient.from("status_films").upsert({
+        user_id: user.id,
+        film_id: filmId,
+        status,
+      });
+
+      if (error) return toast.error(error.message);
+    }
   };
 
   const statusChangeHandler = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => setStatus(e.target.value as Status);
+  ) => {
+    console.log(e.target.value);
+    setStatus(e.target.value as Status);
+  };
 
   return { status, addStatusHandler, statusChangeHandler };
 };

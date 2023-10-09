@@ -131,6 +131,12 @@ const FilmEditorModal = () => {
 
           <div className="flex w-full flex-col items-center justify-center gap-7 px-7 sm:flex-row">
             <FilmStatusButton
+              id="unlist"
+              status={Status.UNLISTED}
+              checked={status === Status.UNLISTED}
+              onChange={statusChangeHandler}
+            />
+            <FilmStatusButton
               id="add"
               src="https://cdn.lordicon.com/ynwbvguu.json"
               status={Status.TO_WATCH_LATER}
