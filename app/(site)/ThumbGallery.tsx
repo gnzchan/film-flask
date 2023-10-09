@@ -69,7 +69,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
                 })`,
               }}
             >
-              <div className="flex h-full cursor-pointer items-center justify-center p-3 backdrop-blur-sm backdrop-brightness-50">
+              <div className="flex h-full cursor-pointer items-center justify-center p-3 backdrop-brightness-50">
                 <p className="truncate text-center text-xs font-semibold text-white md:text-sm ">
                   {film.Title}
                 </p>
