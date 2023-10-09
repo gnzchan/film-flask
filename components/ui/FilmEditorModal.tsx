@@ -77,7 +77,7 @@ const FilmEditorModal = () => {
   return (
     <Modal
       title="Change record"
-      description={`You are currently editing ${cachedFilm.Title}`}
+      description={`You are currently editing: ${cachedFilm.Title}`}
       isOpen={filmEditorModal.isOpen}
       onChange={onToggleModal}
     >
@@ -94,7 +94,7 @@ const FilmEditorModal = () => {
             value={review}
             onChange={reviewChangeHandler}
           />
-          
+
           <div className="flex flex-col items-center justify-center gap-2">
             <label
               htmlFor="imageFiles"
