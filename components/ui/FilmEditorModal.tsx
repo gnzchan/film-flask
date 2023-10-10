@@ -130,7 +130,7 @@ const FilmEditorModal = () => {
             </div>
           </div>
 
-          <div className="flex w-full flex-col items-center justify-center gap-7 px-7 sm:flex-row">
+          <div className="flex w-full flex-col items-center justify-center gap-10 px-7 sm:flex-row sm:gap-7">
             <FilmStatusButton
               id="unlist"
               status={Status.UNLISTED}
@@ -160,7 +160,7 @@ const FilmEditorModal = () => {
             />
           </div>
 
-          <Button className="max-w-sm" type="submit">
+          <Button className="max-w-sm font-medium" type="submit">
             Submit
           </Button>
         </form>
