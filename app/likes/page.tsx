@@ -1,10 +1,13 @@
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 import { getLikedFilms } from "@/actions/getSBFilms";
 import FilmGrid from "@/components/ui/FilmGrid";
 import Header from "@/components/ui/Header";
-import { redirect } from "next/navigation";
+import Await from "@/components/ui/Await";
+import LikesSkeleton from "./LikesSkeleton";
 
 const Likes = async () => {
   const supabase = createServerComponentClient({ cookies });
@@ -16,12 +19,14 @@ const Likes = async () => {
     redirect("/unauthenticated");
   }
 
-  const films = await getLikedFilms();
+  const promise = getLikedFilms();
 
   return (
     <div className="flex h-full flex-col">
       <Header />
-      <FilmGrid films={films} />
+      <Suspense fallback={<LikesSkeleton />}>
+        <Await promise={promise}>{(data) => <FilmGrid films={data} />}</Await>
+      </Suspense>
     </div>
   );
 };

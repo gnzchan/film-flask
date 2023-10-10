@@ -1,12 +1,14 @@
+import { Suspense } from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { getListedFilms } from "@/actions/getSBFilms";
 import Header from "@/components/ui/Header";
-import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
-import SeeMoreContent from "@/components/ui/SeeMoreContent";
 import { Status } from "@/types";
+import Await from "@/components/ui/Await";
+import WatchListGallery from "./WatchListGallery";
+import WatchListGallerySkeleton from "./WatchListGallerySkeleton";
 
 interface WatchlistProps {
   searchParams: {
@@ -24,47 +26,34 @@ const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
     redirect("/unauthenticated");
   }
 
-  const watchLaterFilms = await getListedFilms(Status.TO_WATCH_LATER);
-  const currentWatchFilms = await getListedFilms(Status.CURRENTLY_WATCHING);
-  const finishedWatchFilms = await getListedFilms(Status.FINISHED_WATCHING);
+  const watchLaterFilmsPromise = getListedFilms(Status.TO_WATCH_LATER);
+  const currentWatchFilmsPromise = getListedFilms(Status.CURRENTLY_WATCHING);
+  const finishedWatchFilmsPromise = getListedFilms(Status.FINISHED_WATCHING);
 
-  const content = () => {
-    switch (searchParams.status?.toLowerCase()) {
-      case Status.TO_WATCH_LATER.toLowerCase():
-        return <SeeMoreContent films={watchLaterFilms} />;
-
-      case Status.CURRENTLY_WATCHING.toLowerCase():
-        return <SeeMoreContent films={currentWatchFilms} />;
-
-      case Status.FINISHED_WATCHING.toLowerCase():
-        return <SeeMoreContent films={finishedWatchFilms} />;
-
-      default:
-        return (
-          <>
-            <ScrollableFilmContent
-              title={Status.TO_WATCH_LATER}
-              films={watchLaterFilms}
-            />
-            <ScrollableFilmContent
-              title={Status.CURRENTLY_WATCHING}
-              films={currentWatchFilms}
-            />
-            <ScrollableFilmContent
-              title={Status.FINISHED_WATCHING}
-              films={finishedWatchFilms}
-            />
-          </>
-        );
-    }
-  };
+  const promise = Promise.all([
+    watchLaterFilmsPromise,
+    currentWatchFilmsPromise,
+    finishedWatchFilmsPromise,
+  ]);
 
   return (
     <div className="flex h-full flex-col">
       <Header />
-
       <div className="flex items-center justify-center">
-        <div className="w-full max-w-[1700px]">{content()}</div>
+        <div className="w-full max-w-[1700px]">
+          <Suspense fallback={<WatchListGallerySkeleton />}>
+            <Await promise={promise}>
+              {(data) => (
+                <WatchListGallery
+                  status={searchParams.status?.toLowerCase()}
+                  currentWatchFilms={data[1]}
+                  watchLaterFilms={data[0]}
+                  finishedWatchFilms={data[2]}
+                />
+              )}
+            </Await>
+          </Suspense>
+        </div>
       </div>
     </div>
   );

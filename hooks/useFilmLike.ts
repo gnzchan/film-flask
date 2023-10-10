@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import toast from "react-hot-toast";
 
@@ -7,15 +7,16 @@ import useAuthModal from "./useAuthModal";
 import useFilm from "./useFilm";
 import { OMDBFilm } from "@/types";
 import useFilmEditorModal from "./useFilmEditorModal";
+import { useRouter } from "next/navigation";
 
 const useFilmLike = (film: OMDBFilm) => {
+  const router = useRouter();
   const [liked, setLiked] = useState<boolean | null>(null);
   const { user } = useUser();
   const { supabaseClient } = useSessionContext();
   const authModal = useAuthModal();
   const { listed } = useFilmEditorModal();
   const { fetchListed, addFilmToListHandler } = useFilm(film.imdbID);
-
   const fetchLikeStatus = async () => {
     if (!user) return;
 
@@ -57,6 +58,9 @@ const useFilmLike = (film: OMDBFilm) => {
         return toast.error(error.message);
       } else {
         setLiked(false);
+        startTransition(() => {
+          router.refresh();
+        });
         toast.success("Unliked");
       }
     } else {
@@ -69,6 +73,9 @@ const useFilmLike = (film: OMDBFilm) => {
         return toast.error(error.message);
       } else {
         setLiked(true);
+        startTransition(() => {
+          router.refresh();
+        });
         toast.success("Liked");
       }
     }

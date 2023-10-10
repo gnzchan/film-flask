@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, startTransition } from "react";
 import { useSessionContext } from "@supabase/auth-helpers-react";
 import toast from "react-hot-toast";
 
@@ -6,8 +6,10 @@ import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
 import { Status } from "@/types";
 import useFilmEditorModal from "./useFilmEditorModal";
+import { useRouter } from "next/navigation";
 
 const useFilmStatus = (filmId: string) => {
+  const router = useRouter();
   const [status, setStatus] = useState(Status.UNLISTED);
   const [listed, setListed] = useState(false);
   const { user } = useUser();
@@ -69,6 +71,9 @@ const useFilmStatus = (filmId: string) => {
       });
 
       if (error) return toast.error(error.message);
+      startTransition(() => {
+        router.refresh();
+      });
     }
   };
 
