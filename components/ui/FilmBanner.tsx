@@ -39,7 +39,7 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
           href={`/film/${film?.imdbID}`}
           className="flex w-full items-center justify-center md:justify-start"
         >
-          <Button className="max-w-[360px] bg-white font-medium text-black">
+          <Button className="bg-white font-medium text-black">
             View more info
           </Button>
         </Link>
