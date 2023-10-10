@@ -11,7 +11,7 @@ interface FilmBannerProps {
 const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
   return (
     <div className="mx-8 mb-12 flex h-[65vh] min-h-[450px] overflow-hidden rounded-md bg-black shadow-xl shadow-zinc-950">
-      <div className="flex w-full flex-col items-center justify-center gap-5 px-7 md:items-start">
+      <div className="flex w-full flex-col items-center justify-center gap-5 px-12 md:items-start md:px-7">
         <h1 className="text-xl font-extrabold text-white md:text-4xl">
           {film?.Title}
         </h1>
@@ -35,8 +35,13 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
         <p className="text-justify text-sm font-normal text-gray-400">
           {film?.Plot}
         </p>
-        <Link href={`/film/${film?.imdbID}`}>
-          <Button className="max-w-[240px] font-medium">View more info</Button>
+        <Link
+          href={`/film/${film?.imdbID}`}
+          className="flex w-full items-center justify-center md:justify-start"
+        >
+          <Button className="max-w-[360px] bg-white font-medium text-black">
+            View more info
+          </Button>
         </Link>
       </div>
       <div
