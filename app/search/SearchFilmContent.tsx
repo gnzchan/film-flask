@@ -46,7 +46,11 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   useEffect(() => {
     setFilms(mapToFilm(propFilms));
     setIsAllPagesLoaded(pagesLoaded === totalPages);
-  }, [propFilms]);
+
+    if (films.length === 10 && !isAllPagesLoaded) {
+      loadMoreFilms();
+    }
+  }, [propFilms, isAllPagesLoaded]);
 
   useEffect(() => {
     if (inView) {
