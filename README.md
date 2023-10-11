@@ -21,6 +21,8 @@ Users can keep track of their entertainment journey. To access these features an
 
 https://film-flask.vercel.app/
 
+![](https://s6.gifyu.com/images/S6nAu.gif)
+
 ## Tech Stack
 
 Made using Next.js
@@ -47,7 +49,6 @@ Made using Next.js
 <a href="https://supabase.com/" target="blank">
 <img align="center" src="https://raw.githubusercontent.com/patrickpiccini/devicons/687ea87f66801c164da6793be2de9e95e4e20ca8/icons/light/Supabase.svg" alt="Supabase" height="40" width="40" />
 </a>
-
 <a href="https://git-scm.com/" target="blank">
 <img align="center" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" height="40" width="40" />
 </a>
