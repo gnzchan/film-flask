@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Logo](https://raw.githubusercontent.com/chan-gonzales/film-flask/d72955c89c41f567dfa18d5b7f56e8d743d860bd/public/images/ff-logo.svg)
 
-## Getting Started
+# Film Flask
 
-First, run the development server:
+This web application, built with Next.js and Supabase, allows users to manage their movie watchlist seamlessly. With options to categorize movies as:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Watch Later
+- Currently Watching
+- Finished Watching
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Users can keep track of their entertainment journey. To access these features and save lists, users need to sign in. Additionally, the app enables users to leave reviews and attach images to their movie entries, enhancing the movie-watching experience. Start organizing your movies today with this user-friendly, responsive web app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- See Popular films added by other users
+- Email and Google Authentication
+- Cross platform / Responsive Design
+- Light and Dark mode themes
 
-## Learn More
+## Demo
 
-To learn more about Next.js, take a look at the following resources:
+https://film-flask.vercel.app/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Made using Next.js
 
-## Deploy on Vercel
+**Client:** React, Zustand, TailwindCSS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Server:** Supabase
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<a href="https://www.typescriptlang.org/" target="blank">
+<img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="TypeScript" height="40" width="40" />
+</a>
+<a href="https://reactjs.org/" target="blank">
+<img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="React" height="40" width="40" />
+</a>
+<a href="https://www.w3schools.com/css/" target="blank">
+<img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="Css3" height="40" width="40" />
+</a>
+<a href="https://www.w3.org/html/" target="blank">
+<img align="center" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="Html5" height="40" width="40" />
+</a>
+<a href="https://tailwindcss.com/" target="blank">
+<img align="center" src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="TailWind" height="40" width="40" />
+</a>
+<a href="https://supabase.com/" target="blank">
+<img align="center" src="https://raw.githubusercontent.com/patrickpiccini/devicons/687ea87f66801c164da6793be2de9e95e4e20ca8/icons/light/Supabase.svg" alt="Supabase" height="40" width="40" />
+</a>
+
+<a href="https://git-scm.com/" target="blank">
+<img align="center" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" height="40" width="40" />
+</a>
