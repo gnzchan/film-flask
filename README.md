@@ -22,7 +22,6 @@ Users can keep track of their entertainment journey. To access these features an
 https://film-flask.vercel.app/
 
 ![](https://s6.gifyu.com/images/S6nAu.gif)
-![](https://miro.medium.com/v2/resize:fit:750/1*Gvgtvd6wJqRFxbA_q0iZYQ.gif)
 
 ## Tech Stack
 
