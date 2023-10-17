@@ -8,7 +8,7 @@ This web application, built with Next.js and Supabase, allows users to manage th
 - Currently Watching
 - Finished Watching
 
-Users can keep track of their entertainment journey. To access these features and save lists, users need to sign in. Additionally, the app enables users to leave reviews and attach images to their movie entries, enhancing the movie-watching experience. Start organizing your movies today with this user-friendly, responsive web app.
+Users can keep track of their entertainment journey. To access these features and save lists, users need to sign in. Additionally, the app enables users to leave reviews and attach images to their movie entries, enhancing the movie-tracking experience. Powered by OMDB API, start organizing your movies today with this user-friendly, responsive web app.
 
 ## Features
 
@@ -52,3 +52,7 @@ Made using Next.js
 <a href="https://git-scm.com/" target="blank">
 <img align="center" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="Git" height="40" width="40" />
 </a>
+
+## Post creation comments
+
+I've used OMDB API as source of data for this app. 2 days after deployment, I just discovered TMDB API which provides more valuable movie details than OMDB API. Had I known TMDB API prior development, it would have been nice to use both APIs for this project.
