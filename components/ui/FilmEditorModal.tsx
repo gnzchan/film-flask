@@ -1,5 +1,8 @@
 import toast from "react-hot-toast";
 import { BiImageAdd } from "react-icons/bi";
+import { BsCameraVideoOff, BsEye } from "react-icons/bs";
+import { AiOutlineVideoCameraAdd } from "react-icons/ai";
+import { IoMdDoneAll } from "react-icons/io";
 
 import Modal from "./Modal";
 import FilmStatusButton from "./FilmStatusButton";
@@ -137,27 +140,28 @@ const FilmEditorModal = () => {
           <div className="flex w-full flex-col items-center justify-center gap-10 px-7 sm:flex-row sm:gap-7">
             <FilmStatusButton
               id="unlist"
+              icon={BsCameraVideoOff}
               status={Status.UNLISTED}
               checked={status === Status.UNLISTED}
               onChange={statusChangeHandler}
             />
             <FilmStatusButton
               id="add"
-              src="https://cdn.lordicon.com/ynwbvguu.json"
+              icon={AiOutlineVideoCameraAdd}
               status={Status.TO_WATCH_LATER}
               checked={status === Status.TO_WATCH_LATER}
               onChange={statusChangeHandler}
             />
             <FilmStatusButton
               id="current"
-              src="https://cdn.lordicon.com/ycwlopoz.json"
+              icon={BsEye}
               status={Status.CURRENTLY_WATCHING}
               checked={status === Status.CURRENTLY_WATCHING}
               onChange={statusChangeHandler}
             />
             <FilmStatusButton
               id="complete"
-              src="https://cdn.lordicon.com/tyvtvbcy.json"
+              icon={IoMdDoneAll}
               status={Status.FINISHED_WATCHING}
               checked={status === Status.FINISHED_WATCHING}
               onChange={statusChangeHandler}

@@ -1,7 +1,6 @@
 import SupabaseProvider from "@/components/providers/SupabaseProvider";
 import "./globals.css";
 import type { Metadata } from "next";
-import Script from "next/script";
 
 // change font
 import { Inter } from "next/font/google";
@@ -19,6 +18,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Film Flask",
   description: "A storage for films, made for Jessa",
+  appleWebApp: true,
 };
 
 export default function RootLayout({
@@ -28,12 +28,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <Script src="https://cdn.lordicon.com/bhenfmcm.js"></Script>
-        <meta name="apple-mobile-web-app-capable" content="yes"></meta>
-        <meta name="apple-mobile-web-app-title" content="Film Flask"></meta>
-        <meta name="mobile-web-app-capable" content="yes"></meta>
-      </head>
       <ThemeProvider attribute="class">
         <body className={twMerge("min-w-[340px]", font.className)}>
           <ToasterProvider />

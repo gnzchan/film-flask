@@ -48,6 +48,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     setIsAllPagesLoaded(pagesLoaded === totalPages);
 
     if (films.length === 10 && !isAllPagesLoaded) {
+      console.log("fetch 20");
       loadMoreFilms();
     }
   }, [propFilms, isAllPagesLoaded]);
