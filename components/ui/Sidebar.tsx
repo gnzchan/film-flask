@@ -45,133 +45,122 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div>
-      <aside>
-        <RPSidebar
-          rootStyles={{
-            [`.${sidebarClasses.container}`]: {
-              height: "100vh",
-              transition: "all .5s ease-in-out",
+    <RPSidebar
+      rootStyles={{
+        [`.${sidebarClasses.container}`]: {
+          height: "100vh",
+          transition: "all .5s ease-in-out",
+        },
+
+        [`.${sidebarClasses.backdrop}`]: {
+          background: authModal.isOpen
+            ? "rgb(0, 0, 0, 0)"
+            : "rgb(0, 0, 0, 0.3)",
+        },
+        borderRight: 0,
+      }}
+      toggled={sidebar.isOpen}
+      onBackdropClick={sidebar.onClose}
+      customBreakPoint="1024px"
+      backgroundColor={getColorTheme(theme).sidebar.backgroundColor}
+      className="h-full shadow-xl dark:shadow-zinc-950"
+    >
+      <div className="relative aspect-auto min-h-[90px]">
+        <Image
+          src={getColorTheme(theme).logo}
+          alt="Film Flask Logo"
+          fill
+          priority={true}
+        />
+      </div>
+
+      <Menu
+        className="px-2"
+        menuItemStyles={{
+          button: {
+            "&:hover": {
+              backgroundColor: getColorTheme(theme).menu.hover.backgroundColor,
+              borderRadius: "5px",
             },
-
-            [`.${sidebarClasses.backdrop}`]: {
-              background: authModal.isOpen
-                ? "rgb(0, 0, 0, 0)"
-                : "rgb(0, 0, 0, 0.3)",
+          },
+        }}
+      >
+        <SidebarItem
+          icon={FiSearch}
+          label="Search"
+          href="/search"
+          isActive={activeSidebarItem === "/search"}
+        />
+      </Menu>
+      <div className="pl-2">
+        <p>Menu</p>
+      </div>
+      <Menu
+        className="px-2"
+        menuItemStyles={{
+          button: {
+            "&:hover": {
+              backgroundColor: getColorTheme(theme).menu.hover.backgroundColor,
+              borderRadius: "5px",
             },
-            borderRight: 0,
-          }}
-          toggled={sidebar.isOpen}
-          onBackdropClick={sidebar.onClose}
-          customBreakPoint="1024px"
-          backgroundColor={getColorTheme(theme).sidebar.backgroundColor}
-          className="shadow-xl dark:shadow-zinc-950"
-        >
-          <div className="relative aspect-auto min-h-[90px]">
-            <Image
-              src={getColorTheme(theme).logo}
-              alt="Film Flask Logo"
-              fill
-              priority={true}
-            />
-          </div>
-
-          <Menu
-            className="px-2"
-            menuItemStyles={{
-              button: {
-                "&:hover": {
-                  backgroundColor:
-                    getColorTheme(theme).menu.hover.backgroundColor,
-                  borderRadius: "5px",
-                },
-              },
-            }}
-          >
+          },
+        }}
+      >
+        <SidebarItem
+          icon={FiCompass}
+          label="Browse"
+          href="/"
+          isActive={activeSidebarItem === "/"}
+        />
+        {user && (
+          <>
             <SidebarItem
-              icon={FiSearch}
-              label="Search"
-              href="/search"
-              isActive={activeSidebarItem === "/search"}
+              icon={AiOutlineHeart}
+              label="Likes"
+              href="/likes"
+              isActive={activeSidebarItem === "/likes"}
             />
-          </Menu>
-          <div className="pl-2">
-            <p>Menu</p>
-          </div>
-          <Menu
-            className="px-2"
-            menuItemStyles={{
-              button: {
-                "&:hover": {
-                  backgroundColor:
-                    getColorTheme(theme).menu.hover.backgroundColor,
-                  borderRadius: "5px",
-                },
-              },
-            }}
-          >
             <SidebarItem
-              icon={FiCompass}
-              label="Browse"
-              href="/"
-              isActive={activeSidebarItem === "/"}
+              icon={BsBookmark}
+              label="Watchlist"
+              href="/watchlist"
+              isActive={activeSidebarItem === "/watchlist"}
             />
-            {user && (
-              <>
-                <SidebarItem
-                  icon={AiOutlineHeart}
-                  label="Likes"
-                  href="/likes"
-                  isActive={activeSidebarItem === "/likes"}
-                />
-                <SidebarItem
-                  icon={BsBookmark}
-                  label="Watchlist"
-                  href="/watchlist"
-                  isActive={activeSidebarItem === "/watchlist"}
-                />
-              </>
-            )}
-          </Menu>
+          </>
+        )}
+      </Menu>
 
-          <div className="pl-2">
-            <p>General</p>
-          </div>
-          <Menu
-            className="px-2"
-            menuItemStyles={{
-              button: {
-                "&:hover": {
-                  backgroundColor:
-                    getColorTheme(theme).menu.hover.backgroundColor,
-                  borderRadius: "5px",
-                },
-              },
-            }}
-          >
-            {/* <SidebarItem
+      <div className="pl-2">
+        <p>General</p>
+      </div>
+      <Menu
+        className="px-2"
+        menuItemStyles={{
+          button: {
+            "&:hover": {
+              backgroundColor: getColorTheme(theme).menu.hover.backgroundColor,
+              borderRadius: "5px",
+            },
+          },
+        }}
+      >
+        {/* <SidebarItem
               icon={BsGear}
               label="Settings"
               href="/settings"
               isActive={activeSidebarItem === "/settings"}
             /> */}
-            {user ? (
-              <SidebarItem
-                icon={PiSignOut}
-                label="Logout"
-                onClick={handleLogout}
-              />
-            ) : (
-              <SidebarItem
-                icon={PiSignIn}
-                label="Login"
-                onClick={() => authModal.onOpen("Welcome back")}
-              />
-            )}
-          </Menu>
-        </RPSidebar>
-      </aside>
-    </div>
+        {user ? (
+          <SidebarItem icon={PiSignOut} label="Logout" onClick={handleLogout} />
+        ) : (
+          <SidebarItem
+            icon={PiSignIn}
+            label="Login"
+            onClick={() => authModal.onOpen("Welcome back")}
+          />
+        )}
+      </Menu>
+    </RPSidebar>
   );
 };
 

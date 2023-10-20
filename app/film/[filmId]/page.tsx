@@ -13,7 +13,7 @@ const Film: React.FC<FilmProps> = async ({ params }) => {
   const film = await getFilmById(params.filmId, true);
 
   return (
-    <div className="flex h-full flex-col">
+    <div>
       <Header>
         <FilmTitleBar film={film} />
       </Header>

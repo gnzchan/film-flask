@@ -34,17 +34,17 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Film Flask"></meta>
         <meta name="mobile-web-app-capable" content="yes"></meta>
       </head>
-      <body className={twMerge("min-w-[340px]", font.className)}>
-        <ToasterProvider />
-        <SupabaseProvider>
-          <UserProvider>
-            <ThemeProvider attribute="class">
+      <ThemeProvider attribute="class">
+        <body className={twMerge("min-w-[340px]", font.className)}>
+          <ToasterProvider />
+          <SupabaseProvider>
+            <UserProvider>
               <ModalProvider />
               <MainPage>{children}</MainPage>
-            </ThemeProvider>
-          </UserProvider>
-        </SupabaseProvider>
-      </body>
+            </UserProvider>
+          </SupabaseProvider>
+        </body>
+      </ThemeProvider>
     </html>
   );
 }
