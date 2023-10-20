@@ -12,9 +12,9 @@ interface SearchProps {
 
 const Search: React.FC<SearchProps> = async ({ searchParams }) => {
   const {
-    Search: films,
+    Search: films = [],
     Error: error,
-    totalResults,
+    totalResults = 0,
   } = await getFilmsByTitle(searchParams.title);
 
   return (
@@ -26,7 +26,7 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
         </div>
 
         <SearchFilmContent
-          propFilms={films}
+          propFilms={films ?? []}
           searchString={searchParams.title ?? ""}
           totalPages={getTotalPages(totalResults)}
           error={error}

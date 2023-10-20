@@ -47,7 +47,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     setFilms(mapToFilm(propFilms));
     setIsAllPagesLoaded(pagesLoaded === totalPages);
 
-    if (films?.length === 10 && !isAllPagesLoaded) {
+    if (films.length === 10 && !isAllPagesLoaded) {
       loadMoreFilms();
     }
   }, [propFilms, isAllPagesLoaded]);
@@ -62,19 +62,26 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     await delay(1000);
     const nextPage = pagesLoaded + 1;
 
-    if (nextPage > totalPages - 1) return setIsAllPagesLoaded(true);
+    if (nextPage > totalPages - 1) {
+      setPagesLoaded(nextPage);
+      return setIsAllPagesLoaded(true);
+    }
 
     const { Search: newFilms } = await getFilmsByTitle(
       searchString,
       nextPage + 1,
     );
-    setFilms((prevItems) => [...prevItems, ...mapToFilm(newFilms)]);
+
+    if (newFilms) {
+      setFilms((prevItems) => [...prevItems, ...mapToFilm(newFilms)]);
+    }
+
     setPagesLoaded(nextPage);
   };
 
   const content = isAllPagesLoaded ? (
     <p className="text-md font-normal">
-      {films?.length !== 0
+      {films.length !== 0
         ? "You're all caught up"
         : "Enter movie title or keywords"}
     </p>

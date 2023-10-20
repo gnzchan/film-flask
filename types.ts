@@ -58,8 +58,8 @@ export interface OMDBSearchFilm {
 
 export interface OMDBSearch {
   Response: string;
-  Search: OMDBSearchFilm[];
-  totalResults: number;
+  Search?: OMDBSearchFilm[];
+  totalResults?: number;
   Error?: string;
 }
 
