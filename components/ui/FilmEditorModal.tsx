@@ -34,9 +34,13 @@ const FilmEditorModal = () => {
   const { review, addReviewHandler, reviewChangeHandler } = useFilmReview(
     cachedFilm?.imdbID ?? "",
   );
-  const { status, addStatusHandler, statusChangeHandler } = useFilmStatus(
-    cachedFilm?.imdbID ?? "",
-  );
+  const {
+    status,
+    dateFinished,
+    addStatusHandler,
+    statusChangeHandler,
+    dateFinishedHandler,
+  } = useFilmStatus(cachedFilm?.imdbID ?? "");
   const { fetchReviews } = useFilmReviewsAndImages(cachedFilm?.imdbID ?? "");
 
   if (!cachedFilm) return;
@@ -160,6 +164,18 @@ const FilmEditorModal = () => {
             />
           </div>
 
+          {status === Status.FINISHED_WATCHING && (
+            <div className="flex flex-col items-center justify-center gap-2">
+              <label htmlFor="dateFinished">Date Finished</label>
+              <input
+                id="dateFinished"
+                type="date"
+                className="cursor-pointer rounded-md border p-2 text-neutral-600 transition hover:text-neutral-400"
+                value={dateFinished}
+                onChange={dateFinishedHandler}
+              />
+            </div>
+          )}
           <Button className="max-w-sm font-medium" type="submit">
             Submit
           </Button>

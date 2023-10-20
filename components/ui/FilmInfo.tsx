@@ -111,6 +111,9 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             </p>
           ))}
         </div>
+        <div>
+          
+        </div>
         <div className="flex items-center justify-center">
           <Button onClick={handleClick} className="font-medium">
             Change status

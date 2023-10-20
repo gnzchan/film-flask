@@ -12,6 +12,7 @@ const useFilmStatus = (filmId: string) => {
   const router = useRouter();
   const [status, setStatus] = useState(Status.UNLISTED);
   const [listed, setListed] = useState(false);
+  const [dateFinished, setDateFinished] = useState<string>("");
   const { user } = useUser();
   const { supabaseClient } = useSessionContext();
   const authModal = useAuthModal();
@@ -22,13 +23,14 @@ const useFilmStatus = (filmId: string) => {
 
     const { data } = await supabaseClient
       .from("status_films")
-      .select("status")
+      .select("status, date_finished")
       .eq("film_id", filmId)
       .eq("user_id", user.id)
       .maybeSingle();
 
     if (data) {
       setStatus(data.status);
+      setDateFinished(data.date_finished);
       setListed(true);
     } else {
       setStatus(Status.UNLISTED);
@@ -67,6 +69,7 @@ const useFilmStatus = (filmId: string) => {
       const { error } = await supabaseClient.from("status_films").upsert({
         user_id: user.id,
         film_id: filmId,
+        date_finished: status === Status.FINISHED_WATCHING ? dateFinished : "",
         status,
       });
 
@@ -81,7 +84,16 @@ const useFilmStatus = (filmId: string) => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => setStatus(e.target.value as Status);
 
-  return { status, addStatusHandler, statusChangeHandler };
+  const dateFinishedHandler = (e: ChangeEvent<HTMLInputElement>) =>
+    setDateFinished(e.target.value);
+
+  return {
+    status,
+    dateFinished,
+    addStatusHandler,
+    statusChangeHandler,
+    dateFinishedHandler,
+  };
 };
 
 export default useFilmStatus;
