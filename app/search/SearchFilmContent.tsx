@@ -81,7 +81,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   };
 
   const content = isAllPagesLoaded ? (
-    <p className="text-md font-normal">
+    <p className="text-md font-normal text-gray-400">
       {films.length !== 0
         ? "You're all caught up"
         : "Enter movie title or keywords"}
