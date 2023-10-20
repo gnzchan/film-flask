@@ -47,7 +47,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     setFilms(mapToFilm(propFilms));
     setIsAllPagesLoaded(pagesLoaded === totalPages);
 
-    if (films.length === 10 && !isAllPagesLoaded) {
+    if (films?.length === 10 && !isAllPagesLoaded) {
       loadMoreFilms();
     }
   }, [propFilms, isAllPagesLoaded]);
@@ -74,7 +74,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
 
   const content = isAllPagesLoaded ? (
     <p className="text-md font-normal">
-      {films.length !== 0
+      {films?.length !== 0
         ? "You're all caught up"
         : "Enter movie title or keywords"}
     </p>
