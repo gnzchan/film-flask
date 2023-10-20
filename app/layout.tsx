@@ -28,8 +28,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ThemeProvider attribute="class">
-        <body className={twMerge("min-w-[340px]", font.className)}>
+      <body className={twMerge("min-w-[340px]", font.className)}>
+        <ThemeProvider attribute="class">
           <ToasterProvider />
           <SupabaseProvider>
             <UserProvider>
@@ -37,8 +37,8 @@ export default function RootLayout({
               <MainPage>{children}</MainPage>
             </UserProvider>
           </SupabaseProvider>
-        </body>
-      </ThemeProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

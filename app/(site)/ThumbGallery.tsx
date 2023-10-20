@@ -58,7 +58,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
           <SwiperSlide key={film.imdbID}>
             <div
               className={twMerge(
-                "m-8 mt-2 h-[15vh] min-h-[100px] w-full overflow-hidden rounded-md bg-cover bg-center shadow-xl shadow-zinc-950 transition",
+                "m-8 mt-2 h-[15vh] min-h-[100px] w-full overflow-hidden rounded-md bg-cover bg-center shadow-lg shadow-zinc-950 transition",
                 activeIndex === i && "scale-105",
               )}
               style={{
