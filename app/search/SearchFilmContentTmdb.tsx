@@ -6,33 +6,32 @@ import { useInView } from "react-intersection-observer";
 import FilmGrid from "../../components/ui/FilmGrid";
 import Spinner from "../../components/ui/Spinner";
 
-import { Film, OMDBSearchFilm } from "@/types";
+import { Film, OMDBSearchFilm, TMDBFilm, TMDBSearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
-import getFilmsByTitle from "@/actions/getFilmsByTitle";
+import { getFilmsTMDB } from "@/actions/getFilmsByTitle";
+import FilmGridTMDB from "@/components/ui/FilmGridTMDB";
 
-interface SearchFilmContentProps {
-  propFilms: OMDBSearchFilm[];
+interface SearchFilmContentTmdbProps {
+  propFilms: TMDBSearchFilm[];
   searchString: string;
   totalPages: number;
-  error: string | undefined;
 }
 
-const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
+const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   propFilms,
   searchString,
   totalPages,
-  error,
 }) => {
-  const mapToFilm = (omdbFilms: OMDBSearchFilm[]) =>
-    omdbFilms?.map((omdbFilm) => ({
-      id: omdbFilm.imdbID,
-      title: omdbFilm.Title,
-      poster_url: omdbFilm.Poster,
-      year: omdbFilm.Year,
-      category: omdbFilm.Type,
+  const mapToFilm = (tmdbFilms: TMDBSearchFilm[]) =>
+    tmdbFilms?.map((tmdbFilm) => ({
+      id: tmdbFilm.id,
+      title: tmdbFilm.name,
+      poster_url: tmdbFilm.poster_path,
+      year: tmdbFilm.release_date ?? tmdbFilm.first_air_date,
+      category: tmdbFilm.media_type,
     }));
 
-  const [films, setFilms] = useState<Film[]>(mapToFilm(propFilms));
+  const [films, setFilms] = useState<TMDBFilm[]>(mapToFilm(propFilms));
   const [pagesLoaded, setPagesLoaded] = useState(0);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(true);
   const { ref, inView } = useInView();
@@ -45,18 +44,17 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
 
   useEffect(() => {
     setFilms(mapToFilm(propFilms));
-  }, [propFilms]);
-
-  useEffect(() => {
     setIsAllPagesLoaded(pagesLoaded === totalPages);
 
     if (films.length === 10 && !isAllPagesLoaded) {
+      // console.log("fetch 20");
       loadMoreFilms();
     }
   }, [propFilms, isAllPagesLoaded]);
 
   useEffect(() => {
     if (inView) {
+      console.log("hehe");
       loadMoreFilms();
     }
   }, [inView]);
@@ -70,7 +68,7 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
       return setIsAllPagesLoaded(true);
     }
 
-    const { Search: newFilms } = await getFilmsByTitle(
+    const { results: newFilms } = await getFilmsTMDB(
       searchString,
       nextPage + 1,
     );
@@ -92,20 +90,20 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
     <Spinner />
   );
 
-  if (error) {
-    return (
-      <div className="my-5 flex items-center justify-center">
-        <p className="text-md font-normal">
-          We&apos;re finding it difficult to find what you&apos;re searching.{" "}
-          {error}
-        </p>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="my-5 flex items-center justify-center">
+  //       <p className="text-md font-normal">
+  //         We&apos;re finding it difficult to find what you&apos;re searching.{" "}
+  //         {error}
+  //       </p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
-      <FilmGrid films={films} />
+      <FilmGridTMDB films={films} />
       <div className="my-5 flex items-center justify-center" ref={ref}>
         {content}
       </div>
@@ -113,4 +111,4 @@ const SearchFilmContent: React.FC<SearchFilmContentProps> = ({
   );
 };
 
-export default SearchFilmContent;
+export default SearchFilmContentTmdb;
