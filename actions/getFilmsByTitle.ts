@@ -1,9 +1,9 @@
 "use server";
 
 import { getData } from "@/libs/helpers";
-import { OMDBSearch } from "@/types";
+import { OMDBSearch, TMDBSearch } from "@/types";
 
-const getFilmsByTitle = async (
+export const getFilmsByTitle = async (
   title: string,
   page: number = 1,
 ): Promise<OMDBSearch> => {
@@ -24,4 +24,26 @@ const getFilmsByTitle = async (
   return films;
 };
 
-export default getFilmsByTitle;
+export const getFilmsTMDB = async (
+  title: string,
+  page: number = 1,
+): Promise<TMDBSearch> => {
+  if (title === "" || title === undefined) {
+    return {
+      page: 0,
+      results: [],
+      total_pages: 0,
+      total_results: 0,
+    };
+  }
+
+  const tmdbKey = process.env.TMDB_KEY;
+  const formattedTitleForUrl = title.replaceAll(" ", "%20");
+  const url = `https://api.themoviedb.org/3/search/multi?query=${formattedTitleForUrl}&api_key=${tmdbKey}&include_adult=false&language=en-US&page=${page}`;
+
+  const films = await getData<TMDBSearch>(url);
+
+  return films;
+};
+
+// export default getFilmsByTitle;

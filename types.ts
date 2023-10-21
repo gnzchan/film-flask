@@ -44,6 +44,48 @@ export interface OMDBFilm {
   Response: string;
 }
 
+export interface TMDBSearch {
+  page: number;
+  results: TMDBSearchFilm[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface TMDBSearchFilm {
+  adult: boolean;
+  backdrop_path: string;
+  // "/sN5cqyipK3OJnTFLcLnwD9CPXCe.jpg";
+  id: number;
+  // 204243;
+  name: string;
+  // "Robot";
+  title: string;
+  original_language: string;
+  // "en";
+  original_name: string;
+  original_title: string;
+  // "Robot";
+  overview: string;
+  poster_path: string;
+  // "/46nFEPK36LxpdW58ixiHBglzTnG.jpg";
+  media_type: string;
+  //  "tv";
+  genre_ids: number[];
+  // [18];
+  popularity: boolean;
+  // 1.4;
+  first_air_date: string;
+  // "2021-12-24";
+  release_date: string;
+  // "2016-01-27",
+  vote_average: number;
+  // 0;
+  vote_count: number;
+  //  0;
+  origin_country: string[];
+  // ["IN"];
+}
+
 export interface Review {
   user_id: string;
   review: string;
@@ -73,6 +115,15 @@ export interface Film {
   poster_url: string;
   genre?: string;
   category?: FilmCategory;
+  year?: string;
+  language?: string;
+}
+
+export interface TMDBFilm {
+  id: number;
+  title: string;
+  poster_url: string;
+  category: string;
   year?: string;
   language?: string;
 }
