@@ -1,10 +1,10 @@
 import FilmItem from "./FilmItem";
 
-import { Film, TMDBFilm } from "@/types";
+import { Film } from "@/types";
 import FilmItemTMDB from "./FilmItemTMDB";
 
 interface FilmGridTMDBProps {
-  films: TMDBFilm[];
+  films: Film[];
 }
 
 const FilmGridTMDB: React.FC<FilmGridTMDBProps> = ({ films }) => {

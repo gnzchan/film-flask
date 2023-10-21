@@ -5,12 +5,12 @@ import qs from "query-string";
 
 import useDebounce from "@/hooks/useDebounce";
 import { useRouter } from "next/navigation";
-import { FilmTMDBCategory } from "@/types";
+import { FilmCategory } from "@/types";
 
 const SearchInput = () => {
   const router = useRouter();
   const [searchString, setSearchString] = useState("");
-  const [searchCategory, setSearchCategory] = useState(FilmTMDBCategory.MOVIE);
+  const [searchCategory, setSearchCategory] = useState(FilmCategory.MOVIE);
   const debouncedValue = useDebounce(searchString.trim(), 800);
 
   useEffect(() => {
@@ -42,26 +42,26 @@ const SearchInput = () => {
 
       <input
         type="radio"
-        id={FilmTMDBCategory.MOVIE}
+        id={FilmCategory.MOVIE}
         name="film_category"
-        value={FilmTMDBCategory.MOVIE}
-        checked={searchCategory === FilmTMDBCategory.MOVIE}
+        value={FilmCategory.MOVIE}
+        checked={searchCategory === FilmCategory.MOVIE}
         onChange={(e) =>
-          setSearchCategory(e.currentTarget.value as FilmTMDBCategory)
+          setSearchCategory(e.currentTarget.value as FilmCategory)
         }
       />
-      <label htmlFor={FilmTMDBCategory.MOVIE}>Movie</label>
+      <label htmlFor={FilmCategory.MOVIE}>Movie</label>
       <input
         type="radio"
-        id={FilmTMDBCategory.TV}
+        id={FilmCategory.TV}
         name="film_category"
-        value={FilmTMDBCategory.TV}
-        checked={searchCategory === FilmTMDBCategory.TV}
+        value={FilmCategory.TV}
+        checked={searchCategory === FilmCategory.TV}
         onChange={(e) =>
-          setSearchCategory(e.currentTarget.value as FilmTMDBCategory)
+          setSearchCategory(e.currentTarget.value as FilmCategory)
         }
       />
-      <label htmlFor={FilmTMDBCategory.TV}>TV</label>
+      <label htmlFor={FilmCategory.TV}>TV</label>
     </div>
   );
 };

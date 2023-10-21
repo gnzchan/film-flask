@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import { Film, TMDBFilm } from "@/types";
+import { Film } from "@/types";
 
 interface FilmItemTMDBProps {
-  film: TMDBFilm;
+  film: Film;
 }
 
 const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {

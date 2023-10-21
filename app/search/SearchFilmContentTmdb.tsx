@@ -6,13 +6,7 @@ import { useInView } from "react-intersection-observer";
 import FilmGrid from "../../components/ui/FilmGrid";
 import Spinner from "../../components/ui/Spinner";
 
-import {
-  Film,
-  FilmTMDBCategory,
-  OMDBSearchFilm,
-  TMDBFilm,
-  TMDBSearchFilm,
-} from "@/types";
+import { Film, FilmCategory, TMDBSearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
 import { getFilmsTMDB } from "@/actions/getFilmsByTitle";
 import FilmGridTMDB from "@/components/ui/FilmGridTMDB";
@@ -20,7 +14,7 @@ import FilmGridTMDB from "@/components/ui/FilmGridTMDB";
 interface SearchFilmContentTmdbProps {
   propFilms: TMDBSearchFilm[];
   searchString: string;
-  category: FilmTMDBCategory;
+  category: FilmCategory;
   totalPages: number;
 }
 
@@ -39,7 +33,7 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
       category: tmdbFilm.media_type,
     }));
 
-  const [films, setFilms] = useState<TMDBFilm[]>(mapToFilm(propFilms));
+  const [films, setFilms] = useState<Film[]>(mapToFilm(propFilms));
   const [pagesLoaded, setPagesLoaded] = useState(0);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(true);
   const { ref, inView } = useInView();
