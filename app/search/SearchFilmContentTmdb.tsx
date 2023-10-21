@@ -25,14 +25,14 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   const mapToFilm = (tmdbFilms: TMDBSearchFilm[]) =>
     tmdbFilms?.map((tmdbFilm) => ({
       id: tmdbFilm.id,
-      title: tmdbFilm.title ?? tmdbFilm.name,
+      title: tmdbFilm.name,
       poster_url: tmdbFilm.poster_path,
       year: tmdbFilm.release_date ?? tmdbFilm.first_air_date,
       category: tmdbFilm.media_type,
     }));
 
   const [films, setFilms] = useState<TMDBFilm[]>(mapToFilm(propFilms));
-  const [pagesLoaded, setPagesLoaded] = useState(1);
+  const [pagesLoaded, setPagesLoaded] = useState(0);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(true);
   const { ref, inView } = useInView();
 
@@ -46,20 +46,15 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
     setFilms(mapToFilm(propFilms));
     setIsAllPagesLoaded(pagesLoaded === totalPages);
 
-    // console.log(pagesLoaded);
-    // console.log(totalPages);
-    console.log(pagesLoaded === totalPages);
-
-    // if (films.length === 20 && !isAllPagesLoaded) {
-    //   console.log("ran here");
-    //   loadMoreFilms();
-    // }
+    if (films.length === 10 && !isAllPagesLoaded) {
+      // console.log("fetch 20");
+      loadMoreFilms();
+    }
   }, [propFilms, isAllPagesLoaded]);
-
-  console.log(pagesLoaded);
 
   useEffect(() => {
     if (inView) {
+      console.log("hehe");
       loadMoreFilms();
     }
   }, [inView]);
@@ -68,7 +63,7 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
     await delay(1000);
     const nextPage = pagesLoaded + 1;
 
-    if (nextPage > totalPages) {
+    if (nextPage > totalPages - 1) {
       setPagesLoaded(nextPage);
       return setIsAllPagesLoaded(true);
     }
