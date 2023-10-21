@@ -4,10 +4,12 @@ import SearchFilmInput from "@/components/ui/SearchFilmInput";
 import { getTotalPages } from "@/libs/helpers";
 import SearchFilmContent from "./SearchFilmContent";
 import SearchFilmContentTmdb from "./SearchFilmContentTmdb";
+import { FilmTMDBCategory } from "@/types";
 
 interface SearchProps {
   searchParams: {
     title: string;
+    category: FilmTMDBCategory;
   };
 }
 
@@ -18,8 +20,11 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
   //   totalResults = 0,
   // } = await getFilmsByTitle(searchParams.title);
 
-  const response = await getFilmsTMDB(searchParams.title);
-  console.log(response);
+  const response = await getFilmsTMDB(
+    searchParams.category,
+    searchParams.title,
+    1,
+  );
   return (
     <div>
       <Header>
@@ -31,6 +36,7 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
         <SearchFilmContentTmdb
           propFilms={response.results}
           searchString={searchParams.title ?? ""}
+          category={searchParams.category}
           totalPages={response.total_pages}
         />
         {/* <SearchFilmContent

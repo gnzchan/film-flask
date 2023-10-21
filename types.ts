@@ -6,6 +6,11 @@ export enum FilmCategory {
   SERIES = "series",
 }
 
+export enum FilmTMDBCategory {
+  MOVIE = "movie",
+  TV = "tv",
+}
+
 export enum Status {
   UNLISTED = "Unlisted",
   TO_WATCH_LATER = "Watch later",
