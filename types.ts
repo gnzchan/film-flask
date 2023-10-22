@@ -67,7 +67,6 @@ export interface TMDBSearchFilm {
   original_title: string;
   overview: string;
   poster_path: string;
-  media_type: string;
   genre_ids: number[];
   popularity: boolean;
   first_air_date: string;
@@ -76,7 +75,6 @@ export interface TMDBSearchFilm {
   vote_count: number;
   origin_country: string[];
 }
-
 export interface Review {
   user_id: string;
   review: string;

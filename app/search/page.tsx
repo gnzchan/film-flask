@@ -14,12 +14,6 @@ interface SearchProps {
 }
 
 const Search: React.FC<SearchProps> = async ({ searchParams }) => {
-  // const {
-  //   Search: films = [],
-  //   Error: error,
-  //   totalResults = 0,
-  // } = await getFilmsByTitle(searchParams.title);
-
   const response = await getFilmsByTitle(
     searchParams.category,
     searchParams.title,

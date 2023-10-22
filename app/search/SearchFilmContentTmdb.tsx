@@ -8,7 +8,7 @@ import Spinner from "../../components/ui/Spinner";
 
 import { Film, FilmCategory, TMDBSearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
-import { getFilmsTMDB } from "@/actions/getFilmsByTitle";
+import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
 import FilmGridTMDB from "@/components/ui/FilmGridTMDB";
 
 interface SearchFilmContentTmdbProps {
@@ -24,16 +24,16 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   category,
   totalPages,
 }) => {
-  const mapToFilm = (tmdbFilms: TMDBSearchFilm[]) =>
-    tmdbFilms?.map((tmdbFilm) => ({
-      id: tmdbFilm.id,
-      title: tmdbFilm.title ?? tmdbFilm.name,
-      poster_url: tmdbFilm.poster_path,
-      year: tmdbFilm.release_date ?? tmdbFilm.first_air_date,
-      category: tmdbFilm.media_type,
-    }));
+  // const mapToFilm = (tmdbFilms: TMDBSearchFilm[]) =>
+  //   tmdbFilms?.map((tmdbFilm) => ({
+  //     id: tmdbFilm.id,
+  //     title: tmdbFilm.title ?? tmdbFilm.name,
+  //     poster_url: tmdbFilm.poster_path,
+  //     year: tmdbFilm.release_date ?? tmdbFilm.first_air_date,
+  //     category: tmdbFilm.media_type,
+  //   }));
 
-  const [films, setFilms] = useState<Film[]>(mapToFilm(propFilms));
+  const [films, setFilms] = useState<TMDBSearchFilm[]>(propFilms);
   const [pagesLoaded, setPagesLoaded] = useState(0);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(true);
   const { ref, inView } = useInView();
@@ -47,7 +47,7 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   useEffect(() => {
     if (propFilms.length !== 0) {
       setPagesLoaded(1);
-      setFilms(mapToFilm(propFilms));
+      setFilms(propFilms);
     }
   }, [propFilms]);
 
@@ -70,14 +70,14 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
       return setIsAllPagesLoaded(true);
     }
 
-    const { results: newFilms } = await getFilmsTMDB(
+    const { results: newFilms } = await getFilmsByTitle(
       category,
       searchString,
       nextPage,
     );
 
     if (newFilms) {
-      setFilms((prevItems) => [...prevItems, ...mapToFilm(newFilms)]);
+      setFilms((prevItems) => [...prevItems, ...newFilms]);
     }
 
     setPagesLoaded(nextPage);
