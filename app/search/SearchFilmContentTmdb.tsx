@@ -106,7 +106,7 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
 
   return (
     <>
-      <FilmGridTMDB films={films} />
+      <FilmGridTMDB films={films} category={category} />
       <div className="my-5 flex items-center justify-center">{content}</div>
     </>
   );
