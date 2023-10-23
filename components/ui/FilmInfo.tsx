@@ -55,8 +55,6 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
     return filmEditorModal.onOpen();
   };
 
-  console.log(film);
-
   return (
     <div className="flex h-full flex-col">
       <div
