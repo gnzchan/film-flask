@@ -23,7 +23,7 @@ const useFilmImages = (
   const { fetchImage } = useCommonFunctions();
 
   const fetchImages = async () => {
-    if (!user) return;
+    if (!user || !filmId || !filmCategory) return;
 
     const { data } = await supabaseClient
       .from("image_films")
@@ -53,7 +53,7 @@ const useFilmImages = (
 
   useEffect(() => {
     fetchImages();
-  }, [user, filmId]);
+  }, [user, filmId, filmCategory]);
 
   const addImageForUploadHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const newImage = e.target.files?.[0];

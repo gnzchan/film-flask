@@ -13,6 +13,8 @@ const useFilm = (
   const { supabaseClient } = useSessionContext();
 
   const fetchListed = async () => {
+    if (!id || !category) return;
+
     const { data } = await supabaseClient
       .from("films")
       .select("*")
@@ -25,7 +27,7 @@ const useFilm = (
 
   useEffect(() => {
     fetchListed();
-  }, []);
+  }, [id, category]);
 
   const addFilmToListHandler = async (film: TMDBFilm) => {
     const { error } = await supabaseClient.from("films").insert({

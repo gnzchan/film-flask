@@ -15,9 +15,11 @@ const useFilmReviewsAndImages = (
 
   useEffect(() => {
     fetchReviews();
-  }, []);
+  }, [filmId, filmCategory]);
 
   const fetchReviews = async () => {
+    if (!filmId || !filmCategory) return;
+
     const reviews = await fetchFilmReviews();
     const images = await fetchFilmImages();
 

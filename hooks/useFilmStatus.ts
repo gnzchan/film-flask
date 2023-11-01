@@ -22,7 +22,7 @@ const useFilmStatus = (
   const filmEditorModal = useFilmEditorModal();
 
   const fetchStatus = async () => {
-    if (!user) return;
+    if (!user || !filmId || !filmCategory) return;
 
     const { data } = await supabaseClient
       .from("status_films")
@@ -43,7 +43,7 @@ const useFilmStatus = (
 
   useEffect(() => {
     fetchStatus();
-  }, [user, filmId]);
+  }, [user, filmId, filmCategory]);
 
   useEffect(() => {
     if (!filmEditorModal.isOpen) fetchStatus();

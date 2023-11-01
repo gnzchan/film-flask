@@ -18,7 +18,7 @@ const useFilmReview = (
   const filmEditorModal = useFilmEditorModal();
 
   const fetchReview = async () => {
-    if (!user) return;
+    if (!user || !filmId || !filmCategory) return;
 
     const { data } = await supabaseClient
       .from("review_films")
@@ -37,7 +37,7 @@ const useFilmReview = (
 
   useEffect(() => {
     fetchReview();
-  }, [user, filmId]);
+  }, [user, filmId, filmCategory]);
 
   useEffect(() => {
     if (!filmEditorModal.isOpen) fetchReview();
