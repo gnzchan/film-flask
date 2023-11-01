@@ -1,5 +1,6 @@
 import { getData } from "@/libs/helpers";
 import { CreditsResponse } from "@/types";
+import { NextResponse } from "next/server";
 
 export const GET = async (request: Request) => {
   const { searchParams } = new URL(request.url);
@@ -12,5 +13,5 @@ export const GET = async (request: Request) => {
 
   const casts = await getData<CreditsResponse>(url);
 
-  return Response.json(casts);
+  return NextResponse.json(casts);
 };
