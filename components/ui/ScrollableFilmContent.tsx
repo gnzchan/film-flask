@@ -72,7 +72,11 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
       ) : (
         <div className="no-scrollbar flex h-[200px] w-full snap-x snap-mandatory overflow-auto">
           {films.map((film, i) => (
-            <div className="ml-3 aspect-[3/4] h-full" ref={setItemRef(i)}>
+            <div
+              key={film.id}
+              className="ml-3 aspect-[3/4] h-full"
+              ref={setItemRef(i)}
+            >
               <FilmItemTMDB film={film} />
             </div>
           ))}

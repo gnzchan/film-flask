@@ -22,6 +22,7 @@ const FilmCarousell: React.FC<FilmCarousellProps> = ({
       <div className="no-scrollbar flex h-[200px] w-full snap-x snap-mandatory overflow-auto">
         {films.map((film) => (
           <div
+            key={film.id}
             className="ml-3 aspect-[3/4] h-full"
             onClick={() => handleSetFilm(film)}
           >
