@@ -5,7 +5,10 @@ import { ImageReview, CommentReview } from "@/types";
 import useFilmEditorModal from "./useFilmEditorModal";
 import useCommonFunctions from "./useCommonFunctions";
 
-const useFilmReviewsAndImages = (filmId: string) => {
+const useFilmReviewsAndImages = (
+  filmId: number | undefined,
+  filmCategory: string | undefined,
+) => {
   const { supabaseClient } = useSessionContext();
   const { fetchImage } = useCommonFunctions();
   const { setReviewsAndImages } = useFilmEditorModal();
@@ -24,19 +27,25 @@ const useFilmReviewsAndImages = (filmId: string) => {
   const fetchFilmReviews = async () => {
     const { data } = await supabaseClient
       .from("review_films")
-      .select("*, users(*)")
-      .eq("film_id", filmId);
+      .select(
+        "review, created_at, updated_at, user:users!inner(*), films!inner()",
+      )
+      .eq("film_id", filmId)
+      .eq("films.category", filmCategory)
+      .returns<CommentReview[]>();
 
-    return data as CommentReview[];
+    return data ?? [];
   };
 
   const fetchFilmImages = async () => {
     const { data } = await supabaseClient
       .from("image_films")
-      .select("*, users(*)")
-      .eq("film_id", filmId);
+      .select("*, user:users!inner(*), films!inner()")
+      .eq("film_id", filmId)
+      .eq("films.category", filmCategory)
+      .returns<ImageReview[]>();
 
-    return data as ImageReview[];
+    return data ?? [];
   };
 
   const mergeCommentAndImageReview = async (
@@ -47,18 +56,18 @@ const useFilmReviewsAndImages = (filmId: string) => {
     const imageReviewMap = new Map<string, File[]>();
 
     for (const imageReview of imageReviews) {
-      const { user_id, image_path } = imageReview;
-      if (!imageReviewMap.has(user_id)) {
-        imageReviewMap.set(user_id, []);
+      const { user, image_path } = imageReview;
+      if (!imageReviewMap.has(user.id)) {
+        imageReviewMap.set(user.id, []);
       }
       const imageFile = await fetchImage(image_path);
-      imageReviewMap.get(user_id)?.push(imageFile);
+      imageReviewMap.get(user.id)?.push(imageFile);
     }
 
     // Merge ImageReviews into corresponding Reviews
     const mergedReviews = reviews.map((review) => ({
       ...review,
-      image_path: imageReviewMap.get(review.user_id) || [],
+      image_path: imageReviewMap.get(review.user.id) || [],
     }));
 
     setReviewsAndImages(mergedReviews);

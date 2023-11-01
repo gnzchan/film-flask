@@ -1,12 +1,12 @@
 import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
 import SeeMoreContent from "@/components/ui/SeeMoreContent";
-import { Film, Status } from "@/types";
+import { Status, TMDBFilm } from "@/types";
 
 interface WatchListGalleryProps {
   status?: string;
-  watchLaterFilms: Film[];
-  currentWatchFilms: Film[];
-  finishedWatchFilms: Film[];
+  watchLaterFilms: TMDBFilm[];
+  currentWatchFilms: TMDBFilm[];
+  finishedWatchFilms: TMDBFilm[];
 }
 
 const WatchListGallery: React.FC<WatchListGalleryProps> = ({

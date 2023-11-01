@@ -46,8 +46,8 @@ const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
               {(data) => (
                 <WatchListGallery
                   status={searchParams.status?.toLowerCase()}
-                  currentWatchFilms={data[1]}
                   watchLaterFilms={data[0]}
+                  currentWatchFilms={data[1]}
                   finishedWatchFilms={data[2]}
                 />
               )}

@@ -5,19 +5,13 @@ import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/navigation";
 import { HiArrowRight } from "react-icons/hi";
 import qs from "query-string";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import { FreeMode, Navigation } from "swiper/modules";
 
-import FilmItem from "./FilmItem";
-
-import { Film } from "@/types";
+import { TMDBFilm } from "@/types";
+import FilmItemTMDB from "./FilmItemTMDB";
 
 interface ScrollableFilmContentProps {
   title: string;
-  films: Film[];
+  films: TMDBFilm[];
 }
 
 const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
@@ -56,8 +50,8 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
   };
 
   return (
-    <div className="my-2">
-      <div className="my-1 flex h-10 items-center justify-between px-5 transition">
+    <div className="h-full snap-end snap-always pb-5">
+      <div className="m-3 flex items-center justify-between py-3">
         <h1 className="text-2xl font-light text-neutral-800 dark:text-white">
           {title}
         </h1>
@@ -71,31 +65,17 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
           </button>
         )}
       </div>
-      {films.length !== 0 ? (
-        <Swiper
-          navigation={true}
-          freeMode={true}
-          spaceBetween={20}
-          breakpoints={{
-            0: { slidesPerView: 1.5 },
-            500: { slidesPerView: 2.5 },
-            850: { slidesPerView: 3.5 },
-            1120: { slidesPerView: 4.5 },
-          }}
-          modules={[FreeMode, Navigation]}
-          className="mySwiper"
-        >
-          {films.map((film, i) => (
-            <SwiperSlide key={film.id}>
-              <div ref={setItemRef(i)} className="mx-3 mb-8 mt-2">
-                <FilmItem film={film} />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      {films.length === 0 ? (
+        <p className="text-center text-sm font-light text-neutral-400  dark:text-neutral-300">
+          No films for status {title}
+        </p>
       ) : (
-        <div className="flex h-full w-full items-center justify-center">
-          <h1 className="text-l font-light text-neutral-800">no films found</h1>
+        <div className="no-scrollbar flex h-[200px] w-full snap-x snap-mandatory overflow-auto">
+          {films.map((film, i) => (
+            <div className="ml-3 aspect-[3/4] h-full" ref={setItemRef(i)}>
+              <FilmItemTMDB film={film} />
+            </div>
+          ))}
         </div>
       )}
     </div>

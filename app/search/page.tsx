@@ -1,22 +1,22 @@
-import getFilmsByTitle from "@/actions/getFilmsByTitle";
+import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
 import SearchFilmInput from "@/components/ui/SearchFilmInput";
-import { getTotalPages } from "@/libs/helpers";
-import SearchFilmContent from "./SearchFilmContent";
+import SearchFilmContentTmdb from "./SearchFilmContentTmdb";
+import { FilmCategory } from "@/types";
 
 interface SearchProps {
   searchParams: {
     title: string;
+    category: FilmCategory;
   };
 }
 
 const Search: React.FC<SearchProps> = async ({ searchParams }) => {
-  const {
-    Search: films = [],
-    Error: error,
-    totalResults = 0,
-  } = await getFilmsByTitle(searchParams.title);
-
+  const response = await getFilmsByTitle(
+    searchParams.category,
+    searchParams.title,
+    1,
+  );
   return (
     <div>
       <Header>
@@ -24,12 +24,11 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
           <h1 className="text-3xl font-semibold">Search</h1>
           <SearchFilmInput />
         </div>
-
-        <SearchFilmContent
-          propFilms={films ?? []}
+        <SearchFilmContentTmdb
+          propFilms={response.results}
           searchString={searchParams.title ?? ""}
-          totalPages={getTotalPages(totalResults)}
-          error={error}
+          category={searchParams.category}
+          totalPages={response.total_pages}
         />
       </Header>
     </div>

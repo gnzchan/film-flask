@@ -4,7 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ["m.media-amazon.com"],
+    domains: ["m.media-amazon.com", "image.tmdb.org"],
   },
 };
 

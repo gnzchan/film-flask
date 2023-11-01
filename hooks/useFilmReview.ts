@@ -5,8 +5,12 @@ import toast from "react-hot-toast";
 import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
 import useFilmEditorModal from "./useFilmEditorModal";
+import { FilmCategory } from "@/types";
 
-const useFilmReview = (filmId: string) => {
+const useFilmReview = (
+  filmId: number | undefined,
+  filmCategory: FilmCategory | undefined,
+) => {
   const [review, setReview] = useState("");
   const { user } = useUser();
   const { supabaseClient } = useSessionContext();
@@ -18,10 +22,11 @@ const useFilmReview = (filmId: string) => {
 
     const { data } = await supabaseClient
       .from("review_films")
-      .select("review")
+      .select("review, films!inner()")
       .eq("film_id", filmId)
       .eq("user_id", user.id)
-      .maybeSingle();
+      .eq("films.category", filmCategory)
+      .maybeSingle<{ review: string }>();
 
     if (data) {
       setReview(data.review);
@@ -38,7 +43,7 @@ const useFilmReview = (filmId: string) => {
     if (!filmEditorModal.isOpen) fetchReview();
   }, [filmEditorModal.isOpen]);
 
-  const addReviewHandler = async (filmId: string) => {
+  const addReviewHandler = async (filmId: number) => {
     if (!user)
       return authModal.onOpen("You need to sign in to access this content");
 

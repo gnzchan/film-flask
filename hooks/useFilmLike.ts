@@ -5,29 +5,31 @@ import toast from "react-hot-toast";
 import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
 import useFilm from "./useFilm";
-import { OMDBFilm } from "@/types";
 import useFilmEditorModal from "./useFilmEditorModal";
 import { useRouter } from "next/navigation";
+import { TMDBFilm } from "@/types";
 
-const useFilmLike = (film: OMDBFilm) => {
+const useFilmLike = (film: TMDBFilm) => {
   const router = useRouter();
   const [liked, setLiked] = useState<boolean | null>(null);
   const { user } = useUser();
   const { supabaseClient } = useSessionContext();
   const authModal = useAuthModal();
   const { listed } = useFilmEditorModal();
-  const { fetchListed, addFilmToListHandler } = useFilm(film.imdbID);
+  const { fetchListed, addFilmToListHandler } = useFilm(film.id, film.category);
+
   const fetchLikeStatus = async () => {
     if (!user) return;
 
     const { data } = await supabaseClient
       .from("liked_films")
-      .select("*")
+      .select("count, films!inner()")
+      .eq("film_id", film.id)
       .eq("user_id", user.id)
-      .eq("film_id", film.imdbID)
-      .maybeSingle();
+      .eq("films.category", film.category)
+      .maybeSingle<{ count: number }>();
 
-    setLiked(data ? true : false);
+    setLiked(data?.count !== 0);
   };
 
   useEffect(() => {
@@ -52,7 +54,7 @@ const useFilmLike = (film: OMDBFilm) => {
         .from("liked_films")
         .delete()
         .eq("user_id", user.id)
-        .eq("film_id", film.imdbID);
+        .eq("film_id", film.id);
 
       if (error) {
         return toast.error(error.message);
@@ -66,7 +68,7 @@ const useFilmLike = (film: OMDBFilm) => {
     } else {
       const { error } = await supabaseClient.from("liked_films").insert({
         user_id: user.id,
-        film_id: film.imdbID,
+        film_id: film.id,
       });
 
       if (error) {

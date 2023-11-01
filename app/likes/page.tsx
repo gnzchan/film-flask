@@ -4,12 +4,18 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 import { getLikedFilms } from "@/actions/getSBFilms";
-import FilmGrid from "@/components/ui/FilmGrid";
 import Header from "@/components/ui/Header";
 import Await from "@/components/ui/Await";
 import LikesSkeleton from "./LikesSkeleton";
+import { FilmCategory } from "@/types";
+import FilmGridTMDB from "@/components/ui/FilmGridTMDB";
+interface SearchProps {
+  searchParams: {
+    category: FilmCategory;
+  };
+}
 
-const Likes = async () => {
+const Likes: React.FC<SearchProps> = async ({ searchParams }) => {
   const supabase = createServerComponentClient({ cookies });
   const {
     data: { session },
@@ -25,7 +31,9 @@ const Likes = async () => {
     <div className="flex h-full flex-col">
       <Header />
       <Suspense fallback={<LikesSkeleton />}>
-        <Await promise={promise}>{(data) => <FilmGrid films={data} />}</Await>
+        <Await promise={promise}>
+          {(data) => <FilmGridTMDB films={data} />}
+        </Await>
       </Suspense>
     </div>
   );

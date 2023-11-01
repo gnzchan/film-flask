@@ -13,7 +13,7 @@ export const getData = async <T>(url: string): Promise<T> => {
 
   const value = await res.json();
 
-  return value;
+  return value as T;
 };
 
 export const delay = (ms: number) => {

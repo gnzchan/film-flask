@@ -1,16 +1,18 @@
-import { Film, OMDBFilm, Status } from "@/types";
+"use server";
+
+import { FilmCategory, Status, TMDBFilm } from "@/types";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import getFilmById from "./getFilmById";
 
-const getOmdbFilms = async (): Promise<OMDBFilm[]> => {
+const getTMDBFilms = async (): Promise<TMDBFilm[]> => {
   const supabase = createServerComponentClient({
     cookies,
   });
 
   const { data, error } = await supabase
     .from("films")
-    .select("id")
+    .select("id, category")
     .order("created_at", { ascending: false })
     .limit(20);
 
@@ -18,30 +20,42 @@ const getOmdbFilms = async (): Promise<OMDBFilm[]> => {
     console.log(error);
   }
 
-  const omdbDataPromise = data?.map(({ id }) => getFilmById(id));
-  const omdbData = await Promise.all(omdbDataPromise || []);
+  const tmdbDataPromise = data?.map(({ id, category }) =>
+    getFilmById(category, id),
+  );
+  const tmdbData = await Promise.all(tmdbDataPromise || []);
 
-  return (omdbData as unknown as OMDBFilm[]) || [];
+  return (tmdbData as unknown as TMDBFilm[]) || [];
 };
 
-const getFilms = async (): Promise<Film[]> => {
+const getLikedFilms = async (): Promise<TMDBFilm[]> => {
   const supabase = createServerComponentClient({
     cookies,
   });
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   const { data, error } = await supabase
     .from("films")
-    .select("*")
-    .order("created_at", { ascending: false });
+    .select("id, category, liked_films!inner()")
+    .eq("liked_films.user_id", user?.id)
+    .returns<{ id: string; category: FilmCategory }[]>();
 
   if (error) {
     console.log(error);
   }
 
-  return (data as Film[]) || [];
+  const tmdbDataPromise = data?.map(({ id, category }) =>
+    getFilmById(category, id),
+  );
+  const tmdbData = await Promise.all(tmdbDataPromise || []);
+
+  return (tmdbData as unknown as TMDBFilm[]) || [];
 };
 
-const getLikedFilms = async (): Promise<Film[]> => {
+const getListedFilms = async (status: Status): Promise<TMDBFilm[]> => {
   const supabase = createServerComponentClient({
     cookies,
   });
@@ -51,41 +65,24 @@ const getLikedFilms = async (): Promise<Film[]> => {
   } = await supabase.auth.getUser();
 
   const { data, error } = await supabase
-    .from("liked_films")
-    .select("films(*)")
-    .eq("user_id", user?.id);
+    .from("films")
+    .select("id, category, status_films!inner()")
+    .eq("status_films.user_id", user?.id)
+    .eq("status_films.status", status)
+    .returns<{ id: string; category: FilmCategory }[]>();
+
+  console.log(data);
 
   if (error) {
     console.log(error);
   }
 
-  const filmData = data?.map((item) => item.films as unknown as Film);
+  const tmdbDataPromise = data?.map(({ id, category }) =>
+    getFilmById(category, id),
+  );
+  const tmdbData = await Promise.all(tmdbDataPromise || []);
 
-  return filmData || [];
+  return (tmdbData as unknown as TMDBFilm[]) || [];
 };
 
-const getListedFilms = async (status: Status): Promise<Film[]> => {
-  const supabase = createServerComponentClient({
-    cookies,
-  });
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const { data, error } = await supabase
-    .from("status_films")
-    .select("films(*)")
-    .eq("user_id", user?.id)
-    .eq("status", status);
-
-  if (error) {
-    console.log(error);
-  }
-
-  const filmData = data?.map((item) => item.films as unknown as Film);
-
-  return filmData || [];
-};
-
-export { getOmdbFilms, getFilms, getLikedFilms, getListedFilms };
+export { getTMDBFilms, getLikedFilms, getListedFilms };

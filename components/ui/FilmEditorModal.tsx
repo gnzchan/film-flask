@@ -19,10 +19,11 @@ import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
 
 const FilmEditorModal = () => {
   const filmEditorModal = useFilmEditorModal();
-  const cachedFilm = filmEditorModal.omdbFilm;
+  const cachedFilm = filmEditorModal.tmdbFilm;
 
   const { fetchListed, addFilmToListHandler } = useFilm(
-    cachedFilm?.imdbID ?? "",
+    cachedFilm?.id,
+    cachedFilm?.category,
   );
 
   const {
@@ -33,9 +34,10 @@ const FilmEditorModal = () => {
     removeImageForUploadHandler,
     uploadImagesHandler,
     removeImagesHandler,
-  } = useFilmImages(cachedFilm?.imdbID ?? "");
+  } = useFilmImages(cachedFilm?.id, cachedFilm?.category);
   const { review, addReviewHandler, reviewChangeHandler } = useFilmReview(
-    cachedFilm?.imdbID ?? "",
+    cachedFilm?.id,
+    cachedFilm?.category,
   );
   const {
     status,
@@ -43,8 +45,11 @@ const FilmEditorModal = () => {
     addStatusHandler,
     statusChangeHandler,
     dateFinishedHandler,
-  } = useFilmStatus(cachedFilm?.imdbID ?? "");
-  const { fetchReviews } = useFilmReviewsAndImages(cachedFilm?.imdbID ?? "");
+  } = useFilmStatus(cachedFilm?.id, cachedFilm?.category);
+  const { fetchReviews } = useFilmReviewsAndImages(
+    cachedFilm?.id,
+    cachedFilm?.category,
+  );
 
   if (!cachedFilm) return;
 
@@ -69,11 +74,11 @@ const FilmEditorModal = () => {
     }
 
     if (review) {
-      await addReviewHandler(cachedFilm.imdbID);
+      await addReviewHandler(cachedFilm.id);
     }
 
     if (status) {
-      await addStatusHandler(cachedFilm.imdbID);
+      await addStatusHandler(cachedFilm.id);
     }
 
     filmEditorModal.onClose();
@@ -84,7 +89,9 @@ const FilmEditorModal = () => {
   return (
     <Modal
       title="Change record"
-      description={`You are currently editing: ${cachedFilm.Title}`}
+      description={`You are currently editing: ${
+        cachedFilm.title ?? cachedFilm.name
+      }`}
       isOpen={filmEditorModal.isOpen}
       onChange={onToggleModal}
     >

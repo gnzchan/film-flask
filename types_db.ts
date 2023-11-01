@@ -9,75 +9,69 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      commented_films: {
+      films: {
         Row: {
-          comment: string | null;
+          category: Database["public"]["Enums"]["category"] | null;
+          created_at: string | null;
+          genre: string | null;
+          id: string;
+          language: string | null;
+          poster_url: string | null;
+          title: string | null;
+          year: string | null;
+        };
+        Insert: {
+          category?: Database["public"]["Enums"]["category"] | null;
+          created_at?: string | null;
+          genre?: string | null;
+          id: string;
+          language?: string | null;
+          poster_url?: string | null;
+          title?: string | null;
+          year?: string | null;
+        };
+        Update: {
+          category?: Database["public"]["Enums"]["category"] | null;
+          created_at?: string | null;
+          genre?: string | null;
+          id?: string;
+          language?: string | null;
+          poster_url?: string | null;
+          title?: string | null;
+          year?: string | null;
+        };
+        Relationships: [];
+      };
+      image_films: {
+        Row: {
           film_id: string;
+          image_path: string;
           user_id: string;
         };
         Insert: {
-          comment?: string | null;
           film_id: string;
+          image_path: string;
           user_id: string;
         };
         Update: {
-          comment?: string | null;
           film_id?: string;
+          image_path?: string;
           user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: "commented_films_film_id_fkey";
+            foreignKeyName: "image_films_film_id_fkey";
             columns: ["film_id"];
             referencedRelation: "films";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "commented_films_user_id_fkey";
+            foreignKeyName: "image_films_user_id_fkey";
             columns: ["user_id"];
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
         ];
-      };
-      films: {
-        Row: {
-          actors: string | null;
-          category: Database["public"]["Enums"]["category"] | null;
-          date_released: string | null;
-          genre: string | null;
-          id: string;
-          imdb_rating: number | null;
-          imdb_votes: number | null;
-          plot: string | null;
-          poster_url: string | null;
-          title: string | null;
-        };
-        Insert: {
-          actors?: string | null;
-          category?: Database["public"]["Enums"]["category"] | null;
-          date_released?: string | null;
-          genre?: string | null;
-          id?: string;
-          imdb_rating?: number | null;
-          imdb_votes?: number | null;
-          plot?: string | null;
-          poster_url?: string | null;
-          title?: string | null;
-        };
-        Update: {
-          actors?: string | null;
-          category?: Database["public"]["Enums"]["category"] | null;
-          date_released?: string | null;
-          genre?: string | null;
-          id?: string;
-          imdb_rating?: number | null;
-          imdb_votes?: number | null;
-          plot?: string | null;
-          poster_url?: string | null;
-          title?: string | null;
-        };
-        Relationships: [];
       };
       liked_films: {
         Row: {
@@ -104,6 +98,77 @@ export interface Database {
           },
           {
             foreignKeyName: "liked_films_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      review_films: {
+        Row: {
+          created_at: string | null;
+          film_id: string;
+          review: string | null;
+          updated_at: string | null;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string | null;
+          film_id: string;
+          review?: string | null;
+          updated_at?: string | null;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string | null;
+          film_id?: string;
+          review?: string | null;
+          updated_at?: string | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "review_films_film_id_fkey";
+            columns: ["film_id"];
+            referencedRelation: "films";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "review_films_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      status_films: {
+        Row: {
+          date_finished: string | null;
+          film_id: string;
+          status: Database["public"]["Enums"]["status"] | null;
+          user_id: string;
+        };
+        Insert: {
+          date_finished?: string | null;
+          film_id: string;
+          status?: Database["public"]["Enums"]["status"] | null;
+          user_id: string;
+        };
+        Update: {
+          date_finished?: string | null;
+          film_id?: string;
+          status?: Database["public"]["Enums"]["status"] | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "status_films_film_id_fkey";
+            columns: ["film_id"];
+            referencedRelation: "films";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "status_films_user_id_fkey";
             columns: ["user_id"];
             referencedRelation: "users";
             referencedColumns: ["id"];
@@ -143,7 +208,18 @@ export interface Database {
       [_ in never]: never;
     };
     Enums: {
-      category: "movie" | "series";
+      category: "movie" | "tv";
+      pricing_plan_interval: "day" | "week" | "month" | "year";
+      pricing_type: "one_time" | "recurring";
+      status: "Watch later" | "Currently watching" | "Finished watching";
+      subscription_status:
+        | "trialing"
+        | "active"
+        | "canceled"
+        | "incomplete"
+        | "incomplete_expired"
+        | "past_due"
+        | "unpaid";
     };
     CompositeTypes: {
       [_ in never]: never;

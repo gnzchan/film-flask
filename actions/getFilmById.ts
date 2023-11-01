@@ -1,18 +1,18 @@
 "use server";
 
 import { getData } from "@/libs/helpers";
-import { OMDBFilm } from "@/types";
+import { FilmCategory, TMDBFilm } from "@/types";
 
 const getFilmById = async (
+  category: FilmCategory,
   id: string,
-  fullPlot: boolean = false,
-): Promise<OMDBFilm> => {
-  const omdbKey = process.env.OMDB_KEY;
-  const url = `https://www.omdbapi.com/?apikey=${omdbKey}&i=${id}${
-    fullPlot ? "&plot=full" : ""
-  }`;
+): Promise<TMDBFilm> => {
+  const tmdbKey = process.env.TMDB_KEY;
+  const url = `https://api.themoviedb.org/3/${category}/${id}?api_key=${tmdbKey}&language=en-US`;
 
-  const film = await getData<OMDBFilm>(url);
+  const film = await getData<TMDBFilm>(url);
+
+  film.category = category;
 
   return film;
 };
