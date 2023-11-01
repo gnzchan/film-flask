@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { AiOutlineFire } from "react-icons/ai";
+import axios from "axios";
 
 import Button from "./Button";
 import UploadImage from "./UploadImage";
+import GenreChips from "./GenreChips";
 
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
@@ -14,8 +16,6 @@ import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
 import { Cast, Crew, TMDBFilm } from "@/types";
 import { getFormattedTime } from "@/libs/helpers";
-import { genres } from "@/constants";
-import axios from "axios";
 
 interface FilmInfoProps {
   film: TMDBFilm;
@@ -26,7 +26,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   const { user } = useUser();
   const authModal = useAuthModal();
   const filmEditorModal = useFilmEditorModal();
-  // const { fetchReviews } = useFilmReviewsAndImages(film.imdbID);
+  const { fetchReviews } = useFilmReviewsAndImages(film.id, film.category);
 
   const [casts, setCasts] = useState<Cast[]>([]);
   const [crew, setCrew] = useState<Crew[]>([]);
@@ -46,11 +46,13 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
     };
 
     fetchCredits();
-  }, []);
+    fetchReviews();
+  }, [user, film]);
 
   const handleClick = () => {
-    if (!user)
+    if (!user) {
       return authModal.onOpen("You need to sign in to access this content");
+    }
 
     return filmEditorModal.onOpen();
   };
@@ -73,16 +75,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
       >
         <div className="w-full items-center gap-4 md:grid md:grid-cols-3">
           <div className="flex flex-col gap-5 p-5 md:col-span-2">
-            <div className="flex items-center justify-center gap-1">
-              {film.genres.map((genre, i) => (
-                <div
-                  key={`${genre}-${i}`}
-                  className="flex items-center justify-center rounded-full border border-gray-600 px-2 py-1 text-xs font-medium text-gray-600 dark:border-gray-400 dark:text-gray-400 "
-                >
-                  <p>{genres.find((g) => g.id === genre.id)?.name}</p>
-                </div>
-              ))}
-            </div>
+            <GenreChips genreProp={film.genres} />
             <div className="flex items-center gap-6 text-xs font-medium">
               <div className="flex items-center justify-center gap-1">
                 <AiOutlineFire />
@@ -111,13 +104,13 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
               <Image
                 src={
                   film.poster_path
-                    ? `https://image.tmdb.org/t/p/w780/${film.poster_path}`
+                    ? `https://image.tmdb.org/t/p/w342/${film.poster_path}`
                     : "/images/movie-poster.jpg"
                 }
                 alt={`${film.title ?? film.name} Poster`}
                 priority={true}
                 fill
-                sizes="(max-width: 750px) 100vw"
+                sizes="(max-width: 342px) 100vw"
                 className="rounded-lg border"
               />
             </div>
@@ -130,17 +123,17 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
           <Image
             src={
               film.poster_path
-                ? `https://image.tmdb.org/t/p/w780/${film.poster_path}`
+                ? `https://image.tmdb.org/t/p/w342/${film.poster_path}`
                 : "/images/movie-poster.jpg"
             }
             alt={`${film.title ?? film.name} Poster`}
             priority={true}
             fill
-            sizes="(max-width: 750px) 100vw"
+            sizes="(max-width: 342px) 100vw"
             className="rounded-lg border"
           />
         </div>
-        <div className="w-full overflow-auto py-4">
+        <div className="no-scrollbar w-full overflow-auto py-4">
           <div className="flex items-center gap-4 px-3 lg:justify-around">
             {casts.slice(0, 7).map((cast) => (
               <div
@@ -152,6 +145,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
                     src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}
                     alt={cast.name}
                     fill
+                    sizes="(max-width: 180px) 100vw"
                     className="rounded-md"
                   />
                 </div>
@@ -173,7 +167,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         </div>
       </div>
 
-      {/* <div className="flex h-full flex-col gap-3 bg-white px-5 py-3 dark:bg-black">
+      <div className="flex h-full flex-col gap-3 bg-white px-5 py-3 dark:bg-black">
         <h1 className="text-2xl font-bold">Reviews</h1>
         <p className="text-center text-sm italic text-gray-400">
           Add film to add a review
@@ -181,7 +175,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         <div className="flex flex-col gap-2 divide-y">
           {filmEditorModal.reviewsAndImages.map((review, i) => (
             <div key={i} className="flex flex-col">
-              <p className="text-md font-medium">{review.users.full_name}</p>
+              <p className="text-md font-medium">{review.user.full_name}</p>
               <p className="text-sm">{review.review}</p>
               <div className="flex gap-1">
                 {review.image_path.map((image) => (
@@ -196,7 +190,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

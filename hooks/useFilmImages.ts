@@ -7,8 +7,12 @@ import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
 import useFilmEditorModal from "./useFilmEditorModal";
 import useCommonFunctions from "./useCommonFunctions";
+import { FilmCategory } from "@/types";
 
-const useFilmImages = (filmId: string) => {
+const useFilmImages = (
+  filmId: number | undefined,
+  filmCategory: FilmCategory | undefined,
+) => {
   const [images, setImages] = useState<File[]>([]);
   const [imagesForUpload, setImagesForUpload] = useState<File[]>([]);
   const [imagesForRemove, setImagesForRemove] = useState<File[]>([]);
@@ -23,9 +27,11 @@ const useFilmImages = (filmId: string) => {
 
     const { data } = await supabaseClient
       .from("image_films")
-      .select("image_path")
+      .select("image_path, films!inner()")
       .eq("film_id", filmId)
-      .eq("user_id", user.id);
+      .eq("user_id", user.id)
+      .eq("films.category", filmCategory)
+      .returns<{ image_path: string }[]>();
 
     if (data) {
       const imagesPromise = data.map(({ image_path }) =>
@@ -57,6 +63,7 @@ const useFilmImages = (filmId: string) => {
     for (const image of [...images, ...imagesForUpload]) {
       if (image.name === newImage.name) {
         // TODO: Add prompt for duplicate file name
+        alert(`File '${newImage.name}' already exists.`);
         return;
       }
     }

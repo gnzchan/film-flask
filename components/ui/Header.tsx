@@ -9,19 +9,26 @@ import { getColorTheme } from "./Themes";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 import useSidebar from "@/hooks/useSidebar";
+import { twMerge } from "tailwind-merge";
 
 interface HeaderProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ children }) => {
+const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const sidebar = useSidebar();
 
   const { theme } = useTheme();
 
   return (
     <>
-      <div className="grid grid-cols-3 items-center px-2 py-1 shadow-xl dark:bg-zinc-800 dark:shadow-zinc-950">
+      <div
+        className={twMerge(
+          "grid grid-cols-3 items-center bg-neutral-100 px-2 py-1 shadow-xl dark:bg-zinc-800 dark:shadow-zinc-950",
+          className,
+        )}
+      >
         <div>
           <button className="lg:hidden" onClick={sidebar.onOpen}>
             <RxHamburgerMenu size={24} />

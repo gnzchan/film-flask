@@ -3,10 +3,9 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-import FilmGrid from "../../components/ui/FilmGrid";
 import Spinner from "../../components/ui/Spinner";
 
-import { Film, FilmCategory, TMDBSearchFilm } from "@/types";
+import { FilmCategory, TMDBSearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
 import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
 import FilmGridTMDB from "@/components/ui/FilmGridTMDB";
@@ -24,15 +23,6 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   category,
   totalPages,
 }) => {
-  // const mapToFilm = (tmdbFilms: TMDBSearchFilm[]) =>
-  //   tmdbFilms?.map((tmdbFilm) => ({
-  //     id: tmdbFilm.id,
-  //     title: tmdbFilm.title ?? tmdbFilm.name,
-  //     poster_url: tmdbFilm.poster_path,
-  //     year: tmdbFilm.release_date ?? tmdbFilm.first_air_date,
-  //     category: tmdbFilm.media_type,
-  //   }));
-
   const [films, setFilms] = useState<TMDBSearchFilm[]>(propFilms);
   const [pagesLoaded, setPagesLoaded] = useState(0);
   const [isAllPagesLoaded, setIsAllPagesLoaded] = useState(true);
@@ -47,7 +37,7 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   useEffect(() => {
     if (propFilms.length !== 0) {
       setPagesLoaded(1);
-      setFilms(propFilms);
+      setFilms(propFilms.map((pf) => ({ ...pf, category })));
     }
   }, [propFilms]);
 
@@ -77,7 +67,10 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
     );
 
     if (newFilms) {
-      setFilms((prevItems) => [...prevItems, ...newFilms]);
+      setFilms((prevItems) => [
+        ...prevItems,
+        ...newFilms.map((nf) => ({ ...nf, category })),
+      ]);
     }
 
     setPagesLoaded(nextPage);
@@ -93,20 +86,9 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
     <Spinner ref={ref} />
   );
 
-  // if (error) {
-  //   return (
-  //     <div className="my-5 flex items-center justify-center">
-  //       <p className="text-md font-normal">
-  //         We&apos;re finding it difficult to find what you&apos;re searching.{" "}
-  //         {error}
-  //       </p>
-  //     </div>
-  //   );
-  // }
-
   return (
     <>
-      <FilmGridTMDB films={films} category={category} />
+      <FilmGridTMDB films={films} />
       <div className="my-5 flex items-center justify-center">{content}</div>
     </>
   );

@@ -1,58 +1,48 @@
 import Link from "next/link";
+import { useTheme } from "next-themes";
 
 import Button from "./Button";
 
-import { OMDBFilm } from "@/types";
+import { TMDBFilm } from "@/types";
+import { genres } from "@/constants";
+import GenreChips from "./GenreChips";
 
 interface FilmBannerProps {
-  film: OMDBFilm;
+  film: TMDBFilm | undefined;
 }
 
 const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
+  const { theme } = useTheme();
+
+  if (!film) return;
+
   return (
-    <div className="mx-8 mb-12 flex h-[65vh] min-h-[450px] overflow-hidden rounded-md bg-black shadow-xl shadow-zinc-950">
-      <div className="flex w-full flex-col items-center justify-center gap-5 px-12 md:items-start md:px-7">
-        <h1 className="text-xl font-extrabold text-white md:text-4xl">
-          {film?.Title}
-        </h1>
-        <div className="flex items-center">
-          {film.Genre?.split(",").map((genre, i) => (
-            <div
-              key={`${genre}-${i}`}
-              className="m-1 flex items-center justify-center rounded-full border border-gray-300  px-2 py-1 font-medium text-gray-400 "
-            >
-              <div className="max-w-full flex-initial text-xs font-normal leading-none">
-                <h1 className="text-white">{genre}</h1>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="flex items-center gap-6 text-xs font-medium capitalize text-white">
-          <p>{film?.Language}</p>
-          <p>{film?.Type}</p>
-          <p>{film?.Year}</p>
-        </div>
-        <p className="text-justify text-sm font-normal text-gray-400">
-          {film?.Plot}
-        </p>
-        <Link
-          href={`/film/${film?.imdbID}`}
-          className="flex w-full items-center justify-center md:justify-start"
-        >
-          <Button className="bg-white font-medium text-black">
+    <div
+      className="sticky top-0 flex aspect-video h-[60%] w-full flex-col items-center justify-end bg-white bg-cover bg-center p-1 dark:bg-black sm:items-start sm:p-5"
+      style={{
+        backgroundImage: `
+          linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgb(${
+            theme === "light" ? "255, 255, 255" : "0, 0, 0"
+          }) 100%),
+          url(${
+            film.backdrop_path
+              ? `https://image.tmdb.org/t/p/w1280/${film.backdrop_path}`
+              : "/images/movie-poster.jpg"
+          })`,
+      }}
+    >
+      <GenreChips genreProp={film.genres} className="sm:hidden" />
+      <h1 className="my-1 text-center text-lg font-extrabold sm:my-4 sm:text-xl md:text-3xl">
+        {film.title ?? film.name}
+      </h1>
+      <div className="flex w-full scale-75 flex-col items-center justify-between sm:scale-100 sm:flex-row-reverse">
+        <GenreChips genreProp={film.genres} className="hidden sm:flex" />
+        <Link href={`/film/${film.category}/${film.id}`}>
+          <Button className="rounded-sm font-medium shadow-none">
             View more info
           </Button>
         </Link>
       </div>
-      <div
-        className="hidden aspect-[3/4] overflow-visible bg-cover bg-center md:block"
-        style={{
-          backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 1)), 
-       url(${
-         film?.Poster !== "N/A" ? film.Poster : "/images/movie-poster.jpg"
-       })`,
-        }}
-      ></div>
     </div>
   );
 };

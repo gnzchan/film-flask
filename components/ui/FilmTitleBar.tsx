@@ -3,7 +3,7 @@
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 import useFilmLike from "@/hooks/useFilmLike";
-import { FilmCategory, TMDBFilm } from "@/types";
+import { TMDBFilm } from "@/types";
 
 interface FilmTitleBarProps {
   film: TMDBFilm;

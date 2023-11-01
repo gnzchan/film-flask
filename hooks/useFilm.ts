@@ -3,9 +3,12 @@ import { useSessionContext } from "@supabase/auth-helpers-react";
 import toast from "react-hot-toast";
 
 import useFilmEditorModal from "./useFilmEditorModal";
-import { FilmCategory, OMDBFilm } from "@/types";
+import { FilmCategory, TMDBFilm } from "@/types";
 
-const useFilm = (filmId: string) => {
+const useFilm = (
+  id: number | undefined,
+  category: FilmCategory | undefined,
+) => {
   const { setListed } = useFilmEditorModal();
   const { supabaseClient } = useSessionContext();
 
@@ -13,7 +16,8 @@ const useFilm = (filmId: string) => {
     const { data } = await supabaseClient
       .from("films")
       .select("*")
-      .eq("id", filmId)
+      .eq("id", id)
+      .eq("category", category)
       .maybeSingle();
 
     setListed(data ? true : false);
@@ -23,22 +27,21 @@ const useFilm = (filmId: string) => {
     fetchListed();
   }, []);
 
-  const addFilmToListHandler = async (film: OMDBFilm) => {
+  const addFilmToListHandler = async (film: TMDBFilm) => {
     const { error } = await supabaseClient.from("films").insert({
-      id: film.imdbID,
-      title: film.Title,
-      genre: film.Genre ?? "",
+      id: film.id,
+      title: film.title ?? film.name,
       category:
-        film.Type === "movie" ? FilmCategory.MOVIE : FilmCategory.SERIES,
-      year: film.Year ?? "",
-      language: film.Language ?? "",
-      poster_url: film.Poster ?? "",
+        film.category === "movie" ? FilmCategory.MOVIE : FilmCategory.TV,
     });
 
     if (error) return toast.error(error.message);
   };
 
-  return { fetchListed, addFilmToListHandler };
+  return {
+    fetchListed,
+    addFilmToListHandler,
+  };
 };
 
 export default useFilm;

@@ -1,83 +1,51 @@
 "use client";
 
 import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType } from "swiper";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
-import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
-import { twMerge } from "tailwind-merge";
 
 import FilmBanner from "../../components/ui/FilmBanner";
 
-import { OMDBFilm } from "@/types";
+import { TMDBFilm, TMDBSearchFilm } from "@/types";
+import FilmCarousell from "./FilmCarousell";
 
 interface ThumbGalleryProps {
-  films: OMDBFilm[];
+  films: TMDBFilm[];
+  popularMovies: TMDBFilm[];
+  upcomingMovies: TMDBFilm[];
 }
 
-const ThumbGallery: React.FC<ThumbGalleryProps> = ({ films }) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+const ThumbGallery: React.FC<ThumbGalleryProps> = ({
+  films,
+  popularMovies,
+  upcomingMovies,
+}) => {
+  const [activeFilm, setActiveFilm] = useState<TMDBFilm>(
+    films[0] || popularMovies[0] || upcomingMovies[0],
+  );
+
+  const handleSetFilm = (film: TMDBFilm) => {
+    setActiveFilm(film);
+  };
 
   return (
-    <div>
-      <Swiper
-        spaceBetween={10}
-        autoplay={{
-          delay: 5000,
-        }}
-        navigation={true}
-        thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-        onActiveIndexChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-        className="mySwiper2"
-      >
-        {films.map((film) => (
-          <SwiperSlide key={film.imdbID}>
-            <FilmBanner film={film} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        spaceBetween={20}
-        breakpoints={{
-          0: { slidesPerView: 1.5 },
-          550: { slidesPerView: 4.5 },
-          800: { slidesPerView: 6.5 },
-        }}
-        freeMode={true}
-        watchSlidesProgress={true}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper"
-      >
-        {films.map((film, i) => (
-          <SwiperSlide key={film.imdbID}>
-            <div
-              className={twMerge(
-                "m-8 mt-2 h-[15vh] min-h-[100px] w-full overflow-hidden rounded-md bg-cover bg-center shadow-lg shadow-zinc-950 transition",
-                activeIndex === i && "scale-105",
-              )}
-              style={{
-                backgroundImage: `url(${
-                  film?.Poster !== "N/A"
-                    ? film.Poster
-                    : "/images/movie-poster.jpg"
-                })`,
-              }}
-            >
-              <div className="flex h-full cursor-pointer items-center justify-center p-3 backdrop-brightness-50">
-                <p className="truncate text-center text-xs font-semibold text-white md:text-sm ">
-                  {film.Title}
-                </p>
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="flex h-full flex-col bg-white dark:bg-black">
+      <FilmBanner film={activeFilm} />
+      <div className="no-scrollbar flex h-[40%] snap-y flex-col overflow-y-auto">
+        <FilmCarousell
+          title="Popular on Film Flask"
+          films={films}
+          handleSetFilm={handleSetFilm}
+        />
+        <FilmCarousell
+          title="Popular Movies"
+          films={popularMovies}
+          handleSetFilm={handleSetFilm}
+        />
+        <FilmCarousell
+          title="Upcoming Movies"
+          films={upcomingMovies}
+          handleSetFilm={handleSetFilm}
+        />
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import qs from "query-string";
 import useDebounce from "@/hooks/useDebounce";
 import { useRouter } from "next/navigation";
 import { FilmCategory } from "@/types";
+import CategoryButton from "./CategoryButton";
 
 const SearchInput = () => {
   const router = useRouter();
@@ -31,37 +32,30 @@ const SearchInput = () => {
     }
   }, [debouncedValue, searchCategory]);
 
+  const handleCategoryChange = (cat: FilmCategory) => {
+    setSearchCategory(cat);
+  };
+
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex h-full items-center justify-center gap-3">
       <input
         placeholder="Search for movies or series"
         value={searchString}
         className="focus:shadow-outline w-full max-w-[1700px] appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow-sm focus:outline-none"
         onChange={(e) => setSearchString(e.target.value)}
       />
-
-      <input
-        type="radio"
-        id={FilmCategory.MOVIE}
-        name="film_category"
-        value={FilmCategory.MOVIE}
-        checked={searchCategory === FilmCategory.MOVIE}
-        onChange={(e) =>
-          setSearchCategory(e.currentTarget.value as FilmCategory)
-        }
-      />
-      <label htmlFor={FilmCategory.MOVIE}>Movie</label>
-      <input
-        type="radio"
-        id={FilmCategory.TV}
-        name="film_category"
-        value={FilmCategory.TV}
-        checked={searchCategory === FilmCategory.TV}
-        onChange={(e) =>
-          setSearchCategory(e.currentTarget.value as FilmCategory)
-        }
-      />
-      <label htmlFor={FilmCategory.TV}>TV</label>
+      <div className="grid grid-cols-2 items-center gap-1">
+        <CategoryButton
+          id={FilmCategory.MOVIE}
+          checked={searchCategory === FilmCategory.MOVIE}
+          handleCategoryChange={handleCategoryChange}
+        />
+        <CategoryButton
+          id={FilmCategory.TV}
+          checked={searchCategory === FilmCategory.TV}
+          handleCategoryChange={handleCategoryChange}
+        />
+      </div>
     </div>
   );
 };

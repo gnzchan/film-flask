@@ -1,60 +1,51 @@
 import Link from "next/link";
+import { AiOutlineFire } from "react-icons/ai";
+import Image from "next/image";
 
-import { Film, FilmCategory, TMDBSearchFilm } from "@/types";
-import { genres } from "@/constants";
+import { TMDBFilm, TMDBSearchFilm } from "@/types";
+import Button from "./Button";
 
 interface FilmItemTMDBProps {
-  film: TMDBSearchFilm;
-  category: FilmCategory;
+  film: TMDBFilm | TMDBSearchFilm;
 }
 
-const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, category }) => {
+const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {
   return (
-    <Link
-      href={`/film/${category}/${film.id}`}
-      className="flex aspect-[3/4] w-full items-center justify-center"
-    >
-      <div className="w-full overflow-hidden rounded-md bg-black shadow-lg shadow-zinc-950">
-        <div
-          className="flex aspect-[3/4] w-full flex-col justify-end bg-cover bg-center"
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), 
-           url(${
-             film.poster_path
-               ? `https://image.tmdb.org/t/p/w185/${film.poster_path}`
-               : "/images/movie-poster.jpg"
-           })`,
-          }}
-        >
-          <div className="group flex h-full w-full flex-col items-start justify-end transition hover:justify-center hover:backdrop-blur-sm hover:backdrop-brightness-50">
-            <div className="flex w-full flex-col gap-2 p-3">
-              <h1 className="text-lg font-bold text-white">
-                {film.title ?? film.name}
-              </h1>
-              <div className="hidden flex-col gap-2 text-xs font-medium capitalize text-white group-hover:flex">
-                {film.genre_ids.map((genre, i) => (
-                  <div
-                    key={`${genre}-${i}`}
-                    className="flex w-full items-center justify-center rounded-full border border-gray-300 px-2 py-1 font-medium text-gray-400 "
-                  >
-                    <div className="max-w-full flex-initial text-xs font-normal leading-none">
-                      <h1 className="text-white">
-                        {genres.find((g) => g.id === genre)?.name}
-                      </h1>
-                    </div>
-                  </div>
-                ))}
-                <div className="flex items-center justify-evenly">
-                  <p>{film.original_language}</p>
-                  {film.origin_country && <p>{film.origin_country}</p>}
-                  <p>{film.release_date ?? film.first_air_date}</p>
-                </div>
-              </div>
+    <div className="group relative aspect-[3/4] h-full w-full cursor-pointer snap-end rounded-md">
+      <Image
+        alt={`Poster-${film.name ?? film.title}`}
+        fill
+        src={
+          film.backdrop_path
+            ? `https://image.tmdb.org/t/p/w342/${film.poster_path}`
+            : "/images/movie-poster.jpg"
+        }
+        sizes="(max-width: 342px) 100vw"
+        className="rounded-md"
+      />
+      <div className="h-full w-full rounded-md transition hover:justify-center hover:backdrop-brightness-50 group-hover:backdrop-blur-sm">
+        <div className="hidden h-full w-full flex-col items-center justify-between rounded-md p-3 text-xs font-medium text-white group-hover:flex">
+          <h1 className="text-md text-center text-white">
+            {film.title ?? film.name}
+          </h1>
+          <div className="flex w-full flex-col gap-3">
+            <div className="flex w-full items-center justify-evenly capitalize">
+              <p>{film.original_language}</p>
+              <p>{film.release_date ?? film.first_air_date}</p>
+            </div>
+            <div className="flex items-center justify-center gap-1">
+              <AiOutlineFire />
+              <p>{film.popularity}</p>
             </div>
           </div>
+          <Link href={`/film/${film.category}/${film.id}`}>
+            <Button className="rounded-sm bg-white text-black shadow-none">
+              View more
+            </Button>
+          </Link>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 

@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-import { OMDBFilm, Review } from "@/types";
+import { Review, TMDBFilm } from "@/types";
 
 interface FilmEditorModalStore {
-  omdbFilm: OMDBFilm | null;
+  tmdbFilm: TMDBFilm | null;
   listed: boolean;
   isOpen: boolean;
   reviewsAndImages: Review[];
-  setFilm: (omdbFilm: OMDBFilm) => void;
+  setFilm: (tmdbFilm: TMDBFilm) => void;
   setListed: (isListed: boolean) => void;
   setReviewsAndImages: (reviewsAndImages: Review[]) => void;
   onOpen: () => void;
@@ -15,11 +15,11 @@ interface FilmEditorModalStore {
 }
 
 const useFilmEditorModal = create<FilmEditorModalStore>((set) => ({
-  omdbFilm: null,
+  tmdbFilm: null,
   listed: false,
   isOpen: false,
   reviewsAndImages: [],
-  setFilm: (omdbFilm) => set({ omdbFilm }),
+  setFilm: (tmdbFilm) => set({ tmdbFilm }),
   setListed: (isListed) => set({ listed: isListed }),
   setReviewsAndImages: (reviewsAndImages) => set({ reviewsAndImages }),
   onOpen: () => set({ isOpen: true }),

@@ -3,12 +3,11 @@
 import { useRouter } from "next/navigation";
 import { HiArrowLeft } from "react-icons/hi";
 
-import FilmGrid from "./FilmGrid";
-
-import { Film } from "@/types";
+import { TMDBFilm } from "@/types";
+import FilmGridTMDB from "./FilmGridTMDB";
 
 interface SeeMoreContentProps {
-  films: Film[];
+  films: TMDBFilm[];
 }
 
 const SeeMoreContent: React.FC<SeeMoreContentProps> = ({ films }) => {
@@ -25,7 +24,7 @@ const SeeMoreContent: React.FC<SeeMoreContentProps> = ({ films }) => {
           <span>Back</span>
         </button>
       </div>
-      <FilmGrid films={films} />
+      <FilmGridTMDB films={films} />
     </div>
   );
 };

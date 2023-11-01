@@ -4,11 +4,14 @@ import toast from "react-hot-toast";
 
 import { useUser } from "./useUser";
 import useAuthModal from "./useAuthModal";
-import { Status } from "@/types";
+import { FilmCategory, Status } from "@/types";
 import useFilmEditorModal from "./useFilmEditorModal";
 import { useRouter } from "next/navigation";
 
-const useFilmStatus = (filmId: string) => {
+const useFilmStatus = (
+  filmId: number | undefined,
+  filmCategory: FilmCategory | undefined,
+) => {
   const router = useRouter();
   const [status, setStatus] = useState(Status.UNLISTED);
   const [listed, setListed] = useState(false);
@@ -23,10 +26,11 @@ const useFilmStatus = (filmId: string) => {
 
     const { data } = await supabaseClient
       .from("status_films")
-      .select("status, date_finished")
+      .select("status, date_finished, films!inner()")
       .eq("film_id", filmId)
       .eq("user_id", user.id)
-      .maybeSingle();
+      .eq("films.category", filmCategory)
+      .maybeSingle<{ status: Status; date_finished: string }>();
 
     if (data) {
       setStatus(data.status);
@@ -45,7 +49,7 @@ const useFilmStatus = (filmId: string) => {
     if (!filmEditorModal.isOpen) fetchStatus();
   }, [filmEditorModal.isOpen]);
 
-  const addStatusHandler = async (filmId: string) => {
+  const addStatusHandler = async (filmId: number) => {
     if (!user)
       return authModal.onOpen("You need to sign in to access this content");
 

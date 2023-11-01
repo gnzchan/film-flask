@@ -33,7 +33,7 @@ const FilmStatusButton: React.FC<FilmStatusButtonProps> = ({
         className="absolute z-10 h-full w-full cursor-pointer opacity-0"
         htmlFor={status}
       />
-      <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-b from-pink-600 to-purple-600 opacity-75 blur peer-checked:scale-110 peer-checked:from-blue-600 peer-checked:to-green-600"></div>
+      {/* <div className="absolute -inset-0.5 rounded-lg bg-gradient-to-b from-pink-600 to-purple-600 opacity-75 blur peer-checked:scale-110 peer-checked:from-blue-600 peer-checked:to-green-600"></div> */}
       <div className="relative flex h-full w-full min-w-[170px] flex-row items-center justify-center gap-5 rounded-md border-gray-400 bg-neutral-700 p-3 transition-all group-hover:scale-105 peer-checked:scale-105 sm:min-h-[150px] sm:min-w-[10px] sm:flex-col sm:items-start">
         <Icon className="h-10 w-10 text-white" />
         <h2 className="text-md text-center font-semibold text-white md:text-left md:text-lg">

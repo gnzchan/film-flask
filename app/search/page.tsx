@@ -1,8 +1,6 @@
 import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
 import SearchFilmInput from "@/components/ui/SearchFilmInput";
-import { getTotalPages } from "@/libs/helpers";
-import SearchFilmContent from "./SearchFilmContent";
 import SearchFilmContentTmdb from "./SearchFilmContentTmdb";
 import { FilmCategory } from "@/types";
 
@@ -26,19 +24,12 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
           <h1 className="text-3xl font-semibold">Search</h1>
           <SearchFilmInput />
         </div>
-
         <SearchFilmContentTmdb
           propFilms={response.results}
           searchString={searchParams.title ?? ""}
           category={searchParams.category}
           totalPages={response.total_pages}
         />
-        {/* <SearchFilmContent
-          propFilms={films ?? []}
-          searchString={searchParams.title ?? ""}
-          totalPages={getTotalPages(totalResults)}
-          error={error}
-        /> */}
       </Header>
     </div>
   );
