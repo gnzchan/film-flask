@@ -39,7 +39,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {
             </div>
           </div>
           <Link href={`/film/${film.category}/${film.id}`}>
-            <Button className="rounded-sm bg-white text-black shadow-none">
+            <Button className="bg-white text-black shadow-none">
               View more
             </Button>
           </Link>

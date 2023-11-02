@@ -38,9 +38,7 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
       <div className="flex w-full scale-75 flex-col items-center justify-between sm:scale-100 sm:flex-row-reverse">
         <GenreChips genreProp={film.genres} className="hidden sm:flex" />
         <Link href={`/film/${film.category}/${film.id}`}>
-          <Button className="rounded-sm font-medium shadow-none">
-            View more info
-          </Button>
+          <Button className="font-medium shadow-none">View more info</Button>
         </Link>
       </div>
     </div>
