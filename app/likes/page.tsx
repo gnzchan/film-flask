@@ -28,7 +28,9 @@ export const metadata: Metadata = {
     siteName: "Film Flask",
     images: [
       {
-        url: "/images/ff-logo-whitebg.png",
+        url: "https://raw.githubusercontent.com/gnzchan/film-flask/main/public/images/ff-logo-whitebg.png",
+        width: 1200,
+        height: 630,
       },
     ],
     locale: "en_US",

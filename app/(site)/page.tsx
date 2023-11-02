@@ -21,6 +21,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/ff-logo-whitebg.png",
+        width: 1200,
+        height: 630,
       },
     ],
     locale: "en_US",
