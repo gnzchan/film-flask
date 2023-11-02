@@ -12,10 +12,9 @@ interface FilmProps {
   };
 }
 
-export async function generateMetadata(
-  { params }: FilmProps,
-  parent?: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: FilmProps): Promise<Metadata> {
   const film = await getFilmById(params.filmInfo[0], params.filmInfo[1]);
 
   return {
