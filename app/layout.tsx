@@ -5,7 +5,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import UserProvider from "@/components/providers/UserProvider";
-import MainPage from "@/components/ui/MainPage";
+import MainPage from "@/components/customUI/MainPage";
 import ModalProvider from "@/components/providers/ModalProvider";
 import ToasterProvider from "@/components/providers/ToasterProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={twMerge("min-w-[340px]", font.className)}>
         <ThemeProvider attribute="class">
           <ToasterProvider />

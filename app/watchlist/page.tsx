@@ -5,9 +5,9 @@ import { redirect } from "next/navigation";
 import { Metadata } from "next";
 
 import { getListedFilms } from "@/actions/getSBFilms";
-import Header from "@/components/ui/Header";
+import Header from "@/components/customUI/Header";
 import { Status } from "@/types";
-import Await from "@/components/ui/Await";
+import Await from "@/components/customUI/Await";
 import WatchListGallery from "./WatchListGallery";
 import WatchListGallerySkeleton from "./WatchListGallerySkeleton";
 import { defaultOgImg, description } from "@/constants";

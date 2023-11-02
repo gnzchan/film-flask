@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-import FilmEditorModal from "../ui/FilmEditorModal";
-import AuthModal from "../ui/AuthModal";
+import FilmEditorModal from "../customUI/FilmEditorModal";
+import AuthModal from "../customUI/AuthModal";
 
 interface ModalProviderProps {}
 

@@ -1,5 +1,5 @@
-import ScrollableFilmContent from "@/components/ui/ScrollableFilmContent";
-import SeeMoreContent from "@/components/ui/SeeMoreContent";
+import ScrollableFilmContent from "@/components/customUI/ScrollableFilmContent";
+import SeeMoreContent from "@/components/customUI/SeeMoreContent";
 import { Status, TMDBFilm } from "@/types";
 
 interface WatchListGalleryProps {

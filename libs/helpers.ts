@@ -31,3 +31,9 @@ export const getFormattedTime = (timestamptz: string) => {
 
   return formattedTime;
 };
+
+export const getLogo = (theme: string | undefined): string => {
+  return theme === "dark"
+    ? "/images/ff-logo-inverted.svg"
+    : "/images/ff-logo.svg";
+};
