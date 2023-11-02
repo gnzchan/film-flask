@@ -111,3 +111,9 @@ export const genres = [
 
 export const description =
   "Film Flask - Stream films, read overview, change watch status, and leave a review.";
+
+export const defaultOgImg = {
+  url: "https://raw.githubusercontent.com/gnzchan/film-flask/main/public/images/ff-logo-whitebg.png",
+  width: 1200,
+  height: 630,
+};

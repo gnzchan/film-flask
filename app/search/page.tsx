@@ -5,7 +5,7 @@ import Header from "@/components/ui/Header";
 import SearchFilmInput from "@/components/ui/SearchFilmInput";
 import SearchFilmContentTmdb from "./SearchFilmContentTmdb";
 import { FilmCategory } from "@/types";
-import { description } from "@/constants";
+import { defaultOgImg, description } from "@/constants";
 
 interface SearchProps {
   searchParams: {
@@ -23,11 +23,7 @@ export const metadata: Metadata = {
     description: description,
     url: "https://film-flask.vercel.app/",
     siteName: "Film Flask",
-    images: [
-      {
-        url: "/images/ff-logo-whitebg.png",
-      },
-    ],
+    images: [defaultOgImg],
     locale: "en_US",
     type: "website",
   },

@@ -7,7 +7,7 @@ import ThumbGallery from "@/app/(site)/ThumbGallery";
 import Await from "@/components/ui/Await";
 import { getTMDBFilms } from "@/actions/getSBFilms";
 import { getPopularMovies, getUpcomingMovies } from "@/actions/getTMDBFilms";
-import { description } from "@/constants";
+import { defaultOgImg, description } from "@/constants";
 
 export const metadata: Metadata = {
   title: "Film Flask - Home",
@@ -18,13 +18,7 @@ export const metadata: Metadata = {
     description: description,
     url: "https://film-flask.vercel.app/",
     siteName: "Film Flask",
-    images: [
-      {
-        url: "/images/ff-logo-whitebg.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: [defaultOgImg],
     locale: "en_US",
     type: "website",
   },

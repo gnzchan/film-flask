@@ -10,7 +10,7 @@ import { Status } from "@/types";
 import Await from "@/components/ui/Await";
 import WatchListGallery from "./WatchListGallery";
 import WatchListGallerySkeleton from "./WatchListGallerySkeleton";
-import { description } from "@/constants";
+import { defaultOgImg, description } from "@/constants";
 
 interface WatchlistProps {
   searchParams: {
@@ -27,11 +27,7 @@ export const metadata: Metadata = {
     description: description,
     url: "https://film-flask.vercel.app/",
     siteName: "Film Flask",
-    images: [
-      {
-        url: "/images/ff-logo-whitebg.png",
-      },
-    ],
+    images: [defaultOgImg],
     locale: "en_US",
     type: "website",
   },

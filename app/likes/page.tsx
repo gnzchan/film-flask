@@ -10,7 +10,7 @@ import Await from "@/components/ui/Await";
 import LikesSkeleton from "./LikesSkeleton";
 import { FilmCategory } from "@/types";
 import FilmGridTMDB from "@/components/ui/FilmGridTMDB";
-import { description } from "@/constants";
+import { defaultOgImg, description } from "@/constants";
 interface SearchProps {
   searchParams: {
     category: FilmCategory;
@@ -26,13 +26,7 @@ export const metadata: Metadata = {
     description: description,
     url: "https://film-flask.vercel.app/",
     siteName: "Film Flask",
-    images: [
-      {
-        url: "https://raw.githubusercontent.com/gnzchan/film-flask/main/public/images/ff-logo-whitebg.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: [defaultOgImg],
     locale: "en_US",
     type: "website",
   },

@@ -1,4 +1,4 @@
-import { description } from "@/constants";
+import { defaultOgImg, description } from "@/constants";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -11,11 +11,7 @@ export const metadata: Metadata = {
     description: description,
     url: "https://film-flask.vercel.app/",
     siteName: "Film Flask",
-    images: [
-      {
-        url: "/images/ff-logo-whitebg.png",
-      },
-    ],
+    images: [defaultOgImg],
     locale: "en_US",
     type: "website",
   },
