@@ -16,7 +16,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {
         alt={`Poster-${film.name ?? film.title}`}
         fill
         src={
-          film.backdrop_path
+          film.poster_path
             ? `https://image.tmdb.org/t/p/w342/${film.poster_path}`
             : "/images/movie-poster.jpg"
         }

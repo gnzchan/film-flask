@@ -16,11 +16,14 @@ export async function generateMetadata({
   params,
 }: FilmProps): Promise<Metadata> {
   const film = await getFilmById(params.filmInfo[0], params.filmInfo[1]);
+  const genreTitle = film.genres.map((g) => g.name).join(", ");
+
+  const title = `${film.title ?? film.name} | ${genreTitle} - Film Flask`;
 
   return {
-    title: `${film.title ?? film.name} - Film Flask`,
+    title,
     openGraph: {
-      title: `${film.title ?? film.name} - Film Flask`,
+      title,
       description:
         "${film.title ?? film.name}: Watch film, read overview, change status, and leave a review.",
       url: `https://film-flask.vercel.app/film/${film.category}/${film.id}`,
@@ -28,8 +31,6 @@ export async function generateMetadata({
       images: [
         {
           url: `https://image.tmdb.org/t/p/w1280/${film.backdrop_path}`,
-          height: 445,
-          width: 780,
         },
       ],
       locale: "en_US",
