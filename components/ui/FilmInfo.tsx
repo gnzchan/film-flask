@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { AiOutlineFire } from "react-icons/ai";
+import { BsPlayFill } from "react-icons/bs";
 import axios from "axios";
 
 import Button from "./Button";
@@ -93,7 +94,14 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             <p className="text-justify text-sm font-normal text-gray-600 dark:text-gray-400">
               {film.overview}
             </p>
-            <div className="flex items-center justify-center">
+            <div className="flex w-full items-center justify-center gap-5 md:justify-start">
+              <Button
+                onClick={() => console.log("Play video")}
+                className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
+              >
+                <BsPlayFill className="col-span-1 h-6 w-6" />
+                <span className="col-span-2">Play</span>
+              </Button>
               <Button onClick={handleClick} className="font-medium">
                 Change status
               </Button>
