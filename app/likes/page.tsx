@@ -18,7 +18,7 @@ interface SearchProps {
 }
 
 export const metadata: Metadata = {
-  title: "Film Flask - Liked Films",
+  title: "Film Flask - Liked",
   description: description,
   appleWebApp: true,
   openGraph: {
