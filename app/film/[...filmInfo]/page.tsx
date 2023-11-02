@@ -23,6 +23,7 @@ export async function generateMetadata({
 
   return {
     title,
+    appleWebApp: true,
     openGraph: {
       title,
       description: `${film.title ?? film.name}: ${description}`,

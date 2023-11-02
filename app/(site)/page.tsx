@@ -25,6 +25,23 @@ export const metadata: Metadata = {
   },
 };
 
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Film Flask - Home",
+    description: description,
+    appleWebApp: true,
+    openGraph: {
+      title: "Film Flask - Home",
+      description: description,
+      url: "https://film-flask.vercel.app",
+      siteName: "Film Flask",
+      images: [defaultOgImg],
+      locale: "en_US",
+      type: "website",
+    },
+  };
+}
+
 const Home = async () => {
   const popularInSBPromise = getTMDBFilms();
   const popularMoviePromise = getPopularMovies();
