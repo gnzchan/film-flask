@@ -1,8 +1,8 @@
 import { Metadata, ResolvingMetadata } from "next";
 import getFilmById from "@/actions/getFilmById";
-import FilmInfo from "@/components/ui/FilmInfo";
-import FilmTitleBar from "@/components/ui/FilmTitleBar";
-import Header from "@/components/ui/Header";
+import FilmInfo from "@/components/customUI/FilmInfo";
+import FilmTitleBar from "@/components/customUI/FilmTitleBar";
+import Header from "@/components/customUI/Header";
 import { FilmCategory } from "@/types";
 import { description } from "@/constants";
 

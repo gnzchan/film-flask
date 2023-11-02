@@ -75,7 +75,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
         style={{
           backgroundImage: `
           linear-gradient(to bottom, rgba(0, 0, 0, 0) 10%, rgb(${
-            theme === "light" ? "255, 255, 255" : "0, 0, 0"
+            theme === "dark" ? "0, 0, 0" : "255, 255, 255"
           }) 100%),
           url(${
             film.backdrop_path
