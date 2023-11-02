@@ -1,4 +1,25 @@
+import { description } from "@/constants";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Unauthenticated: Film Flask",
+  description: description,
+  appleWebApp: true,
+  openGraph: {
+    title: "Unauthenticated: Film Flask",
+    description: description,
+    url: "https://film-flask.vercel.app/",
+    siteName: "Film Flask",
+    images: [
+      {
+        url: "/images/ff-logo-whitebg.png",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 const Unauthenticated = () => {
   return (

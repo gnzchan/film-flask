@@ -1,8 +1,11 @@
+import { Metadata } from "next";
+
 import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
 import Header from "@/components/ui/Header";
 import SearchFilmInput from "@/components/ui/SearchFilmInput";
 import SearchFilmContentTmdb from "./SearchFilmContentTmdb";
 import { FilmCategory } from "@/types";
+import { description } from "@/constants";
 
 interface SearchProps {
   searchParams: {
@@ -10,6 +13,25 @@ interface SearchProps {
     category: FilmCategory;
   };
 }
+
+export const metadata: Metadata = {
+  title: "Film Flask - Search",
+  description: description,
+  appleWebApp: true,
+  openGraph: {
+    title: "Film Flask - Search",
+    description: description,
+    url: "https://film-flask.vercel.app/",
+    siteName: "Film Flask",
+    images: [
+      {
+        url: "/images/ff-logo-whitebg.png",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 const Search: React.FC<SearchProps> = async ({ searchParams }) => {
   const response = await getFilmsByTitle(

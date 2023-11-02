@@ -4,6 +4,7 @@ import FilmInfo from "@/components/ui/FilmInfo";
 import FilmTitleBar from "@/components/ui/FilmTitleBar";
 import Header from "@/components/ui/Header";
 import { FilmCategory } from "@/types";
+import { description } from "@/constants";
 
 interface FilmProps {
   params: {
@@ -24,13 +25,14 @@ export async function generateMetadata({
     title,
     openGraph: {
       title,
-      description:
-        "${film.title ?? film.name}: Watch film, read overview, change status, and leave a review.",
+      description: `${film.title ?? film.name}: ${description}`,
       url: `https://film-flask.vercel.app/film/${film.category}/${film.id}`,
       siteName: "Film Flask",
       images: [
         {
           url: `https://image.tmdb.org/t/p/w1280/${film.backdrop_path}`,
+          height: 630,
+          width: 1200,
         },
       ],
       locale: "en_US",

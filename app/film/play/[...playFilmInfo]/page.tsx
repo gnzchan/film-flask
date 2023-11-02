@@ -1,14 +1,50 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Metadata } from "next";
 
 import Header from "@/components/ui/Header";
 import { FilmCategory } from "@/types";
+import getFilmById from "@/actions/getFilmById";
+import { description } from "@/constants";
 
 interface PlayFilmProps {
   params: {
     category: string;
     playFilmInfo: [FilmCategory, string];
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: PlayFilmProps): Promise<Metadata> {
+  const film = await getFilmById(
+    params.playFilmInfo[0],
+    params.playFilmInfo[1],
+  );
+  const genreTitle = film.genres.map((g) => g.name).join(", ");
+
+  const title = `Stream  ${
+    film.title ?? film.name
+  } | ${genreTitle} - Film Flask`;
+
+  return {
+    title,
+    openGraph: {
+      title,
+      description: `Stream ${film.title ?? film.name} Online: ${description}`,
+      url: `https://film-flask.vercel.app/film/play/${film.category}/${film.id}`,
+      siteName: "Film Flask",
+      images: [
+        {
+          url: `https://image.tmdb.org/t/p/w1280/${film.backdrop_path}`,
+          height: 630,
+          width: 1200,
+        },
+      ],
+      locale: "en_US",
+      type: "website",
+    },
   };
 }
 

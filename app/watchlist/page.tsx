@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { Metadata } from "next";
 
 import { getListedFilms } from "@/actions/getSBFilms";
 import Header from "@/components/ui/Header";
@@ -9,12 +10,32 @@ import { Status } from "@/types";
 import Await from "@/components/ui/Await";
 import WatchListGallery from "./WatchListGallery";
 import WatchListGallerySkeleton from "./WatchListGallerySkeleton";
+import { description } from "@/constants";
 
 interface WatchlistProps {
   searchParams: {
     status?: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: "Film Flask - Watchlist",
+  description: description,
+  appleWebApp: true,
+  openGraph: {
+    title: "Film Flask - Watchlist",
+    description: description,
+    url: "https://film-flask.vercel.app/",
+    siteName: "Film Flask",
+    images: [
+      {
+        url: "/images/ff-logo-whitebg.png",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
   const supabase = createServerComponentClient({ cookies });

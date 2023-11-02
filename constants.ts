@@ -108,3 +108,6 @@ export const genres = [
     name: "War & Politics",
   },
 ];
+
+export const description =
+  "Film Flask - Stream films, read overview, change watch status, and leave a review.";
