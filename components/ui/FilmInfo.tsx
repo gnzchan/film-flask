@@ -17,7 +17,7 @@ import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
 import { Cast, Crew, TMDBFilm } from "@/types";
 import { getFormattedTime } from "@/libs/helpers";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface FilmInfoProps {
   film: TMDBFilm;
@@ -25,6 +25,7 @@ interface FilmInfoProps {
 
 const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   const { theme } = useTheme();
+  const router = useRouter();
   const { user } = useUser();
   const authModal = useAuthModal();
   const filmEditorModal = useFilmEditorModal();
@@ -51,11 +52,18 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
     fetchReviews();
   }, [user, film]);
 
-  const handleClick = () => {
+  const handleClickStatus = () => {
     if (!user) {
       return authModal.onOpen("You need to sign in to access this content");
     }
     return filmEditorModal.onOpen();
+  };
+
+  const handleClickPlay = () => {
+    if (!user) {
+      return authModal.onOpen("You need to sign in to access this content");
+    }
+    return router.replace(`/film/play/${film.category}/${film.id}`);
   };
 
   return (
@@ -95,14 +103,14 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
               {film.overview}
             </p>
             <div className="flex w-full items-center justify-center gap-5 md:justify-start">
-              <Link href={`/film/play/${film.category}/${film.id}`} replace>
-                <Button className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white">
-                  <BsPlayFill className="col-span-1 h-6 w-6" />
-                  <span className="col-span-2">Play</span>
-                </Button>
-              </Link>
-
-              <Button onClick={handleClick} className="font-medium">
+              <Button
+                onClick={handleClickPlay}
+                className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
+              >
+                <BsPlayFill className="col-span-1 h-6 w-6" />
+                <span className="col-span-2">Play</span>
+              </Button>
+              <Button onClick={handleClickStatus} className="font-medium">
                 Change status
               </Button>
             </div>

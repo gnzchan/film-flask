@@ -10,7 +10,7 @@ const RouterBackButton = ({ className }: { className?: string }) => {
   return (
     <button
       onClick={() => router.back()}
-      className={twMerge("h-full bg-red-500", className)}
+      className={twMerge("h-full", className)}
     >
       <RxCaretLeft className="h-6 w-6" />
     </button>
