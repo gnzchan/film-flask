@@ -32,7 +32,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   const { fetchReviews } = useFilmReviewsAndImages(film.id, film.category);
 
   const [casts, setCasts] = useState<Cast[]>([]);
-  const [crew, setCrew] = useState<Crew[]>([]);
+  const [director, setDirector] = useState<Crew | undefined>(undefined);
 
   useEffect(() => {
     filmEditorModal.setFilm(film);
@@ -43,9 +43,11 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
       );
       const castsFromApi = response.data.cast.map((cast: any) => cast);
       const crewFromApi = response.data.crew.map((cast: any) => cast);
+      const director = crewFromApi.find((crew: Crew) => crew.job === "Director")
+        ?.name;
 
       setCasts(castsFromApi);
-      setCrew(crewFromApi);
+      setDirector(director);
     };
 
     fetchCredits();
@@ -176,13 +178,15 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             ))}
           </div>
         </div>
-        <div className="flex items-center justify-center">
-          <p className="text-center">
-            <span className="text-sm text-gray-600">film by</span>
-            <br />
-            {crew.find((crew) => crew.job === "Director")?.name}
-          </p>
-        </div>
+        {director && (
+          <div className="flex items-center justify-center">
+            <p className="text-center">
+              <span className="text-sm text-gray-600">film by</span>
+              <br />
+              {director.name}
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="flex h-full flex-col gap-3 bg-white px-5 py-3 dark:bg-black">
