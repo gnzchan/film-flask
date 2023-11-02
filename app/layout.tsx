@@ -10,15 +10,25 @@ import ModalProvider from "@/components/providers/ModalProvider";
 import ToasterProvider from "@/components/providers/ToasterProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { twMerge } from "tailwind-merge";
+import { defaultOgImg, description } from "@/constants";
 
 const font = Inter({ subsets: ["latin"] });
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Film Flask",
-  description: "A storage for films, made for Jessa",
+  title: "Film Flask - Home",
+  description: description,
   appleWebApp: true,
+  openGraph: {
+    title: "Film Flask - Home",
+    description: description,
+    url: "https://film-flask.vercel.app/",
+    siteName: "Film Flask",
+    images: [defaultOgImg],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
