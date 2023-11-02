@@ -3,6 +3,7 @@ import "./globals.css";
 
 // change font
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import UserProvider from "@/components/providers/UserProvider";
 import MainPage from "@/components/ui/MainPage";
 import ModalProvider from "@/components/providers/ModalProvider";
@@ -44,7 +45,10 @@ export default function RootLayout({
           <SupabaseProvider>
             <UserProvider>
               <ModalProvider />
-              <MainPage>{children}</MainPage>
+              <MainPage>
+                {children}
+                <Analytics />
+              </MainPage>
             </UserProvider>
           </SupabaseProvider>
         </ThemeProvider>
