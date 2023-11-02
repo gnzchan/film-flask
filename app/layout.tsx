@@ -13,9 +13,12 @@ import { twMerge } from "tailwind-merge";
 import { Metadata } from "next";
 import { defaultOgImg, description } from "@/constants";
 
-// const font = Inter({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://film-flask.vercel.app/"),
   title: "Film Flask - Home",
   description: description,
   appleWebApp: true,
@@ -37,12 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={twMerge(
-          "min-w-[340px]",
-          // , font.className
-        )}
-      >
+      <body className={twMerge("min-w-[340px]", font.className)}>
         <ThemeProvider attribute="class">
           <ToasterProvider />
           <SupabaseProvider>
