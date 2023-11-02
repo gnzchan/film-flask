@@ -9,8 +9,6 @@ import { getLogo } from "@/libs/helpers";
 import ThemeSwitcher from "./ThemeSwitcher";
 import MobileSidebar from "./MobileSidebar";
 
-import useSidebar from "@/hooks/useSidebar";
-
 interface HeaderProps {
   children?: React.ReactNode;
   className?: string;

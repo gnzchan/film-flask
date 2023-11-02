@@ -80,6 +80,7 @@ const Sidebar: React.FC = () => {
             if ((route.requiresAuth && user) || !route.requiresAuth)
               return (
                 <SidebarItem
+                  key={route.href}
                   icon={route.icon}
                   href={route.href}
                   label={route.label}

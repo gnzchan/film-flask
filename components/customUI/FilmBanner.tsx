@@ -4,7 +4,6 @@ import { useTheme } from "next-themes";
 import Button from "./Button";
 
 import { TMDBFilm } from "@/types";
-import { genres } from "@/constants";
 import GenreChips from "./GenreChips";
 
 interface FilmBannerProps {
@@ -22,7 +21,7 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
       style={{
         backgroundImage: `
           linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgb(${
-            theme === "light" ? "255, 255, 255" : "0, 0, 0"
+            theme === "dark" ? "0, 0, 0" : "255, 255, 255"
           }) 100%),
           url(${
             film.backdrop_path
