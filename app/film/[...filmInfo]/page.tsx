@@ -29,6 +29,8 @@ export async function generateMetadata(
       images: [
         {
           url: `https://image.tmdb.org/t/p/w1280/${film.backdrop_path}`,
+          height: 720,
+          width: 1280,
         },
       ],
     },
