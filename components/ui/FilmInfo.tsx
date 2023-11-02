@@ -15,7 +15,7 @@ import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
-import { Cast, Crew, TMDBFilm } from "@/types";
+import { Cast, Crew, FilmCategory, TMDBFilm } from "@/types";
 import { getFormattedTime } from "@/libs/helpers";
 import { useRouter } from "next/navigation";
 
@@ -103,13 +103,15 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
               {film.overview}
             </p>
             <div className="flex w-full items-center justify-center gap-5 md:justify-start">
-              <Button
-                onClick={handleClickPlay}
-                className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
-              >
-                <BsPlayFill className="col-span-1 h-6 w-6" />
-                <span className="col-span-2">Play</span>
-              </Button>
+              {film.category === FilmCategory.MOVIE && (
+                <Button
+                  onClick={handleClickPlay}
+                  className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
+                >
+                  <BsPlayFill className="col-span-1 h-6 w-6" />
+                  <span className="col-span-2">Play</span>
+                </Button>
+              )}
               <Button onClick={handleClickStatus} className="font-medium">
                 Change status
               </Button>
