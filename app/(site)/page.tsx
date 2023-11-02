@@ -20,7 +20,9 @@ export default async function Home() {
 
   return (
     <div className="flex h-full flex-col">
-      <Header className="absolute left-0 right-0 top-0 z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
+      <div className="relative">
+        <Header className="absolute left-0 right-0 top-0 z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
+      </div>
       <div className="flex h-full items-center justify-center">
         <div className="h-full w-full max-w-[1700px]">
           <Suspense fallback={<ThumbGallerySkeleton />}>
