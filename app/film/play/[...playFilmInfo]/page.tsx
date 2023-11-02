@@ -1,3 +1,7 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+
 import Header from "@/components/ui/Header";
 import { FilmCategory } from "@/types";
 
@@ -9,6 +13,15 @@ interface PlayFilmProps {
 }
 
 const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
+  const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    redirect("/unauthenticated");
+  }
+
   const videoUrl = `https://vidsrc.me/embed/${params.playFilmInfo[0]}?tmdb=${params.playFilmInfo[1]}&color=18181b`;
 
   return (
