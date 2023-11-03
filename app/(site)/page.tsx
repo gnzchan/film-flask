@@ -7,23 +7,6 @@ import Header from "@/components/customUI/Header";
 import Await from "@/components/customUI/Await";
 import { getTMDBFilms } from "@/actions/getSBFilms";
 import { getPopularMovies, getUpcomingMovies } from "@/actions/getTMDBFilms";
-import { defaultOgImg, description } from "@/constants";
-
-export const metadata: Metadata = {
-  metadataBase: new URL("https://film-flask.vercel.app"),
-  title: "Film Flask - Home",
-  description: description,
-  appleWebApp: true,
-  openGraph: {
-    title: "Film Flask - Home",
-    description: description,
-    url: "https://film-flask.vercel.app",
-    siteName: "Film Flask",
-    images: [defaultOgImg],
-    locale: "en_US",
-    type: "website",
-  },
-};
 
 const Home = async () => {
   const popularInSBPromise = getTMDBFilms();
