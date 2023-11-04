@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
 
-import { getLogo } from "@/libs/helpers";
+import FFLightLogo from "../../public/images/ff-logo.svg";
+import FFDarkLogo from "../../public/images/ff-logo-inverted.svg";
 import ThemeSwitcher from "./ThemeSwitcher";
 import MobileSidebar from "./MobileSidebar";
 
@@ -32,10 +33,18 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         <Link href="/">
           <div className="relative aspect-auto min-h-[50px]">
             <Image
-              src={getLogo(theme)}
+              src={FFLightLogo}
               alt="Film Flask Logo"
               fill
               priority={true}
+              className="dark:hidden"
+            />
+            <Image
+              src={FFDarkLogo}
+              alt="Film Flask Logo"
+              fill
+              priority={true}
+              className="hidden dark:block"
             />
           </div>
         </Link>

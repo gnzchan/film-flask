@@ -12,7 +12,8 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 
 import SidebarItem from "./SidebarItem";
-import { getLogo } from "@/libs/helpers";
+import FFLightLogo from "../../public/images/ff-logo.svg";
+import FFDarkLogo from "../../public/images/ff-logo-inverted.svg";
 import useSidebar from "@/hooks/useSidebar";
 import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
@@ -68,10 +69,18 @@ const Sidebar: React.FC = () => {
         <Link href="/" onClick={onClose}>
           <div className="relative aspect-auto min-h-[90px]">
             <Image
-              src={getLogo(theme)}
+              src={FFLightLogo}
               alt="Film Flask Logo"
               fill
               priority={true}
+              className="dark:hidden"
+            />
+            <Image
+              src={FFDarkLogo}
+              alt="Film Flask Logo"
+              fill
+              priority={true}
+              className="hidden dark:block"
             />
           </div>
         </Link>

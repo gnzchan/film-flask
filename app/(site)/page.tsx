@@ -13,7 +13,7 @@ const Home = async () => {
   const popularMoviePromise = getPopularMovies();
   const upcomingMoviePromise = getUpcomingMovies();
 
-  const promise = Promise.all([
+  const data = await Promise.all([
     popularInSBPromise,
     popularMoviePromise,
     upcomingMoviePromise,
@@ -24,7 +24,12 @@ const Home = async () => {
       <Header className="absolute left-0 right-0 top-0 z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
       <div className="flex h-full items-center justify-center">
         <div className="h-full w-full max-w-[1700px]">
-          <Suspense fallback={<ThumbGallerySkeleton />}>
+          <ThumbGallery
+            films={data[0]}
+            popularMovies={data[1]}
+            upcomingMovies={data[2]}
+          />
+          {/* <Suspense fallback={<ThumbGallerySkeleton />}>
             <Await promise={promise}>
               {(data) => (
                 <ThumbGallery
@@ -34,7 +39,7 @@ const Home = async () => {
                 />
               )}
             </Await>
-          </Suspense>
+          </Suspense> */}
         </div>
       </div>
     </div>

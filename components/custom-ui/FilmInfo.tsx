@@ -157,7 +157,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
                 className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
               >
                 {epLoading ? (
-                  <Spinner />
+                  <Spinner className="h-6 w-6" />
                 ) : (
                   <BsPlayFill className="col-span-1 h-6 w-6" />
                 )}

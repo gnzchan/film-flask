@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={twMerge("min-w-[340px]", font.className)}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" enableSystem>
           <ToasterProvider />
           <SupabaseProvider>
             <UserProvider>
