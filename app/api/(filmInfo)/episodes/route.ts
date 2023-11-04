@@ -16,5 +16,3 @@ export const GET = async (request: Request) => {
 
   return NextResponse.json(SeasonDetails);
 };
-
-// 'https://api.themoviedb.org/3/tv/88463/season/2?language=en-US' \

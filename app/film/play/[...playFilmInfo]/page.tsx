@@ -7,7 +7,6 @@ import Header from "@/components/customUI/Header";
 import { FilmCategory } from "@/types";
 import getFilmById from "@/actions/getFilmById";
 import { description } from "@/constants";
-import axios from "axios";
 
 interface PlayFilmProps {
   params: {
@@ -64,13 +63,6 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
   const tvUrl = `https://vidsrc.me/embed/tv?tmdb=${params.playFilmInfo[1]}&season=${params.playFilmInfo[2]}&episode=${params.playFilmInfo[3]}&color=18181b`;
 
   const isMovie = params.playFilmInfo[0] === FilmCategory.MOVIE;
-
-  // try {
-  //   const res = await axios.get(isMovie ? movieUrl : tvUrl);
-  //   console.log(res);
-  // } catch (error) {
-  //   console.log(error);
-  // }
 
   return (
     <div className="h-full">
