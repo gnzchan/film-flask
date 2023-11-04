@@ -1,10 +1,5 @@
-import { Suspense } from "react";
-import { Metadata } from "next";
-
-import ThumbGallerySkeleton from "./ThumbGallerySkeleton";
 import ThumbGallery from "@/app/(site)/ThumbGallery";
 import Header from "@/components/custom-ui/Header";
-import Await from "@/components/custom-ui/Await";
 import { getTMDBFilms } from "@/actions/getSBFilms";
 import { getPopularMovies, getUpcomingMovies } from "@/actions/getTMDBFilms";
 
