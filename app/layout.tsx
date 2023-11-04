@@ -5,7 +5,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import UserProvider from "@/components/providers/UserProvider";
-import MainPage from "@/components/customUI/MainPage";
+import MainPage from "@/components/custom-ui/MainPage";
 import ModalProvider from "@/components/providers/ModalProvider";
 import ToasterProvider from "@/components/providers/ToasterProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";

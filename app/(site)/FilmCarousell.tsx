@@ -1,5 +1,5 @@
 import { TMDBFilm } from "@/types";
-import FilmItemTMDB from "@/components/customUI/FilmItemTMDB";
+import FilmItemTMDB from "@/components/custom-ui/FilmItemTMDB";
 
 interface FilmCarousellProps {
   title: string;

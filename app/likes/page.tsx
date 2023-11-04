@@ -5,11 +5,11 @@ import { cookies } from "next/headers";
 import { Metadata } from "next";
 
 import { getLikedFilms } from "@/actions/getSBFilms";
-import Header from "@/components/customUI/Header";
-import Await from "@/components/customUI/Await";
+import Header from "@/components/custom-ui/Header";
+import Await from "@/components/custom-ui/Await";
 import LikesSkeleton from "./LikesSkeleton";
 import { FilmCategory } from "@/types";
-import FilmGridTMDB from "@/components/customUI/FilmGridTMDB";
+import FilmGridTMDB from "@/components/custom-ui/FilmGridTMDB";
 import { defaultOgImg, description } from "@/constants";
 interface SearchProps {
   searchParams: {

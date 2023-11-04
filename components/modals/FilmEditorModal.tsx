@@ -5,9 +5,9 @@ import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { IoMdDoneAll } from "react-icons/io";
 
 import Modal from "./Modal";
-import FilmStatusButton from "./FilmStatusButton";
-import Button from "./Button";
-import UploadImage from "./UploadImage";
+import FilmStatusButton from "../custom-ui/FilmStatusButton";
+import Button from "../custom-ui/Button";
+import UploadImage from "../custom-ui/UploadImage";
 
 import { Status } from "@/types";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";

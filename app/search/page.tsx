@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
-import Header from "@/components/customUI/Header";
-import SearchFilmInput from "@/components/customUI/SearchFilmInput";
+import Header from "@/components/custom-ui/Header";
+import SearchFilmInput from "@/components/custom-ui/SearchFilmInput";
 import SearchFilmContentTmdb from "./SearchFilmContentTmdb";
 import { FilmCategory } from "@/types";
 import { defaultOgImg, description } from "@/constants";

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Metadata } from "next";
 
-import Header from "@/components/customUI/Header";
+import Header from "@/components/custom-ui/Header";
 import { FilmCategory } from "@/types";
 import getFilmById from "@/actions/getFilmById";
 import { description } from "@/constants";

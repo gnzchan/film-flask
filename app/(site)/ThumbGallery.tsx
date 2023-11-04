@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import FilmBanner from "../../components/customUI/FilmBanner";
+import FilmBanner from "../../components/custom-ui/FilmBanner";
 
 import { TMDBFilm, TMDBSearchFilm } from "@/types";
 import FilmCarousell from "./FilmCarousell";

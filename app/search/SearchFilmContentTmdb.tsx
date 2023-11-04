@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-import Spinner from "../../components/customUI/Spinner";
+import Spinner from "../../components/custom-ui/Spinner";
 
 import { FilmCategory, TMDBSearchFilm } from "@/types";
 import { delay } from "@/libs/helpers";
 import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
-import FilmGridTMDB from "@/components/customUI/FilmGridTMDB";
+import FilmGridTMDB from "@/components/custom-ui/FilmGridTMDB";
 
 interface SearchFilmContentTmdbProps {
   propFilms: TMDBSearchFilm[];
