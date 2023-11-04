@@ -40,7 +40,7 @@ const EpSelectModal = () => {
     >
       <div className="flex flex-col gap-4">
         {epSelectModal.episodes.map((episode, i) => (
-          <div className="flex flex-col justify-center gap-2">
+          <div key={episode.id} className="flex flex-col justify-center gap-2">
             <div className="flex w-full gap-2">
               <div
                 onClick={() => handleClickPlay(episode.episode_number)}
