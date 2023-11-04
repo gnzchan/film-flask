@@ -55,6 +55,12 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   const [episodes, setEpisodes] = useState<SeasonEpisode[]>([]);
   const [epLoading, setEpLoading] = useState(true);
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     filmEditorModal.setFilm(film);
 
@@ -114,6 +120,17 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
     await fetchEpisodes(seasonInput);
   };
 
+  if (!mounted) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-7">
+        <Spinner />
+        <p className="animate-pulse text-sm font-light text-neutral-700 dark:text-neutral-300">
+          Almost there, just a few more seconds...
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-full flex-col">
       <div
@@ -153,10 +170,10 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             <div className="flex w-full flex-col items-center justify-center gap-5 sm:flex-row md:justify-start">
               <Button
                 onClick={handleClickPlay}
-                disabled={epLoading}
+                disabled={film.category === FilmCategory.TV && epLoading}
                 className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
               >
-                {epLoading ? (
+                {film.category === FilmCategory.TV && epLoading ? (
                   <Spinner className="h-6 w-6" />
                 ) : (
                   <BsPlayFill className="col-span-1 h-6 w-6" />
@@ -170,7 +187,13 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
                   defaultValue={film.number_of_seasons.toString()}
                 >
                   <SelectTrigger className="w-[150px] max-w-[360px] rounded-sm border border-gray-300 border-transparent bg-white text-black shadow-lg shadow-zinc-300 transition hover:opacity-75 dark:border-gray-300 dark:bg-black dark:text-white dark:shadow-none">
-                    <SelectValue />
+                    {epLoading ? (
+                      <div className="flex w-full items-center justify-center">
+                        <Spinner className="h-6 w-6" />
+                      </div>
+                    ) : (
+                      <SelectValue />
+                    )}
                   </SelectTrigger>
                   <SelectContent className="w-[150px] max-w-[360px] rounded-sm border border-gray-300 border-transparent bg-white text-black shadow-lg shadow-zinc-300 transition hover:opacity-75 dark:border-gray-300 dark:bg-black dark:text-white dark:shadow-none">
                     {film.seasons.map((season) => (

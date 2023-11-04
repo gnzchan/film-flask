@@ -38,14 +38,15 @@ const EpSelectModal = () => {
       isOpen={epSelectModal.isOpen}
       onChange={onChangeHandler}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         {epSelectModal.episodes.map((episode, i) => (
-          <div key={episode.id} className="flex flex-col justify-center gap-2">
+          <div
+            key={episode.id}
+            onClick={() => handleClickPlay(episode.episode_number)}
+            className="group flex scale-95 cursor-pointer flex-col justify-center gap-2 py-2 transition hover:scale-100"
+          >
             <div className="flex w-full gap-2">
-              <div
-                onClick={() => handleClickPlay(episode.episode_number)}
-                className="group relative aspect-video min-w-[140px] cursor-pointer shadow-zinc-900 drop-shadow-lg sm:min-w-[185px]"
-              >
+              <div className="relative aspect-video min-w-[140px] shadow-zinc-900 drop-shadow-lg sm:min-w-[185px]">
                 <Image
                   src={
                     episode.still_path
@@ -58,16 +59,16 @@ const EpSelectModal = () => {
                   sizes="(max-width: 342px) 100vw"
                   className="rounded-md group-hover:blur-sm"
                 />
-                <div className="absolute left-[50%] top-[50%] z-[100] -ml-3 -mt-3 opacity-0 transition group-hover:opacity-100">
+                <div className="absolute left-[50%] top-[50%] z-[100] -ml-3 -mt-3 opacity-0 group-hover:opacity-100">
                   <BsPlayCircle className="h-6 w-6 text-white" />
                 </div>
               </div>
-              <div className="flex flex-col justify-center text-sm">
+              <div className="flex flex-col justify-center text-sm font-bold">
                 <p>{`${i + 1}. ${episode.name}`}</p>
                 <p>{`${episode.runtime}m`}</p>
               </div>
             </div>
-            <p className="text-xs text-neutral-700 dark:text-neutral-300">
+            <p className="text-xs font-medium text-neutral-700 dark:text-neutral-300">
               {episode.overview}
             </p>
           </div>
