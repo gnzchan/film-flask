@@ -24,6 +24,7 @@ const ThumbGallerySkeleton = () => {
       window.removeEventListener("resize", updateArraySize);
     };
   }, []);
+
   return (
     <div className="flex h-full flex-col bg-white dark:bg-black">
       <div className="mb-5 flex aspect-video h-[60%] w-full flex-col items-center justify-end bg-gray-300 p-1 sm:items-start sm:p-5">

@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import useEpSelectModal from "@/hooks/useEpSelectModal";
+import Spinner from "./Spinner";
 
 interface FilmInfoProps {
   film: TMDBFilm;
@@ -52,7 +53,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   const epSelectModal = useEpSelectModal();
   const [season, setSeason] = useState(film?.number_of_seasons);
   const [episodes, setEpisodes] = useState<SeasonEpisode[]>([]);
-  const [epLoading, setEpLoading] = useState(false);
+  const [epLoading, setEpLoading] = useState(true);
 
   useEffect(() => {
     filmEditorModal.setFilm(film);
@@ -155,18 +156,23 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
                 disabled={epLoading}
                 className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
               >
-                <BsPlayFill className="col-span-1 h-6 w-6" />
+                {epLoading ? (
+                  <Spinner />
+                ) : (
+                  <BsPlayFill className="col-span-1 h-6 w-6" />
+                )}
                 <span className="col-span-2">Play</span>
               </Button>
               {film.category === FilmCategory.TV && (
-                <Select onValueChange={handleSeasonChange}>
-                  <SelectTrigger className="w-[150px] max-w-[360px] sm:w-full">
-                    <SelectValue
-                      placeholder={`Season ${film.number_of_seasons}`}
-                      defaultValue={film.number_of_seasons}
-                    />
+                <Select
+                  onValueChange={handleSeasonChange}
+                  disabled={epLoading}
+                  defaultValue={film.number_of_seasons.toString()}
+                >
+                  <SelectTrigger className="w-[150px] max-w-[360px] rounded-sm border border-gray-300 border-transparent bg-white text-black shadow-lg shadow-zinc-300 transition hover:opacity-75 dark:border-gray-300 dark:bg-black dark:text-white dark:shadow-none">
+                    <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="w-[150px] max-w-[360px] sm:w-full">
+                  <SelectContent className="w-[150px] max-w-[360px] rounded-sm border border-gray-300 border-transparent bg-white text-black shadow-lg shadow-zinc-300 transition hover:opacity-75 dark:border-gray-300 dark:bg-black dark:text-white dark:shadow-none">
                     {film.seasons.map((season) => (
                       <SelectItem
                         key={season.id}

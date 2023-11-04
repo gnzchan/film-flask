@@ -56,7 +56,7 @@ const EpSelectModal = () => {
                   priority={true}
                   fill
                   sizes="(max-width: 342px) 100vw"
-                  className="rounded-md"
+                  className="rounded-md group-hover:blur-sm"
                 />
                 <div className="absolute left-[50%] top-[50%] z-[100] -ml-3 -mt-3 opacity-0 transition group-hover:opacity-100">
                   <BsPlayCircle className="h-6 w-6 text-white" />
@@ -67,7 +67,9 @@ const EpSelectModal = () => {
                 <p>{`${episode.runtime}m`}</p>
               </div>
             </div>
-            <p className="text-xs">{episode.overview}</p>
+            <p className="text-xs text-neutral-700 dark:text-neutral-300">
+              {episode.overview}
+            </p>
           </div>
         ))}
       </div>

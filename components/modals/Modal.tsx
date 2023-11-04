@@ -19,30 +19,33 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <Dialog.Root open={isOpen} defaultOpen={isOpen} onOpenChange={onChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-[100] bg-neutral-900/90 backdrop-blur-sm" />
+        <Dialog.Overlay className="fixed inset-0 z-[100] bg-neutral-100/90 backdrop-blur-sm dark:bg-neutral-900/90" />
         <Dialog.Content
-          className="fixed
-            left-[50%] 
-            top-[50%]
-            z-[110] 
-            max-h-[85vh]
-            w-[90vw] 
+          className="
+            fixed
+            left-[50%]
+            top-[50%] 
+            z-[110]
+            max-h-[85vh] 
+            w-[90vw]
             translate-x-[-50%] 
             translate-y-[-50%] 
+            overflow-hidden 
             overflow-y-auto 
             rounded-md 
             border 
             border-neutral-700 
             bg-neutral-100
-            p-[25px] 
+            p-[25px]
             focus:outline-none 
+            dark:bg-neutral-900 
             md:h-auto 
             md:max-h-[85vh] 
             md:w-[90vw] 
             md:max-w-[650px]
             "
         >
-          <Dialog.Title className="mb-4 text-center text-xl font-bold dark:text-neutral-800">
+          <Dialog.Title className="mb-4 text-center text-xl font-bold dark:text-white">
             {title}
           </Dialog.Title>
           <Dialog.Description
@@ -51,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({
             text-center
             text-sm
             leading-normal
-            dark:text-neutral-800
+            dark:text-white
             "
           >
             {description}
