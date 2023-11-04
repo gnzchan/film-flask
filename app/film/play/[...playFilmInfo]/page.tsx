@@ -7,11 +7,12 @@ import Header from "@/components/customUI/Header";
 import { FilmCategory } from "@/types";
 import getFilmById from "@/actions/getFilmById";
 import { description } from "@/constants";
+import axios from "axios";
 
 interface PlayFilmProps {
   params: {
     category: string;
-    playFilmInfo: [FilmCategory, string];
+    playFilmInfo: [FilmCategory, string, string, string];
   };
 }
 
@@ -59,7 +60,17 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
     redirect("/unauthenticated");
   }
 
-  const videoUrl = `https://vidsrc.me/embed/${params.playFilmInfo[0]}?tmdb=${params.playFilmInfo[1]}&color=18181b`;
+  const movieUrl = `https://vidsrc.me/embed/movie?tmdb=${params.playFilmInfo[1]}&color=18181b`;
+  const tvUrl = `https://vidsrc.me/embed/tv?tmdb=${params.playFilmInfo[1]}&season=${params.playFilmInfo[2]}&episode=${params.playFilmInfo[3]}&color=18181b`;
+
+  const isMovie = params.playFilmInfo[0] === FilmCategory.MOVIE;
+
+  // try {
+  //   const res = await axios.get(isMovie ? movieUrl : tvUrl);
+  //   console.log(res);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   return (
     <div className="h-full">
@@ -67,7 +78,7 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
         <Header className="absolute left-0 right-0 top-0 z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
       </div>
       <iframe
-        src={videoUrl}
+        src={isMovie ? movieUrl : tvUrl}
         className="aspect-video h-full w-full"
         allowFullScreen
       ></iframe>

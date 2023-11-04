@@ -77,7 +77,7 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   };
 
   const content = isAllPagesLoaded ? (
-    <p className="text-md font-normal text-gray-400">
+    <p className="text-center text-sm font-light text-neutral-400  dark:text-neutral-300">
       {films.length !== 0
         ? "You're all caught up"
         : "Enter movie title or keywords"}

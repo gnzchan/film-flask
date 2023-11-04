@@ -15,9 +15,24 @@ import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
-import { Cast, Crew, FilmCategory, TMDBFilm } from "@/types";
+import {
+  Cast,
+  Crew,
+  Episode,
+  FilmCategory,
+  SeasonEpisode,
+  TMDBFilm,
+} from "@/types";
 import { getFormattedTime } from "@/libs/helpers";
 import { useRouter } from "next/navigation";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import useEpSelectModal from "@/hooks/useEpSelectModal";
 
 interface FilmInfoProps {
   film: TMDBFilm;
@@ -33,6 +48,11 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
 
   const [casts, setCasts] = useState<Cast[]>([]);
   const [director, setDirector] = useState<Crew | undefined>(undefined);
+
+  const epSelectModal = useEpSelectModal();
+  const [season, setSeason] = useState(film?.number_of_seasons);
+  const [episodes, setEpisodes] = useState<SeasonEpisode[]>([]);
+  const [epLoading, setEpLoading] = useState(false);
 
   useEffect(() => {
     filmEditorModal.setFilm(film);
@@ -50,9 +70,23 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
       setDirector(director);
     };
 
+    if (film.category === FilmCategory.TV) {
+      fetchEpisodes(film.number_of_seasons.toString());
+    }
+
     fetchCredits();
     fetchReviews();
   }, [user, film]);
+
+  const fetchEpisodes = async (season: string | number) => {
+    setEpLoading(true);
+    const response = await axios.get(
+      `/api/episodes?category=${film.category}&id=${film.id}&season=${season}`,
+    );
+
+    setEpisodes(response.data.episodes);
+    setEpLoading(false);
+  };
 
   const handleClickStatus = () => {
     if (!user) {
@@ -65,7 +99,18 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
     if (!user) {
       return authModal.onOpen("You need to sign in to access this content");
     }
+
+    if (film.category === FilmCategory.TV) {
+      return epSelectModal.onOpen(film.name, episodes, film.id, season);
+    }
+
     return router.replace(`/film/play/${film.category}/${film.id}`);
+  };
+
+  const handleSeasonChange = async (seasonInput: string) => {
+    const value = parseInt(seasonInput);
+    setSeason(value);
+    await fetchEpisodes(seasonInput);
   };
 
   return (
@@ -104,17 +149,39 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             <p className="text-justify text-sm font-normal text-gray-600 dark:text-gray-400">
               {film.overview}
             </p>
-            <div className="flex w-full items-center justify-center gap-5 md:justify-start">
-              {film.category === FilmCategory.MOVIE && (
-                <Button
-                  onClick={handleClickPlay}
-                  className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
-                >
-                  <BsPlayFill className="col-span-1 h-6 w-6" />
-                  <span className="col-span-2">Play</span>
-                </Button>
+            <div className="flex w-full flex-col items-center justify-center gap-5 sm:flex-row md:justify-start">
+              <Button
+                onClick={handleClickPlay}
+                disabled={epLoading}
+                className="grid grid-cols-3 items-center bg-white font-medium text-black shadow-lg shadow-zinc-300 dark:bg-black dark:text-white"
+              >
+                <BsPlayFill className="col-span-1 h-6 w-6" />
+                <span className="col-span-2">Play</span>
+              </Button>
+              {film.category === FilmCategory.TV && (
+                <Select onValueChange={handleSeasonChange}>
+                  <SelectTrigger className="w-[150px] max-w-[360px] sm:w-full">
+                    <SelectValue
+                      placeholder={`Season ${film.number_of_seasons}`}
+                      defaultValue={film.number_of_seasons}
+                    />
+                  </SelectTrigger>
+                  <SelectContent className="w-[150px] max-w-[360px] sm:w-full">
+                    {film.seasons.map((season) => (
+                      <SelectItem
+                        className="w-[150px] max-w-[360px] truncate focus:outline-none sm:w-full"
+                        value={season.season_number.toString()}
+                      >
+                        {`Season ${season.season_number}`}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               )}
-              <Button onClick={handleClickStatus} className="font-medium">
+              <Button
+                onClick={handleClickStatus}
+                className="min-w-[150px] font-medium"
+              >
                 Change status
               </Button>
             </div>

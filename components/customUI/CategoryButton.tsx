@@ -13,8 +13,8 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
 }) => {
   return (
     <div
-      className={`mx-1 h-full w-full rounded-md bg-white px-3 py-2 text-black transition ${
-        checked ? "scale-105" : "scale-95"
+      className={`mx-1 h-full w-full rounded-full px-3 transition hover:bg-white hover:text-black ${
+        checked ? "bg-white text-black" : "bg-transparent text-gray-400"
       }`}
     >
       <input

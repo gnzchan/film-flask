@@ -89,16 +89,7 @@ export interface TMDBFilm {
   release_date: string;
   revenue: number;
   runtime: number;
-  seasons: {
-    air_date: string;
-    episode_count: number;
-    id: number;
-    name: string;
-    overview: string;
-    poster_path: string;
-    season_number: number;
-    vote_average: number;
-  }[];
+  seasons: Episode[];
   spoken_languages: { english_name: string; iso_639_1: string; name: string }[];
   status: string;
   tagline: string;
@@ -107,6 +98,58 @@ export interface TMDBFilm {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface SeasonDetails {
+  _id: string;
+  air_date: string;
+  episodes: SeasonEpisode[];
+  name: string;
+  overview: string;
+  id: number;
+  //  316430;
+  poster_path: string;
+  //  "/zFWbjV3LfeCFY08Brn9yIQoAJqi.jpg";
+  season_number: number;
+  vote_average: number;
+}
+
+export interface SeasonEpisode {
+  air_date: string;
+  // "2023-09-09";
+  episode_number: number;
+  episode_type: string;
+  // "standard";
+  id: number;
+  // 4054864;
+  name: string;
+  // "The Weak Ones";
+  overview: string;
+  // "Eight years has passed since Tagon took the throne as the second coming of Aramun. Eunseom succeeded in uniting the Ago clans as the second coming of Inaishingi and he leads them to the great war against Arthdal. Meanwhile, Saya must prove his worth to succeed Tagon.";
+  production_code: string;
+  runtime: number;
+  // 77;
+  season_number: number;
+  //  2;
+  show_id: number;
+  // 88463;
+  still_path: string;
+  //  "/qSODPHsZR1AbrnIqaVstqWPS12C.jpg";
+  vote_average: number;
+  // 10;
+  vote_count: number;
+  // 2;
+}
+
+export interface Episode {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
 }
 export interface CreditsResponse {
   id: number;

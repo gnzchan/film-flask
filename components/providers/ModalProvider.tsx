@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import FilmEditorModal from "../customUI/FilmEditorModal";
 import AuthModal from "../customUI/AuthModal";
+import EpSelectModal from "../customUI/EpSelectModal";
 
 interface ModalProviderProps {}
 
@@ -22,6 +23,7 @@ const ModalProvider: React.FC<ModalProviderProps> = () => {
     <>
       <FilmEditorModal />
       <AuthModal />
+      <EpSelectModal />
     </>
   );
 };
