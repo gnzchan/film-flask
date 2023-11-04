@@ -169,6 +169,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
                   <SelectContent className="w-[150px] max-w-[360px] sm:w-full">
                     {film.seasons.map((season) => (
                       <SelectItem
+                        key={season.id}
                         className="w-[150px] max-w-[360px] truncate focus:outline-none sm:w-full"
                         value={season.season_number.toString()}
                       >
