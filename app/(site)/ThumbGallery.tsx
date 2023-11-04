@@ -46,7 +46,7 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
   return (
     <div className="flex h-full flex-col bg-white dark:bg-black">
       <FilmBanner film={activeFilm} />
-      <div className="no-scrollbar flex h-[40%] snap-y flex-col overflow-y-auto">
+      <div className="no-scrollbar flex h-[40%] min-h-[270px] snap-y flex-col overflow-y-auto">
         <FilmCarousell
           title="Popular on Film Flask"
           films={films}

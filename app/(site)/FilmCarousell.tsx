@@ -25,8 +25,9 @@ const FilmCarousell: React.FC<FilmCarousellProps> = ({
             key={film.id}
             className="ml-3 aspect-[3/4] h-full"
             onClick={() => handleSetFilm(film)}
+            onTouchStart={() => handleSetFilm(film)}
           >
-            <FilmItemTMDB film={film} />
+            <FilmItemTMDB film={film} />  
           </div>
         ))}
       </div>

@@ -24,17 +24,6 @@ const Home = async () => {
             popularMovies={data[1]}
             upcomingMovies={data[2]}
           />
-          {/* <Suspense fallback={<ThumbGallerySkeleton />}>
-            <Await promise={promise}>
-              {(data) => (
-                <ThumbGallery
-                  films={data[0]}
-                  popularMovies={data[1]}
-                  upcomingMovies={data[2]}
-                />
-              )}
-            </Await>
-          </Suspense> */}
         </div>
       </div>
     </div>
