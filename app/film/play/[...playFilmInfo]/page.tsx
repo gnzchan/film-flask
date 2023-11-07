@@ -55,14 +55,16 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
     data: { session },
   } = await supabase.auth.getSession();
 
+  const streamUrl = process.env.STREAM_URL;
+
   if (!session) {
     redirect("/unauthenticated");
   }
 
-  const movieUrl = `https://vidsrc.me/embed/movie?tmdb=${params.playFilmInfo[1]}&color=18181b`;
-  const tvUrl = `https://vidsrc.me/embed/tv?tmdb=${params.playFilmInfo[1]}&season=${params.playFilmInfo[2]}&episode=${params.playFilmInfo[3]}&color=18181b`;
-
-  const isMovie = params.playFilmInfo[0] === FilmCategory.MOVIE;
+  const url =
+    params.playFilmInfo[0] === FilmCategory.MOVIE
+      ? `${streamUrl}/movie?tmdb=${params.playFilmInfo[1]}&color=18181b`
+      : `${streamUrl}/tv?tmdb=${params.playFilmInfo[1]}&season=${params.playFilmInfo[2]}&episode=${params.playFilmInfo[3]}&color=18181b`;
 
   return (
     <div className="h-full">
@@ -70,7 +72,7 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
         <Header className="absolute left-0 right-0 top-0 z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
       </div>
       <iframe
-        src={isMovie ? movieUrl : tvUrl}
+        src={url}
         className="aspect-video h-full w-full"
         allowFullScreen
       ></iframe>
