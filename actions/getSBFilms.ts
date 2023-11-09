@@ -1,14 +1,19 @@
 "use server";
 
-import { FilmCategory, Status, TMDBFilm } from "@/types";
+import { cache } from "react";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+
+import { FilmCategory, Status, TMDBFilm } from "@/types";
 import getFilmById from "./getFilmById";
 
+export const createServerSupabaseClient = cache(() => {
+  const cookieStore = cookies();
+  return createServerComponentClient({ cookies: () => cookieStore });
+});
+
 const getTMDBFilms = async (): Promise<TMDBFilm[]> => {
-  const supabase = createServerComponentClient({
-    cookies,
-  });
+  const supabase = createServerSupabaseClient();
 
   const { data, error } = await supabase
     .from("films")

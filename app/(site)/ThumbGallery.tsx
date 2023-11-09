@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import FilmBanner from "../../components/custom-ui/FilmBanner";
-
-import { TMDBFilm, TMDBSearchFilm } from "@/types";
 import FilmCarousell from "./FilmCarousell";
+import FilmBanner from "../../components/custom-ui/FilmBanner";
+import { TMDBFilm } from "@/types";
 import Spinner from "@/components/custom-ui/Spinner";
 
 interface ThumbGalleryProps {
@@ -19,29 +18,33 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
   popularMovies,
   upcomingMovies,
 }) => {
-  const [mounted, setMounted] = useState(false);
   const [activeFilm, setActiveFilm] = useState<TMDBFilm>(
     films[0] || popularMovies[0] || upcomingMovies[0],
   );
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setLoaded(true);
   }, []);
 
-  if (!mounted) {
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center gap-7">
-        <Spinner />
-        <p className="animate-pulse text-sm font-light text-neutral-700 dark:text-neutral-300">
-          Your adventure awaits...
-        </p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    setActiveFilm(films[0] || popularMovies[0] || upcomingMovies[0]);
+  }, [films, popularMovies, upcomingMovies]);
 
   const handleSetFilm = (film: TMDBFilm) => {
     setActiveFilm(film);
   };
+
+  if (!loaded) {
+    return (
+      <div className="flex h-full w-full flex-col items-center justify-center gap-7">
+        <Spinner />
+        <p className="animate-pulse text-sm font-light text-neutral-700 dark:text-neutral-300">
+          Just a little bit more...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full min-h-[600px] flex-col">
