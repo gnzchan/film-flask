@@ -170,7 +170,7 @@ const FilmInfoBanner = ({
               alt={`${film.title ?? film.name} Poster`}
               priority={true}
               fill
-              sizes="(max-width: 342px) 100vw"
+              sizes="(min-width: 0px) 215px"
               className="rounded-lg border"
             />
           </div>

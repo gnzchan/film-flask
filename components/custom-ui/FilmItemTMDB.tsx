@@ -20,7 +20,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {
             ? `https://image.tmdb.org/t/p/w342/${film.poster_path}`
             : "/images/movie-poster.jpg"
         }
-        sizes="(max-width: 342px) 100vw"
+        sizes="(min-width: 0) 200px"
         className="rounded-md"
       />
       <div className="h-full w-full rounded-md transition hover:justify-center hover:backdrop-brightness-50 group-hover:backdrop-blur-sm">

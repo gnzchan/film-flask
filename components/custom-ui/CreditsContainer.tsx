@@ -24,7 +24,7 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
   return (
     <>
       <div className="w-full snap-x snap-mandatory overflow-auto py-4">
-        <div className="flex gap-4 px-3 lg:justify-around">
+        <div className="mx-auto flex max-w-[1500px] gap-4 px-3 xl:justify-around">
           {casts.slice(0, 7).map((cast) => (
             <div
               key={cast.cast_id}
@@ -35,7 +35,7 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
                   src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}
                   alt={cast.name}
                   fill
-                  sizes="(max-width: 180px) 100vw"
+                  sizes="(min-width: 0px) 115px"
                   className="rounded-md"
                 />
               </div>

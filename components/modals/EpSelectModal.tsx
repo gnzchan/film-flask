@@ -56,7 +56,6 @@ const EpSelectModal = () => {
                   alt={`${episode.name} Poster`}
                   priority={true}
                   fill
-                  sizes="(max-width: 342px) 100vw"
                   className="rounded-md group-hover:blur-sm"
                 />
                 <div className="absolute left-[50%] top-[50%] z-[100] -ml-3 -mt-3 opacity-0 group-hover:opacity-100">
