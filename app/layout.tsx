@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body className={twMerge("min-w-[340px]", font.className)}>
         <ThemeProvider attribute="class" enableSystem>
           <ToasterProvider />
