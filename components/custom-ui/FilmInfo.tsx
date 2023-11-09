@@ -17,13 +17,14 @@ import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
 import {
   Cast,
+  CreditsResponse,
   Crew,
   Episode,
   FilmCategory,
   SeasonEpisode,
   TMDBFilm,
 } from "@/types";
-import { getFormattedTime } from "@/libs/helpers";
+import { getFormattedTime } from "@/lib/helpers";
 import { useRouter } from "next/navigation";
 import {
   Select,
@@ -37,9 +38,10 @@ import Spinner from "./Spinner";
 
 interface FilmInfoProps {
   film: TMDBFilm;
+  credits: CreditsResponse;
 }
 
-const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
+const FilmInfo: React.FC<FilmInfoProps> = ({ film, credits }) => {
   const { theme } = useTheme();
   const router = useRouter();
   const { user } = useUser();
@@ -64,24 +66,18 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
   useEffect(() => {
     filmEditorModal.setFilm(film);
 
-    const fetchCredits = async () => {
-      const response = await axios.get(
-        `/api/credits?category=${film.category}&id=${film.id}`,
-      );
-      const castsFromApi = response.data.cast.map((cast: any) => cast);
-      const crewFromApi = response.data.crew.map((cast: any) => cast);
-      const director = crewFromApi.find((crew: Crew) => crew.job === "Director")
-        ?.name;
+    const castsFromProps = credits.cast.map((cast: any) => cast);
+    const crewFromProps = credits.crew.map((cast: any) => cast);
+    const director = crewFromProps.find((crew: Crew) => crew.job === "Director")
+      ?.name;
 
-      setCasts(castsFromApi);
-      setDirector(director);
-    };
+    setCasts(castsFromProps);
+    setDirector(director);
 
     if (film.category === FilmCategory.TV) {
       fetchEpisodes(film.number_of_seasons.toString());
     }
 
-    fetchCredits();
     fetchReviews();
   }, [user, film]);
 
@@ -250,12 +246,12 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film }) => {
             className="rounded-lg border"
           />
         </div>
-        <div className="no-scrollbar w-full overflow-auto py-4">
-          <div className="flex items-center gap-4 px-3 lg:justify-around">
+        <div className="w-full snap-x snap-mandatory overflow-auto py-4">
+          <div className="flex gap-4 px-3 lg:justify-around">
             {casts.slice(0, 7).map((cast) => (
               <div
                 key={cast.cast_id}
-                className="flex w-28 flex-col items-center gap-2"
+                className="flex w-28 snap-end flex-col items-center gap-2"
               >
                 <div className="relative aspect-[3/4] w-28 rounded-md ">
                   <Image

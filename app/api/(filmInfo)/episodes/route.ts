@@ -1,4 +1,4 @@
-import { getData } from "@/libs/helpers";
+import { getData } from "@/lib/helpers";
 import { SeasonDetails } from "@/types";
 import { NextResponse } from "next/server";
 

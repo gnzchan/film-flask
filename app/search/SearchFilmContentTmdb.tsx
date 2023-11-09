@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 import Spinner from "../../components/custom-ui/Spinner";
 
 import { FilmCategory, TMDBSearchFilm } from "@/types";
-import { delay } from "@/libs/helpers";
+import { delay } from "@/lib/helpers";
 import { getFilmsByTitle } from "@/actions/getFilmsByTitle";
 import FilmGridTMDB from "@/components/custom-ui/FilmGridTMDB";
 

@@ -1,6 +1,6 @@
 "use server";
 
-import { getData } from "@/libs/helpers";
+import { getData } from "@/lib/helpers";
 import { FilmCategory, TMDBSearch } from "@/types";
 
 export const getFilmsByTitle = async (

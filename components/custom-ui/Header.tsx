@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import { twMerge } from "tailwind-merge";
 
 import FFLightLogo from "../../public/images/ff-logo.svg";
@@ -16,8 +15,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ children, className }) => {
-  const { theme } = useTheme();
-
   return (
     <>
       <div

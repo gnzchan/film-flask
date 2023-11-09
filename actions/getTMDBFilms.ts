@@ -1,7 +1,7 @@
 "use server";
 
-import { getData } from "@/libs/helpers";
-import { FilmCategory, TMDBFilm, TMDBSearch, TMDBSearchFilm } from "@/types";
+import { getData } from "@/lib/helpers";
+import { FilmCategory, TMDBFilm, TMDBSearch } from "@/types";
 
 import getFilmById from "./getFilmById";
 

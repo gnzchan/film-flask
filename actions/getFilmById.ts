@@ -1,6 +1,6 @@
 "use server";
 
-import { getData } from "@/libs/helpers";
+import { getData } from "@/lib/helpers";
 import { FilmCategory, TMDBFilm } from "@/types";
 
 const getFilmById = async (
