@@ -39,42 +39,42 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
       setPagesLoaded(1);
       setFilms(propFilms.map((pf) => ({ ...pf, category })));
     }
-  }, [propFilms]);
+  }, [propFilms, category]);
 
   useEffect(() => {
     setIsAllPagesLoaded(pagesLoaded === totalPages);
   }, [films, isAllPagesLoaded]);
 
   useEffect(() => {
+    const loadMoreFilms = async () => {
+      await delay(1000);
+      const nextPage = pagesLoaded + 1;
+
+      if (nextPage > totalPages) {
+        setPagesLoaded(nextPage);
+        return setIsAllPagesLoaded(true);
+      }
+
+      const { results: newFilms } = await getFilmsByTitle(
+        category,
+        searchString,
+        nextPage,
+      );
+
+      if (newFilms) {
+        setFilms((prevItems) => [
+          ...prevItems,
+          ...newFilms.map((nf) => ({ ...nf, category })),
+        ]);
+      }
+
+      setPagesLoaded(nextPage);
+    };
+
     if (inView) {
       loadMoreFilms();
     }
   }, [inView]);
-
-  const loadMoreFilms = async () => {
-    await delay(1000);
-    const nextPage = pagesLoaded + 1;
-
-    if (nextPage > totalPages) {
-      setPagesLoaded(nextPage);
-      return setIsAllPagesLoaded(true);
-    }
-
-    const { results: newFilms } = await getFilmsByTitle(
-      category,
-      searchString,
-      nextPage,
-    );
-
-    if (newFilms) {
-      setFilms((prevItems) => [
-        ...prevItems,
-        ...newFilms.map((nf) => ({ ...nf, category })),
-      ]);
-    }
-
-    setPagesLoaded(nextPage);
-  };
 
   const content = isAllPagesLoaded ? (
     <p className="text-center text-sm font-light text-neutral-400  dark:text-neutral-300">
@@ -87,10 +87,10 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   );
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center">
       <FilmGridTMDB films={films} />
-      <div className="my-5 flex items-center justify-center">{content}</div>
-    </>
+      <div className="my-5">{content}</div>
+    </div>
   );
 };
 

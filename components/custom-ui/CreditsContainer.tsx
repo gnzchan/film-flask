@@ -19,7 +19,7 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
 
     setCasts(castsFromProps);
     setDirector(director);
-  }, []);
+  }, [credits]);
 
   return (
     <>

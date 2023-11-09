@@ -51,7 +51,7 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
 
   return (
     <div className="h-full snap-end snap-always pb-5">
-      <div className="m-3 flex items-center justify-between py-3">
+      <div className="m-3 flex h-full items-center justify-between py-3">
         <h1 className="text-2xl font-light text-neutral-800 dark:text-white">
           {title}
         </h1>
@@ -70,7 +70,7 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
           No films for status {title}
         </p>
       ) : (
-        <div className="no-scrollbar flex h-[200px] w-full snap-x snap-mandatory overflow-auto">
+        <div className="no-scrollbar flex h-[270px] w-full snap-x snap-mandatory overflow-auto">
           {films.map((film, i) => (
             <div
               key={film.id}

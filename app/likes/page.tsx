@@ -11,6 +11,7 @@ import LikesSkeleton from "./LikesSkeleton";
 import { FilmCategory } from "@/types";
 import FilmGridTMDB from "@/components/custom-ui/FilmGridTMDB";
 import { defaultOgImg, description } from "@/constants";
+import CenterContentWrapper from "@/components/custom-ui/CenterContentWrapper";
 interface SearchProps {
   searchParams: {
     category: FilmCategory;
@@ -47,11 +48,13 @@ const Likes: React.FC<SearchProps> = async ({ searchParams }) => {
   return (
     <div className="flex h-full flex-col">
       <Header />
-      <Suspense fallback={<LikesSkeleton />}>
-        <Await promise={promise}>
-          {(data) => <FilmGridTMDB films={data} />}
-        </Await>
-      </Suspense>
+      <CenterContentWrapper>
+        <Suspense fallback={<LikesSkeleton />}>
+          <Await promise={promise}>
+            {(data) => <FilmGridTMDB films={data} />}
+          </Await>
+        </Suspense>
+      </CenterContentWrapper>
     </div>
   );
 };

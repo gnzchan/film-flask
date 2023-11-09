@@ -27,7 +27,7 @@ const WatchListGallery: React.FC<WatchListGalleryProps> = ({
 
     default:
       return (
-        <>
+        <div>
           <ScrollableFilmContent
             title={Status.TO_WATCH_LATER}
             films={watchLaterFilms}
@@ -40,7 +40,7 @@ const WatchListGallery: React.FC<WatchListGalleryProps> = ({
             title={Status.FINISHED_WATCHING}
             films={finishedWatchFilms}
           />
-        </>
+        </div>
       );
   }
 };

@@ -13,6 +13,7 @@ import Spinner from "./Spinner";
 import CreditsContainer from "./CreditsContainer";
 import FilmInfoBanner from "./FilmInfoBanner";
 import ReviewsContainer from "./ReviewsContainer";
+import CenterContentWrapper from "./CenterContentWrapper";
 
 interface FilmInfoProps {
   film: TMDBFilm;
@@ -56,30 +57,34 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film, credits }) => {
   }
 
   return (
-    <div className="flex h-full flex-col">
-      <FilmInfoBanner
-        film={film}
-        user={user}
-        clickStatusHandler={handleClickStatus}
-      />
-      <div className="flex w-full flex-col items-center gap-5 bg-white dark:bg-black">
-        <div className="relative aspect-[3/4] w-52 drop-shadow-2xl md:hidden">
-          <Image
-            src={
-              film.poster_path
-                ? `https://image.tmdb.org/t/p/w342/${film.poster_path}`
-                : "/images/movie-poster.jpg"
-            }
-            alt={`${film.title ?? film.name} Poster`}
-            priority={true}
-            fill
-            sizes="(min-width: 0px) 215px"
-            className="rounded-lg border"
+    <div className="w-full bg-white dark:bg-black">
+      <CenterContentWrapper>
+        <div className="flex h-full w-full flex-col">
+          <FilmInfoBanner
+            film={film}
+            user={user}
+            clickStatusHandler={handleClickStatus}
           />
+          <div className="flex w-full flex-col items-center gap-5 bg-white dark:bg-black">
+            <div className="relative aspect-[3/4] w-52 drop-shadow-2xl md:hidden">
+              <Image
+                src={
+                  film.poster_path
+                    ? `https://image.tmdb.org/t/p/w342/${film.poster_path}`
+                    : "/images/movie-poster.jpg"
+                }
+                alt={`${film.title ?? film.name} Poster`}
+                priority={true}
+                fill
+                sizes="(min-width: 0px) 215px"
+                className="rounded-lg border"
+              />
+            </div>
+            <CreditsContainer credits={credits} />
+          </div>
+          <ReviewsContainer reviews={filmEditorModal.reviewsAndImages} />
         </div>
-        <CreditsContainer credits={credits} />
-      </div>
-      <ReviewsContainer reviews={filmEditorModal.reviewsAndImages} />
+      </CenterContentWrapper>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Await from "@/components/custom-ui/Await";
 import WatchListGallery from "./WatchListGallery";
 import WatchListGallerySkeleton from "./WatchListGallerySkeleton";
 import { defaultOgImg, description } from "@/constants";
+import CenterContentWrapper from "@/components/custom-ui/CenterContentWrapper";
 
 interface WatchlistProps {
   searchParams: {
@@ -56,22 +57,20 @@ const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
   return (
     <div className="flex h-full flex-col">
       <Header />
-      <div className="flex items-center justify-center">
-        <div className="w-full max-w-[1700px]">
-          <Suspense fallback={<WatchListGallerySkeleton />}>
-            <Await promise={promise}>
-              {(data) => (
-                <WatchListGallery
-                  status={searchParams.status?.toLowerCase()}
-                  watchLaterFilms={data[0]}
-                  currentWatchFilms={data[1]}
-                  finishedWatchFilms={data[2]}
-                />
-              )}
-            </Await>
-          </Suspense>
-        </div>
-      </div>
+      <CenterContentWrapper>
+        <Suspense fallback={<WatchListGallerySkeleton />}>
+          <Await promise={promise}>
+            {(data) => (
+              <WatchListGallery
+                status={searchParams.status?.toLowerCase()}
+                watchLaterFilms={data[0]}
+                currentWatchFilms={data[1]}
+                finishedWatchFilms={data[2]}
+              />
+            )}
+          </Await>
+        </Suspense>
+      </CenterContentWrapper>
     </div>
   );
 };

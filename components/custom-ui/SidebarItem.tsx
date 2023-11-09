@@ -25,7 +25,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         "group flex w-full cursor-pointer justify-start rounded-lg p-3 text-sm font-medium transition hover:bg-neutral-200  hover:dark:bg-neutral-700",
         pathname === href
           ? "bg-neutral-200 font-medium text-black dark:bg-neutral-700 dark:text-white"
-          : "text-zinc-600",
+          : "text-zinc-600 dark:text-zinc-400",
       )}
       onClick={onClose}
     >

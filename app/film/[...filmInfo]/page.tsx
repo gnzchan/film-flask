@@ -1,11 +1,12 @@
 import { Metadata } from "next";
+
+import getFilmCreditsById from "@/actions/getFilmCreditsById";
 import getFilmById from "@/actions/getFilmById";
 import FilmInfo from "@/components/custom-ui/FilmInfo";
 import FilmTitleBar from "@/components/custom-ui/FilmTitleBar";
 import Header from "@/components/custom-ui/Header";
 import { FilmCategory } from "@/types";
 import { description } from "@/constants";
-import getFilmCreditsById from "@/actions/getFilmCreditsById";
 
 interface FilmProps {
   params: {
@@ -53,7 +54,7 @@ const Film: React.FC<FilmProps> = async ({ params }) => {
   const [film, credits] = await Promise.all([filmPromise, creditsPromise]);
 
   return (
-    <div className="h-full">
+    <div className="relative flex h-full flex-col">
       <Header>
         <FilmTitleBar film={film} />
       </Header>

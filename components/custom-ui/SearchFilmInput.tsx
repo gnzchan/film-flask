@@ -38,10 +38,13 @@ const SearchInput = () => {
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-3">
+      <div className="w-full">
+        <h1 className="text-3xl font-semibold">Search</h1>
+      </div>
       <input
         placeholder="Search for movies or series"
         value={searchString}
-        className="focus:shadow-outline w-full max-w-[1700px] appearance-none rounded-md border px-3 py-2 leading-tight text-gray-700 shadow-sm focus:outline-none"
+        className="focus:shadow-outline w-full appearance-none rounded-md border px-3 py-2 leading-tight text-gray-700 shadow-sm focus:outline-none"
         onChange={(e) => setSearchString(e.target.value)}
       />
       <div className="grid grid-cols-2 items-center gap-1">

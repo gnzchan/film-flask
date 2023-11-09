@@ -6,6 +6,7 @@ import SearchFilmInput from "@/components/custom-ui/SearchFilmInput";
 import SearchFilmContentTmdb from "./SearchFilmContentTmdb";
 import { FilmCategory } from "@/types";
 import { defaultOgImg, description } from "@/constants";
+import CenterContentWrapper from "@/components/custom-ui/CenterContentWrapper";
 
 interface SearchProps {
   searchParams: {
@@ -36,20 +37,23 @@ const Search: React.FC<SearchProps> = async ({ searchParams }) => {
     1,
   );
   return (
-    <div>
-      <Header>
+    <Header>
+      <div className="bg-neutral-100 transition duration-500 ease-in-out dark:bg-zinc-900">
         <div className="sticky -top-1 z-10 flex flex-col gap-y-5 rounded-b-lg bg-neutral-100/30 px-5 py-3 backdrop-blur-lg dark:bg-zinc-900/30">
-          <h1 className="text-3xl font-semibold">Search</h1>
-          <SearchFilmInput />
+          <CenterContentWrapper>
+            <SearchFilmInput />
+          </CenterContentWrapper>
         </div>
-        <SearchFilmContentTmdb
-          propFilms={response.results}
-          searchString={searchParams.title ?? ""}
-          category={searchParams.category}
-          totalPages={response.total_pages}
-        />
-      </Header>
-    </div>
+        <CenterContentWrapper>
+          <SearchFilmContentTmdb
+            propFilms={response.results}
+            searchString={searchParams.title ?? ""}
+            category={searchParams.category}
+            totalPages={response.total_pages}
+          />
+        </CenterContentWrapper>
+      </div>
+    </Header>
   );
 };
 

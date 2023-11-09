@@ -17,7 +17,7 @@ const FilmBanner: React.FC<FilmBannerProps> = ({ film }) => {
 
   return (
     <div
-      className="sticky top-0 flex aspect-video h-auto min-h-[60%] w-full flex-col items-center justify-end bg-white bg-cover bg-center bg-no-repeat p-1 dark:bg-black sm:items-start sm:p-5"
+      className="sticky top-0 flex aspect-video h-full w-full flex-col items-center justify-end bg-white bg-cover bg-center bg-no-repeat p-1 dark:bg-black sm:items-start sm:p-5"
       style={{
         backgroundImage: `
           linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgb(${

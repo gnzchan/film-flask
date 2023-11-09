@@ -71,8 +71,6 @@ const getListedFilms = async (status: Status): Promise<TMDBFilm[]> => {
     .eq("status_films.status", status)
     .returns<{ id: string; category: FilmCategory }[]>();
 
-  console.log(data);
-
   if (error) {
     console.log(error);
   }
