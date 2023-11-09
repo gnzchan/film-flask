@@ -44,10 +44,7 @@ export default function RootLayout({
           <SupabaseProvider>
             <UserProvider>
               <ModalProvider />
-              <MainPage>
-                {children}
-                <Analytics />
-              </MainPage>
+              <MainPage>{children}</MainPage>
             </UserProvider>
           </SupabaseProvider>
         </ThemeProvider>
