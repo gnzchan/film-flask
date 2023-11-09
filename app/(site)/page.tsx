@@ -6,13 +6,13 @@ import CenterContentWrapper from "@/components/custom-ui/CenterContentWrapper";
 
 const Home = async () => {
   const popularInSBPromise = getTMDBFilms();
-  const popularMoviePromise = getPopularMovies();
-  const upcomingMoviePromise = getUpcomingMovies();
+  // const popularMoviePromise = getPopularMovies();
+  // const upcomingMoviePromise = getUpcomingMovies();
 
   const data = await Promise.all([
     popularInSBPromise,
-    popularMoviePromise,
-    upcomingMoviePromise,
+    // popularMoviePromise,
+    // upcomingMoviePromise,
   ]);
 
   return (
@@ -21,8 +21,10 @@ const Home = async () => {
       <CenterContentWrapper>
         <ThumbGallery
           films={data[0]}
-          popularMovies={data[1]}
-          upcomingMovies={data[2]}
+          popularMovies={[]}
+          upcomingMovies={[]}
+          // popularMovies={data[1]}
+          // upcomingMovies={data[2]}
         />
       </CenterContentWrapper>
     </div>

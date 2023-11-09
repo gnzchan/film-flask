@@ -4,12 +4,14 @@ import FilmItemTMDB from "@/components/custom-ui/FilmItemTMDB";
 interface FilmCarousellProps {
   title: string;
   films: TMDBFilm[];
+  priority: boolean;
   handleSetFilm: (film: TMDBFilm) => void;
 }
 
 const FilmCarousell: React.FC<FilmCarousellProps> = ({
   title,
   films,
+  priority,
   handleSetFilm,
 }) => {
   if (films.length === 0) return;
@@ -27,7 +29,7 @@ const FilmCarousell: React.FC<FilmCarousellProps> = ({
             onClick={() => handleSetFilm(film)}
             onTouchStart={() => handleSetFilm(film)}
           >
-            <FilmItemTMDB film={film} />
+            <FilmItemTMDB film={film} priority={priority} />
           </div>
         ))}
       </div>

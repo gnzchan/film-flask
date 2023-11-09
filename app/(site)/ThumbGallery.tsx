@@ -52,16 +52,19 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
         <FilmCarousell
           title="Popular on Film Flask"
           films={films}
+          priority={true}
           handleSetFilm={handleSetFilm}
         />
         <FilmCarousell
           title="Popular Movies"
           films={popularMovies}
+          priority={true}
           handleSetFilm={handleSetFilm}
         />
         <FilmCarousell
           title="Upcoming Movies"
           films={upcomingMovies}
+          priority={true}
           handleSetFilm={handleSetFilm}
         />
       </div>

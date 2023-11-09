@@ -77,7 +77,7 @@ const ScrollableFilmContent: React.FC<ScrollableFilmContentProps> = ({
               className="ml-3 aspect-[3/4] h-full"
               ref={setItemRef(i)}
             >
-              <FilmItemTMDB film={film} />
+              <FilmItemTMDB film={film} priority={false} />
             </div>
           ))}
         </div>

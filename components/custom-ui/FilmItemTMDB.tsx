@@ -7,9 +7,10 @@ import Button from "./Button";
 
 interface FilmItemTMDBProps {
   film: TMDBFilm | TMDBSearchFilm;
+  priority: boolean;
 }
 
-const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {
+const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
   return (
     <div className="group relative aspect-[3/4] h-full w-full cursor-pointer snap-end rounded-md">
       <Image
@@ -22,7 +23,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {
         }
         sizes="(min-width: 0) 200px"
         className="rounded-md"
-        priority={true}
+        priority={priority}
       />
       <div className="h-full w-full rounded-md transition hover:justify-center hover:backdrop-brightness-50 group-hover:backdrop-blur-sm">
         <div className="hidden h-full w-full flex-col items-center justify-between rounded-md p-3 text-xs font-medium text-white group-hover:flex">
@@ -40,7 +41,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film }) => {
             </div>
           </div>
           <Link href={`/film/${film.category}/${film.id}`}>
-            <Button className="bg-white text-black shadow-none">
+            <Button className="bg-white text-black shadow-none">````
               View more
             </Button>
           </Link>

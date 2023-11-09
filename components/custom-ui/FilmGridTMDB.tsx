@@ -17,7 +17,9 @@ const FilmGridTMDB: React.FC<FilmGridTMDBProps> = ({ films }) => {
       ) : (
         <div className="grid w-full grid-cols-2 place-items-center gap-5 px-5 pt-3 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {films &&
-            films.map((film) => <FilmItemTMDB key={film.id} film={film} />)}
+            films.map((film) => (
+              <FilmItemTMDB key={film.id} film={film} priority={false} />
+            ))}
         </div>
       )}
     </>
