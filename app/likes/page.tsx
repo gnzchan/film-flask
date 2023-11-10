@@ -51,7 +51,11 @@ const Likes: React.FC<SearchProps> = async ({ searchParams }) => {
       <CenterContentWrapper>
         <Suspense fallback={<LikesSkeleton />}>
           <Await promise={promise}>
-            {(data) => <FilmGridTMDB films={data} />}
+            {(data) => (
+              <div className="mb-6">
+                <FilmGridTMDB films={data} />
+              </div>
+            )}
           </Await>
         </Suspense>
       </CenterContentWrapper>

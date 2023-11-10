@@ -14,6 +14,7 @@ import CreditsContainer from "./CreditsContainer";
 import FilmInfoBanner from "./FilmInfoBanner";
 import ReviewsContainer from "./ReviewsContainer";
 import CenterContentWrapper from "./CenterContentWrapper";
+import LoadingContent from "./LoadingContent";
 
 interface FilmInfoProps {
   film: TMDBFilm;
@@ -47,12 +48,10 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film, credits }) => {
 
   if (!mounted) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center gap-7">
-        <Spinner />
-        <p className="animate-pulse text-sm font-light text-neutral-700 dark:text-neutral-300">
-          Almost there, just a few more seconds...
-        </p>
-      </div>
+      <LoadingContent
+        className="h-[100vh]"
+        string="Almost there, just a few more seconds..."
+      />
     );
   }
 

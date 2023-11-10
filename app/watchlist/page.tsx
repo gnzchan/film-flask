@@ -55,7 +55,7 @@ const Watchlist: React.FC<WatchlistProps> = async ({ searchParams }) => {
   ]);
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="">
       <Header />
       <CenterContentWrapper>
         <Suspense fallback={<WatchListGallerySkeleton />}>

@@ -12,6 +12,8 @@ import ThemeProvider from "@/components/providers/ThemeProvider";
 import { twMerge } from "tailwind-merge";
 import { Metadata } from "next";
 import { defaultOgImg, description } from "@/constants";
+import { Suspense } from "react";
+import LoadingContent from "@/components/custom-ui/LoadingContent";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -45,7 +47,16 @@ export default function RootLayout({
             <UserProvider>
               <ModalProvider />
               <MainPage>
-                {children}
+                <Suspense
+                  fallback={
+                    <LoadingContent
+                      className="h-[100vh] min-w-[100vh]"
+                      string="Your adventure awaits..."
+                    />
+                  }
+                >
+                  {children}
+                </Suspense>
                 <Analytics />
               </MainPage>
             </UserProvider>
