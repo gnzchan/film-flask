@@ -11,7 +11,7 @@ const MainPage: React.FC<MainPageProps> = ({ children }) => {
         <Sidebar />
       </div>
       <main className="h-full w-full bg-neutral-100 transition duration-500 ease-in-out dark:bg-zinc-900 lg:pl-72">
-        {children}
+        <div className="h-full">{children}</div>
       </main>
     </div>
   );

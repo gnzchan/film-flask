@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import FilmCarousell from "./FilmCarousell";
 import FilmBanner from "../../components/custom-ui/FilmBanner";
 import { TMDBFilm } from "@/types";
-import Spinner from "@/components/custom-ui/Spinner";
 
 interface ThumbGalleryProps {
   films: TMDBFilm[];
@@ -21,11 +20,6 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
   const [activeFilm, setActiveFilm] = useState<TMDBFilm>(
     films[0] || popularMovies[0] || upcomingMovies[0],
   );
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
 
   useEffect(() => {
     setActiveFilm(films[0] || popularMovies[0] || upcomingMovies[0]);
@@ -34,17 +28,6 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
   const handleSetFilm = (film: TMDBFilm) => {
     setActiveFilm(film);
   };
-
-  if (!loaded) {
-    return (
-      <div className="flex h-full w-full flex-col items-center justify-center gap-7">
-        <Spinner />
-        <p className="animate-pulse text-sm font-light text-neutral-700 dark:text-neutral-300">
-          Just a little bit more...
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="flex h-full min-h-[600px] flex-col">

@@ -77,7 +77,7 @@ const FilmInfoBanner = ({
 
   return (
     <div
-      className="flex min-h-screen w-full items-end bg-white bg-cover bg-center bg-no-repeat pb-5 dark:bg-black"
+      className="flex min-h-screen w-full items-end bg-white bg-cover bg-center bg-no-repeat pb-5 pt-56 dark:bg-black"
       style={{
         backgroundImage: `
           linear-gradient(to bottom, rgba(0, 0, 0, 0) 10%, rgb(${
