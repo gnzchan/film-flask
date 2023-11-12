@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { BsCheckCircle } from "react-icons/bs";
 
 import Spinner from "../../components/custom-ui/Spinner";
 
@@ -77,19 +78,24 @@ const SearchFilmContentTmdb: React.FC<SearchFilmContentTmdbProps> = ({
   }, [inView]);
 
   const content = isAllPagesLoaded ? (
-    <p className="text-center text-sm font-light text-neutral-400  dark:text-neutral-300">
-      {films.length !== 0
-        ? "You're all caught up"
-        : "Enter movie title or keywords"}
+    <p className="text-center text-sm font-light text-neutral-400 dark:text-neutral-300">
+      {films.length !== 0 ? (
+        <span className="flex items-center gap-2">
+          <BsCheckCircle className="h-4 w-4 text-green-700" />
+          All films showed
+        </span>
+      ) : (
+        "Enter movie title or keywords"
+      )}
     </p>
   ) : (
     <Spinner ref={ref} />
   );
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center pb-5">
       <FilmGridTMDB films={films} />
-      <div className="my-5">{content}</div>
+      <div>{content}</div>
     </div>
   );
 };
