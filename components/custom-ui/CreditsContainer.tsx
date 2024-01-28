@@ -9,7 +9,7 @@ interface CreditsContainerProps {
 
 const CreditsContainer = ({ credits }: CreditsContainerProps) => {
   const [casts, setCasts] = useState<Cast[]>([]);
-  const [director, setDirector] = useState<Crew | undefined>(undefined);
+  const [director, setDirector] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const castsFromProps = credits.cast.map((cast: any) => cast);
@@ -53,7 +53,7 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
           <p className="text-center">
             <span className="text-sm text-gray-600">film by</span>
             <br />
-            {director.name}
+            {director}
           </p>
         </div>
       )}

@@ -50,7 +50,7 @@ export default function RootLayout({
                 <Suspense
                   fallback={
                     <LoadingContent
-                      className="h-[100vh] min-w-[100vh]"
+                      className="h-[100dvh] w-full"
                       string="Your adventure awaits..."
                     />
                   }

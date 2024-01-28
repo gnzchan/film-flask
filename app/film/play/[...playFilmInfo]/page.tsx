@@ -10,8 +10,7 @@ import { description } from "@/constants";
 
 interface PlayFilmProps {
   params: {
-    category: string;
-    playFilmInfo: [FilmCategory, string, string, string];
+    playFilmInfo: [FilmCategory, string, string?, string?];
   };
 }
 
@@ -25,7 +24,7 @@ export async function generateMetadata({
   const genreTitle = film.genres.map((g) => g.name).join(", ");
 
   const title = `Stream  ${
-    film.title ?? film.name
+    film.title ?? film.name 
   } | ${genreTitle} - Film Flask`;
 
   return {
@@ -67,13 +66,13 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
       : `${streamUrl}/tv?tmdb=${params.playFilmInfo[1]}&season=${params.playFilmInfo[2]}&episode=${params.playFilmInfo[3]}&color=18181b`;
 
   return (
-    <div className="h-full">
+    <div className="h-[100dvh]">
       <div className="relative">
         <Header className="absolute left-0 right-0 top-0 z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
       </div>
       <iframe
         src={url}
-        className="aspect-video h-full w-full"
+        className="aspect-video h-full w-full bg-black"
         allowFullScreen
       ></iframe>
     </div>

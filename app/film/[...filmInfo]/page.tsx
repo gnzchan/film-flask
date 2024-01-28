@@ -10,7 +10,6 @@ import { description } from "@/constants";
 
 interface FilmProps {
   params: {
-    category: string;
     filmInfo: [FilmCategory, string];
   };
 }

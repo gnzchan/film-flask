@@ -41,7 +41,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
             </div>
           </div>
           <Link href={`/film/${film.category}/${film.id}`}>
-            <Button className="bg-white text-black shadow-none">
+            <Button className="whitespace-nowrap bg-white text-black shadow-none">
               View more
             </Button>
           </Link>
