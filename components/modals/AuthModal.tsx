@@ -3,11 +3,24 @@ import { Auth } from "@supabase/auth-ui-react";
 
 import useAuthModal from "@/hooks/useAuthModal";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
+import { useEffect } from "react";
 import Modal from "./Modal";
 
 const AuthModal = () => {
   const supabaseClient = useSupabaseClient();
   const authModal = useAuthModal();
+
+  useEffect(() => {
+    const { data: authListener } = supabaseClient.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN") {
+          authModal.onClose();
+        }
+      },
+    );
+
+    return () => authListener.subscription.unsubscribe();
+  }, [supabaseClient, authModal]);
 
   const onChangeHandler = (open: boolean) => {
     if (!open) {
@@ -27,7 +40,6 @@ const AuthModal = () => {
         providers={["google"]}
         supabaseClient={supabaseClient}
         view="sign_in"
-        redirectTo="/"
         appearance={{
           theme: ThemeSupa,
           variables: {
