@@ -1,9 +1,9 @@
-import { Auth } from "@supabase/auth-ui-react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { Auth } from "@supabase/auth-ui-react";
 
-import Modal from "./Modal";
 import useAuthModal from "@/hooks/useAuthModal";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
+import Modal from "./Modal";
 
 const AuthModal = () => {
   const supabaseClient = useSupabaseClient();
@@ -27,6 +27,7 @@ const AuthModal = () => {
         providers={["google"]}
         supabaseClient={supabaseClient}
         view="sign_in"
+        redirectTo="/"
         appearance={{
           theme: ThemeSupa,
           variables: {
