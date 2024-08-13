@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { BsPlayCircle } from "react-icons/bs";
 
-import Modal from "./Modal";
+import useAuthModal from "@/hooks/useAuthModal";
 import useEpSelectModal from "@/hooks/useEpSelectModal";
 import { useUser } from "@/hooks/useUser";
-import useAuthModal from "@/hooks/useAuthModal";
-import { useRouter } from "next/navigation";
+import Modal from "./Modal";
 
 const EpSelectModal = () => {
   const { user } = useUser();
-  const router = useRouter();
   const epSelectModal = useEpSelectModal();
   const authModal = useAuthModal();
 
@@ -26,8 +24,10 @@ const EpSelectModal = () => {
       return authModal.onOpen("You need to sign in to access this content");
     }
 
-    return router.replace(
+    return window.open(
       `/film/play/tv/${epSelectModal.filmId}/${epSelectModal.season}/${episodeNumber}`,
+      "_blank",
+      "noopener,noreferrer",
     );
   };
 

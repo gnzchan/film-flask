@@ -1,15 +1,15 @@
+import { User } from "@supabase/gotrue-js";
+import axios from "axios";
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiOutlineFire } from "react-icons/ai";
 import { BsPlayFill } from "react-icons/bs";
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
-import { User } from "@supabase/gotrue-js";
-import axios from "axios";
 
-import GenreChips from "./GenreChips";
-import Button from "./Button";
-import Spinner from "./Spinner";
+import useAuthModal from "@/hooks/useAuthModal";
+import useEpSelectModal from "@/hooks/useEpSelectModal";
+import { FilmCategory, SeasonEpisode, TMDBFilm } from "@/types";
 import {
   Select,
   SelectContent,
@@ -17,9 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { FilmCategory, SeasonEpisode, TMDBFilm } from "@/types";
-import useAuthModal from "@/hooks/useAuthModal";
-import useEpSelectModal from "@/hooks/useEpSelectModal";
+import Button from "./Button";
+import GenreChips from "./GenreChips";
+import Spinner from "./Spinner";
 
 interface FilmInfoBannerProps {
   film: TMDBFilm;
@@ -66,7 +66,11 @@ const FilmInfoBanner = ({
       return epSelectModal.onOpen(film.name, episodes, film.id, season);
     }
 
-    return router.replace(`/film/play/${film.category}/${film.id}`);
+    return window.open(
+      `/film/play/${film.category}/${film.id}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
 
   const handleSeasonChange = async (seasonInput: string) => {
