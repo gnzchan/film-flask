@@ -18,8 +18,6 @@ const EpSelectModal = () => {
   };
 
   const handleClickPlay = (episodeNumber: number) => {
-    epSelectModal.onClose();
-
     if (!user) {
       return authModal.onOpen("You need to sign in to access this content");
     }
