@@ -1,5 +1,5 @@
-import "react";
 import { User } from "@supabase/auth-helpers-nextjs";
+import "react";
 
 export enum FilmCategory {
   MOVIE = "movie",
