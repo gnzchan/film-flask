@@ -22,8 +22,6 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
     setDirector(director);
   }, [credits]);
 
-  console.log(casts);
-
   return (
     <>
       <div className="w-full snap-x snap-mandatory overflow-auto py-4">
@@ -44,6 +42,7 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
                   />
                 ) : (
                   <div className="flex flex-col items-center justify-center">
+                    heyy this is name without profile path
                     <BsFillPersonFill className="text-4xl text-slate-900" />
                   </div>
                 )}
