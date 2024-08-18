@@ -35,10 +35,11 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
             <div className="flex w-full items-center justify-evenly capitalize">
               <p>{film.original_language}</p>
               <p>
-                {format(
-                  new Date(film.release_date ?? film.first_air_date),
-                  "MMMM d yyyy",
-                )}
+                {(film.release_date || film.first_air_date) &&
+                  format(
+                    new Date(film.release_date ?? film.first_air_date),
+                    "MMMM d yyyy",
+                  )}
               </p>
             </div>
             <div className="flex items-center justify-center gap-1">

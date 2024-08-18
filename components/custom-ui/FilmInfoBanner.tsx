@@ -2,7 +2,6 @@ import { User } from "@supabase/gotrue-js";
 import axios from "axios";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AiOutlineFire } from "react-icons/ai";
 import { BsPlayFill } from "react-icons/bs";
@@ -10,6 +9,7 @@ import { BsPlayFill } from "react-icons/bs";
 import useAuthModal from "@/hooks/useAuthModal";
 import useEpSelectModal from "@/hooks/useEpSelectModal";
 import { FilmCategory, SeasonEpisode, TMDBFilm } from "@/types";
+import { format } from "date-fns";
 import {
   Select,
   SelectContent,
@@ -105,7 +105,13 @@ const FilmInfoBanner = ({
               {film.spoken_languages.map((l) => l.english_name).join(", ")}
             </p>
             <p className="uppercase">{film.category}</p>
-            <p>{film.release_date ?? film.first_air_date}</p>
+            <p>
+              {(film.release_date || film.first_air_date) &&
+                format(
+                  new Date(film.release_date ?? film.first_air_date),
+                  "MMMM d yyyy",
+                )}
+            </p>
           </div>
           <h1 className="text-4xl font-extrabold ">
             {film.name ?? film.title}
