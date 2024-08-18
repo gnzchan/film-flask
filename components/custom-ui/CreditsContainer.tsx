@@ -41,9 +41,8 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
                     className="rounded-md"
                   />
                 ) : (
-                  <div className="flex flex-col items-center justify-center">
-                    heyy this is name without profile path
-                    <BsFillPersonFill className="text-4xl text-slate-900" />
+                  <div className="flex h-full flex-col items-center justify-center">
+                    <BsFillPersonFill className="text-8xl text-slate-900" />
                   </div>
                 )}
               </div>
