@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { BsFillPersonFill } from "react-icons/bs";
 
 import { Cast, CreditsResponse, Crew } from "@/types";
 
@@ -30,14 +31,20 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
               key={cast.cast_id}
               className="flex w-28 snap-end flex-col items-center gap-2"
             >
-              <div className="relative aspect-[3/4] w-28 rounded-md ">
-                <Image
-                  src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}
-                  alt={cast.name}
-                  fill
-                  sizes="(min-width: 0px) 115px"
-                  className="rounded-md"
-                />
+              <div className="relative aspect-[3/4] w-28 rounded-md bg-white">
+                {cast.profile_path ? (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w185/${cast.profile_path}`}
+                    alt={cast.name}
+                    fill
+                    sizes="(min-width: 0px) 115px"
+                    className="rounded-md"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center">
+                    <BsFillPersonFill className="text-4xl" />
+                  </div>
+                )}
               </div>
               <p className="text-center text-xs">
                 {cast.name}
