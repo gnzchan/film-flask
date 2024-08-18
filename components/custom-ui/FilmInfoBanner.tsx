@@ -33,7 +33,6 @@ const FilmInfoBanner = ({
   clickStatusHandler,
 }: FilmInfoBannerProps) => {
   const { theme } = useTheme();
-  const router = useRouter();
   const authModal = useAuthModal();
   const epSelectModal = useEpSelectModal();
 
