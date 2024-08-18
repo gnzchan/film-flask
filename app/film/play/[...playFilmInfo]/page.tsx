@@ -62,7 +62,7 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
 
   const url =
     params.playFilmInfo[0] === FilmCategory.MOVIE
-      ? `${streamUrl}/movie?tmdb=${params.playFilmInfo[1]}&color=18181b`
+      ? `${streamUrl}/movie?tmdb=${params.playFilmInfo[1]}&color=18181b&ds_lang=en`
       : `${streamUrl}/tv?tmdb=${params.playFilmInfo[1]}&season=${params.playFilmInfo[2]}&episode=${params.playFilmInfo[3]}&color=18181b&ds_lang=en`;
 
   return (
