@@ -29,8 +29,8 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
           e.currentTarget.src = "/images/movie-poster.jpg";
         }}
       />
-      <div className="h-full w-full rounded-md transition hover:justify-center hover:backdrop-brightness-50 group-hover:backdrop-blur-sm">
-        <div className="hidden h-full w-full flex-col items-center justify-between rounded-md p-3 text-xs font-medium text-white group-hover:flex">
+      <div className="h-full w-full rounded-md transition hover:justify-center hover:backdrop-brightness-50 focus:justify-center focus:backdrop-blur-sm focus:backdrop-brightness-50 group-hover:backdrop-blur-sm">
+        <div className="hidden h-full w-full flex-col items-center justify-between rounded-md p-3 text-xs font-medium text-white group-hover:flex group-focus:flex">
           <h1 className="text-md text-center text-white">
             {film.title ?? film.name}
           </h1>
