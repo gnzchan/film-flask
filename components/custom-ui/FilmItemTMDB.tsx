@@ -13,7 +13,10 @@ interface FilmItemTMDBProps {
 
 const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
   return (
-    <button className="group relative aspect-[3/4] h-full w-full cursor-pointer snap-end rounded-md">
+    <div
+      tabIndex={0}
+      className="group relative aspect-[3/4] h-full w-full cursor-pointer snap-end rounded-md"
+    >
       <Image
         alt={`Poster-${film.name ?? film.title}`}
         fill
@@ -25,9 +28,6 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
         sizes="(min-width: 0) 200px"
         className="rounded-md"
         priority={priority}
-        onError={(e) => {
-          e.currentTarget.src = "/images/movie-poster.jpg";
-        }}
       />
       <div className="h-full w-full rounded-md transition hover:justify-center hover:backdrop-brightness-50 focus:justify-center focus:backdrop-blur-sm focus:backdrop-brightness-50 group-hover:backdrop-blur-sm">
         <div className="hidden h-full w-full flex-col items-center justify-between rounded-md p-3 text-xs font-medium text-white group-hover:flex group-focus:flex">
@@ -57,7 +57,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
           </Link>
         </div>
       </div>
-    </button>
+    </div>
   );
 };
 
