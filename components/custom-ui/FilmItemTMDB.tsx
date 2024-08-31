@@ -13,7 +13,7 @@ interface FilmItemTMDBProps {
 
 const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
   return (
-    <div className="group relative aspect-[3/4] h-full w-full cursor-pointer snap-end rounded-md">
+    <button className="group relative aspect-[3/4] h-full w-full cursor-pointer snap-end rounded-md">
       <Image
         alt={`Poster-${film.name ?? film.title}`}
         fill
@@ -54,7 +54,7 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 
