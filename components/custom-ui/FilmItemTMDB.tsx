@@ -25,6 +25,9 @@ const FilmItemTMDB: React.FC<FilmItemTMDBProps> = ({ film, priority }) => {
         sizes="(min-width: 0) 200px"
         className="rounded-md"
         priority={priority}
+        onError={(e) => {
+          e.currentTarget.src = "/images/movie-poster.jpg";
+        }}
       />
       <div className="h-full w-full rounded-md transition hover:justify-center hover:backdrop-brightness-50 group-hover:backdrop-blur-sm">
         <div className="hidden h-full w-full flex-col items-center justify-between rounded-md p-3 text-xs font-medium text-white group-hover:flex">
