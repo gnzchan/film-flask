@@ -11,7 +11,9 @@ interface ThumbGalleryProps {
   popularMovies: TMDBFilm[];
   upcomingMovies: TMDBFilm[];
   nowPlayingMovies: TMDBFilm[];
-  topRatedMovies: TMDBFilm[];
+  trendingMovies: TMDBFilm[];
+  trendingSeries: TMDBFilm[];
+  popularSeries: TMDBFilm[];
 }
 
 const ThumbGallery: React.FC<ThumbGalleryProps> = ({
@@ -19,7 +21,9 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
   popularMovies,
   upcomingMovies,
   nowPlayingMovies,
-  topRatedMovies,
+  trendingMovies,
+  trendingSeries,
+  popularSeries,
 }) => {
   const [activeFilm, setActiveFilm] = useState<TMDBFilm>(
     films[0] || popularMovies[0] || upcomingMovies[0],
@@ -46,20 +50,32 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
           handleSetFilm={handleSetFilm}
         />
         <FilmCarousell
+          title="Trending Movies this Week"
+          films={trendingMovies}
+          priority={true}
+          handleSetFilm={handleSetFilm}
+        />
+        <FilmCarousell
+          title="Trending Series this Week"
+          films={trendingSeries}
+          priority={true}
+          handleSetFilm={handleSetFilm}
+        />
+        <FilmCarousell
           title="Popular Movies"
           films={popularMovies}
           priority={true}
           handleSetFilm={handleSetFilm}
         />
         <FilmCarousell
-          title="Now Playing"
-          films={nowPlayingMovies}
+          title="Popular Series"
+          films={popularSeries}
           priority={true}
           handleSetFilm={handleSetFilm}
         />
         <FilmCarousell
-          title="Top Rated Movies"
-          films={topRatedMovies}
+          title="Now Playing"
+          films={nowPlayingMovies}
           priority={true}
           handleSetFilm={handleSetFilm}
         />

@@ -2,7 +2,9 @@ import { getTMDBFilms } from "@/actions/getSBFilms";
 import {
   getNowPlayingMovies,
   getPopularMovies,
-  getTopRatedMovies,
+  getPopularSeries,
+  getTrendingMovies,
+  getTrendingSeries,
   getUpcomingMovies,
 } from "@/actions/getTMDBFilms";
 import ThumbGallery from "@/app/(site)/ThumbGallery";
@@ -14,16 +16,28 @@ const Home = async () => {
   const popularMoviePromise = getPopularMovies();
   const upcomingMoviePromise = getUpcomingMovies();
   const nowPlayingMoviePromise = getNowPlayingMovies();
-  const topRatedMoviePromise = getTopRatedMovies();
+  const trendingMoviePromise = getTrendingMovies();
 
-  const [sbPopular, tmdbPopular, tmdbUpcoming, tmdbNowPlaying, tmdbTopRated] =
-    await Promise.all([
-      popularInSBPromise,
-      popularMoviePromise,
-      upcomingMoviePromise,
-      nowPlayingMoviePromise,
-      topRatedMoviePromise,
-    ]);
+  const trendingSeriesPromise = getTrendingSeries();
+  const popularSeriesPromise = getPopularSeries();
+
+  const [
+    sbPopular,
+    tmdbPopular,
+    tmdbUpcoming,
+    tmdbNowPlaying,
+    tmdbTrendingMovies,
+    tmdbTrendingSeries,
+    tmdbPopularSeries,
+  ] = await Promise.all([
+    popularInSBPromise,
+    popularMoviePromise,
+    upcomingMoviePromise,
+    nowPlayingMoviePromise,
+    trendingMoviePromise,
+    trendingSeriesPromise,
+    popularSeriesPromise,
+  ]);
 
   return (
     <div className="relative flex h-[100dvh] flex-col bg-white dark:bg-black">
@@ -34,7 +48,9 @@ const Home = async () => {
           popularMovies={tmdbPopular}
           upcomingMovies={tmdbUpcoming}
           nowPlayingMovies={tmdbNowPlaying}
-          topRatedMovies={tmdbTopRated}
+          trendingMovies={tmdbTrendingMovies}
+          trendingSeries={tmdbTrendingSeries}
+          popularSeries={tmdbPopularSeries}
         />
       </CenterContentWrapper>
     </div>
