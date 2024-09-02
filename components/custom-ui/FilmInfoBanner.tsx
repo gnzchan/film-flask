@@ -181,6 +181,7 @@ const FilmInfoBanner = ({
               fill
               sizes="(min-width: 0px) 215px"
               className="rounded-lg border"
+              unoptimized={true}
             />
           </div>
         </div>

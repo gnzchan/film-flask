@@ -1,20 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-import { useUser } from "@/hooks/useUser";
 import useAuthModal from "@/hooks/useAuthModal";
 import useFilmEditorModal from "@/hooks/useFilmEditorModal";
 import useFilmReviewsAndImages from "@/hooks/useFilmReviewsAndImages";
+import { useUser } from "@/hooks/useUser";
 import { CreditsResponse, TMDBFilm } from "@/types";
 
-import Spinner from "./Spinner";
+import CenterContentWrapper from "./CenterContentWrapper";
 import CreditsContainer from "./CreditsContainer";
 import FilmInfoBanner from "./FilmInfoBanner";
-import ReviewsContainer from "./ReviewsContainer";
-import CenterContentWrapper from "./CenterContentWrapper";
 import LoadingContent from "./LoadingContent";
+import ReviewsContainer from "./ReviewsContainer";
 
 interface FilmInfoProps {
   film: TMDBFilm;
@@ -77,6 +76,7 @@ const FilmInfo: React.FC<FilmInfoProps> = ({ film, credits }) => {
                 fill
                 sizes="(min-width: 0px) 215px"
                 className="rounded-lg border"
+                unoptimized={true}
               />
             </div>
             <CreditsContainer credits={credits} />
