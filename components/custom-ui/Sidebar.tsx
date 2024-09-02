@@ -1,22 +1,22 @@
 "use client";
 
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { usePathname } from "next/navigation";
+import { useTheme } from "next-themes";
 import Image from "next/image";
-import { FiSearch, FiCompass } from "react-icons/fi";
-import { PiSignOut, PiSignIn } from "react-icons/pi";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import toast from "react-hot-toast";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BsBookmark } from "react-icons/bs";
-import toast from "react-hot-toast";
-import { useTheme } from "next-themes";
-import Link from "next/link";
+import { FiCompass, FiSearch } from "react-icons/fi";
+import { PiSignIn, PiSignOut } from "react-icons/pi";
 
-import SidebarItem from "./SidebarItem";
-import FFLightLogo from "../../public/images/ff-logo.svg";
-import FFDarkLogo from "../../public/images/ff-logo-inverted.svg";
+import useAuthModal from "@/hooks/useAuthModal";
 import useSidebar from "@/hooks/useSidebar";
 import { useUser } from "@/hooks/useUser";
-import useAuthModal from "@/hooks/useAuthModal";
+import FFDarkLogo from "../../public/images/ff-logo-inverted.svg";
+import FFLightLogo from "../../public/images/ff-logo.svg";
+import SidebarItem from "./SidebarItem";
 
 const Sidebar: React.FC = () => {
   const authModal = useAuthModal();
@@ -74,6 +74,7 @@ const Sidebar: React.FC = () => {
               fill
               priority={true}
               className="dark:hidden"
+              unoptimized={true}
             />
             <Image
               src={FFDarkLogo}
@@ -81,6 +82,7 @@ const Sidebar: React.FC = () => {
               fill
               priority={true}
               className="hidden dark:block"
+              unoptimized={true}
             />
           </div>
         </Link>

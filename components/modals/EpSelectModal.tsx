@@ -55,6 +55,7 @@ const EpSelectModal = () => {
                   priority={true}
                   fill
                   className="rounded-md group-hover:blur-sm"
+                  unoptimized={true}
                 />
                 <div className="absolute left-[50%] top-[50%] z-[100] -ml-3 -mt-3 opacity-0 group-hover:opacity-100">
                   <BsPlayCircle className="h-6 w-6 text-white" />

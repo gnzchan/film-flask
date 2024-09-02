@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
-import FFLightLogo from "../../public/images/ff-logo.svg";
 import FFDarkLogo from "../../public/images/ff-logo-inverted.svg";
-import ThemeSwitcher from "./ThemeSwitcher";
+import FFLightLogo from "../../public/images/ff-logo.svg";
 import MobileSidebar from "./MobileSidebar";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -35,6 +35,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               fill
               priority={true}
               className="dark:hidden"
+              unoptimized={true}
             />
             <Image
               src={FFDarkLogo}
@@ -42,6 +43,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               fill
               priority={true}
               className="hidden dark:block"
+              unoptimized={true}
             />
           </div>
         </Link>

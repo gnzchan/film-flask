@@ -39,6 +39,7 @@ const CreditsContainer = ({ credits }: CreditsContainerProps) => {
                     fill
                     sizes="(min-width: 0px) 115px"
                     className="rounded-md"
+                    unoptimized={true}
                   />
                 ) : (
                   <div className="flex h-full flex-col items-center justify-center">
