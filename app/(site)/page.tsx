@@ -1,19 +1,29 @@
-import ThumbGallery from "@/app/(site)/ThumbGallery";
-import Header from "@/components/custom-ui/Header";
 import { getTMDBFilms } from "@/actions/getSBFilms";
-import { getPopularMovies, getUpcomingMovies } from "@/actions/getTMDBFilms";
+import {
+  getNowPlayingMovies,
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+} from "@/actions/getTMDBFilms";
+import ThumbGallery from "@/app/(site)/ThumbGallery";
 import CenterContentWrapper from "@/components/custom-ui/CenterContentWrapper";
+import Header from "@/components/custom-ui/Header";
 
 const Home = async () => {
   const popularInSBPromise = getTMDBFilms();
   const popularMoviePromise = getPopularMovies();
   const upcomingMoviePromise = getUpcomingMovies();
+  const nowPlayingMoviePromise = getNowPlayingMovies();
+  const topRatedMoviePromise = getTopRatedMovies();
 
-  const [sbPopular, tmdbPopular, tmdbUpcoming] = await Promise.all([
-    popularInSBPromise,
-    popularMoviePromise,
-    upcomingMoviePromise,
-  ]);
+  const [sbPopular, tmdbPopular, tmdbUpcoming, tmdbNowPlaying, tmdbTopRated] =
+    await Promise.all([
+      popularInSBPromise,
+      popularMoviePromise,
+      upcomingMoviePromise,
+      nowPlayingMoviePromise,
+      topRatedMoviePromise,
+    ]);
 
   return (
     <div className="relative flex h-[100dvh] flex-col bg-white dark:bg-black">
@@ -23,6 +33,8 @@ const Home = async () => {
           films={sbPopular}
           popularMovies={tmdbPopular}
           upcomingMovies={tmdbUpcoming}
+          nowPlayingMovies={tmdbNowPlaying}
+          topRatedMovies={tmdbTopRated}
         />
       </CenterContentWrapper>
     </div>

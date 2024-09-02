@@ -35,4 +35,39 @@ const getUpcomingMovies = async (): Promise<TMDBFilm[]> => {
   return (tmdbData as unknown as TMDBFilm[]) || [];
 };
 
-export { getPopularMovies, getUpcomingMovies };
+const getNowPlayingMovies = async (): Promise<TMDBFilm[]> => {
+  const tmdbKey = process.env.TMDB_KEY;
+  const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${tmdbKey}&language=en-US`;
+
+  const { results } = await getData<TMDBSearch>(url);
+
+  const tmdbDataPromise = results?.map(({ id }) =>
+    getFilmById(FilmCategory.MOVIE, id.toString()),
+  );
+
+  const tmdbData = await Promise.all(tmdbDataPromise || []);
+
+  return (tmdbData as unknown as TMDBFilm[]) || [];
+};
+
+const getTopRatedMovies = async (): Promise<TMDBFilm[]> => {
+  const tmdbKey = process.env.TMDB_KEY;
+  const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${tmdbKey}&language=en-US`;
+
+  const { results } = await getData<TMDBSearch>(url);
+
+  const tmdbDataPromise = results?.map(({ id }) =>
+    getFilmById(FilmCategory.MOVIE, id.toString()),
+  );
+
+  const tmdbData = await Promise.all(tmdbDataPromise || []);
+
+  return (tmdbData as unknown as TMDBFilm[]) || [];
+};
+
+export {
+  getNowPlayingMovies,
+  getPopularMovies,
+  getTopRatedMovies,
+  getUpcomingMovies,
+};

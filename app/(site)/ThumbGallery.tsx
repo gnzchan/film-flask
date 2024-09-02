@@ -2,20 +2,24 @@
 
 import { useEffect, useState } from "react";
 
-import FilmCarousell from "./FilmCarousell";
-import FilmBanner from "../../components/custom-ui/FilmBanner";
 import { TMDBFilm } from "@/types";
+import FilmBanner from "../../components/custom-ui/FilmBanner";
+import FilmCarousell from "./FilmCarousell";
 
 interface ThumbGalleryProps {
   films: TMDBFilm[];
   popularMovies: TMDBFilm[];
   upcomingMovies: TMDBFilm[];
+  nowPlayingMovies: TMDBFilm[];
+  topRatedMovies: TMDBFilm[];
 }
 
 const ThumbGallery: React.FC<ThumbGalleryProps> = ({
   films,
   popularMovies,
   upcomingMovies,
+  nowPlayingMovies,
+  topRatedMovies,
 }) => {
   const [activeFilm, setActiveFilm] = useState<TMDBFilm>(
     films[0] || popularMovies[0] || upcomingMovies[0],
@@ -44,6 +48,18 @@ const ThumbGallery: React.FC<ThumbGalleryProps> = ({
         <FilmCarousell
           title="Popular Movies"
           films={popularMovies}
+          priority={true}
+          handleSetFilm={handleSetFilm}
+        />
+        <FilmCarousell
+          title="Now Playing"
+          films={nowPlayingMovies}
+          priority={true}
+          handleSetFilm={handleSetFilm}
+        />
+        <FilmCarousell
+          title="Top Rated Movies"
+          films={topRatedMovies}
           priority={true}
           handleSetFilm={handleSetFilm}
         />
