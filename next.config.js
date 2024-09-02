@@ -4,6 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
+    unoptimized: false,
     domains: ["m.media-amazon.com", "image.tmdb.org"],
   },
 };
