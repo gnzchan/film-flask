@@ -110,7 +110,7 @@ export const genres = [
 ];
 
 export const description =
-  "Film Flask - Stream films, read overview, change watch status, and leave a review.";
+  "Film Flask: Stream movies online, explore 20+ genres from Action to Western. Rate films, manage your watchlist, and write reviews. Your ultimate movie tracking and streaming app.";
 
 export const defaultOgImg = {
   url: "https://raw.githubusercontent.com/gnzchan/film-flask/main/public/images/ff-logo-whitebg.png",
