@@ -68,13 +68,13 @@ const PlayFilm: React.FC<PlayFilmProps> = async ({ params }) => {
   return (
     <div className="h-[100dvh]">
       <div className="relative">
-        <Header className="absolute left-0 right-0 top-0 z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
+        <Header className="z-[2] bg-transparent shadow-none transition-all duration-700 hover:bg-neutral-100 dark:bg-transparent dark:hover:bg-zinc-800" />
       </div>
       <iframe
         src={url}
         className="aspect-video h-full w-full bg-black"
         allowFullScreen
-      ></iframe>
+      />
     </div>
   );
 };
